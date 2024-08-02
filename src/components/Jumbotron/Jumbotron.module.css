@@ -1,0 +1,57 @@
+.jumbotron {
+    height: 500px;
+    background-color: #eee;
+
+    .container {
+        max-width: 1200px;
+        height: 500px;
+        position: relative;
+        margin: auto 0;
+
+        .title {
+            height: 100%;
+            display: inline-block;
+            position: relative;
+            padding-left: 20px;
+    
+            .inner {
+                position: relative;
+                display: inline-block;
+                transform: translate(0, -50%);
+                font-size: 48px;
+                top: 50%;
+    
+                .lato {
+                    font-family: 'Lato';
+                    font-weight: 300;
+                }
+        
+                .playwrite {
+                    font-family: 'Playwrite IS Variable';
+                }
+    
+                .cta {
+                    display: inline-block;
+                    position: relative;
+                    background: linear-gradient(#ffb100, #ff8e3c);
+                    font-family: 'Lato';
+                    border-radius: 999px;
+                    padding: 5px 10px;
+                    color: white;
+                    margin-top: 20px;
+                    font-size: 24px;
+                    left: 50%;
+                    transform: translate(-50%, 0);
+                }
+            }
+        }
+    
+        .image {
+            display: inline-block;
+            position: relative;
+            width: 500px;
+            height: 500px;
+            vertical-align: top;
+        }
+    }
+}
