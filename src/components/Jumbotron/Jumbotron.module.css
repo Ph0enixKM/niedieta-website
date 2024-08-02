@@ -6,9 +6,15 @@
         max-width: 1200px;
         height: 500px;
         position: relative;
-        margin: auto 0;
+        margin: auto;
+
+        .logo {
+            position: absolute;
+            padding: 10px;
+        }
 
         .title {
+            width: 50%;
             height: 100%;
             display: inline-block;
             position: relative;
@@ -42,16 +48,42 @@
                     font-size: 24px;
                     left: 50%;
                     transform: translate(-50%, 0);
+                    box-shadow: #bbb 0 3px 5px;
+                    cursor: pointer;
+                    user-select: none;
+                    transition: 200ms;
+
+                    &:hover {
+                        transform: translate(-50%, -3px) scale(1.05);
+                        box-shadow: #bbb 0 5px 10px;
+                    }
                 }
             }
         }
     
         .image {
             display: inline-block;
-            position: relative;
+            position: absolute;
+            bottom: 0;
             width: 500px;
             height: 500px;
             vertical-align: top;
+            user-select: none;
         }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .title {
+        width: 100% !important;
+
+        .inner {
+            left: 50%;
+            transform: translate(-50%, -50%) !important;
+        }
+    }
+
+    .image {
+        display: none !important;
     }
 }

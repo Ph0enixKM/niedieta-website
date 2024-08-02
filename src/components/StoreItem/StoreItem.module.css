@@ -1,0 +1,40 @@
+.container {
+    display: inline-block;
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+.image {
+    background-color: #eee;
+    border-radius: 10px;
+    position: relative;
+    width: 250px;
+    height: 250px;
+}
+
+.title {
+    max-width: 250px;
+    margin-top: 20px;
+    word-break: break-word;
+    font-family: "DM Serif Display";
+    font-size: 24px;
+}
+
+a.buy {
+    display: inline-block;
+    width: 120px;
+    margin-right: 5px;
+    height: 50px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+a.demo {
+    display: inline-block;
+    width: 120px;
+    margin-left: 5px;
+    /* height: 50px; */
+    color: white;
+    background-color: blue;
+    border-radius: 10px;
+}
