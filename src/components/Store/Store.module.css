@@ -6,6 +6,7 @@
 .items {
     text-align: center;
     margin-top: 50px;
+    margin-left: -30px;
 }
 
 .title {
@@ -16,4 +17,12 @@
     color: #444;
     user-select: none;
     cursor: default;
+}
+
+@media screen and (max-width: 800px) {
+    .title {
+        font-size: 38px;
+        text-align: center;
+        padding-left: 0;
+    }
 }
