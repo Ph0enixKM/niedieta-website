@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import styles from "./Jumbotron.module.css";
 
@@ -16,7 +18,7 @@ export default function Jumbotron() {
                         <div className={styles.playwrite}>
                             wegetariański
                         </div>
-                        <div className={styles.cta}>
+                        <div className={styles.cta} onClick={() => location.href='#store'}>
                             Już dostępny!
                         </div>
                     </div>

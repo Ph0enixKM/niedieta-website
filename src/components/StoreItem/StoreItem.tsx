@@ -17,9 +17,11 @@ export default function StoreItem(props: Props) {
             <div className={styles.title}>
                 {props.title}
             </div>
-            <a href={props.purchaseUrl} className={styles.buy} />
+            <a href={props.purchaseUrl} className={styles.buy}>
+                <Image src="/buy.svg" alt="Purchase Icon" width={30} height={30} />
+            </a>
             <a href={props.demoUrl} className={styles.demo}>
-                Wypróbuj za darmo
+                WYPRÓBUJ<br/>ZA DARMO
             </a>
         </div>
     );

@@ -10,7 +10,11 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NieDieta",
-  description: "NieDieta: Jak jeść zdrowo i smacznie bez restrykcji",
+  description: "NieDieta: Jak jeść zdrowo i smacznie bez restrykcji"
+};
+
+export const viewport = {
+  themeColor: "#eee",
 };
 
 export default function RootLayout({
