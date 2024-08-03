@@ -1,0 +1,19 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.items {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.title {
+    font-family: "DM Serif Display", serif;
+    font-size: 48px;
+    padding-left: 20px;
+    padding-top: 50px;
+    color: #444;
+    user-select: none;
+    cursor: default;
+}
