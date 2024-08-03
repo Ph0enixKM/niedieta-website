@@ -46,15 +46,13 @@
                     color: white;
                     margin-top: 20px;
                     font-size: 24px;
-                    left: 50%;
-                    transform: translate(-50%, 0);
                     box-shadow: #bbb 0 3px 5px;
                     cursor: pointer;
                     user-select: none;
                     transition: 200ms;
 
                     &:hover {
-                        transform: translate(-50%, -3px) scale(1.05);
+                        transform: translate(0, -3px) scale(1.05);
                         box-shadow: #bbb 0 5px 10px;
                     }
                 }
@@ -74,16 +72,27 @@
 }
 
 @media screen and (max-width: 800px) {
-    .title {
-        width: 100% !important;
+    .jumbotron {
+        .container {
+            width: 100vw;
+            margin: 0;
+            text-align: center;
 
-        .inner {
-            left: 50%;
-            transform: translate(-50%, -50%) !important;
+            .title {
+                width: auto;
+                /* text-align: center; */
+                padding-left: 0px;
+        
+                .inner {
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 38px;
+                }
+            }
+        
+            .image {
+                display: none;
+            }
         }
-    }
-
-    .image {
-        display: none !important;
     }
 }
