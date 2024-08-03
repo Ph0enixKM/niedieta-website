@@ -12,24 +12,6 @@ export default function Store() {
                     purchaseUrl="https://www.naffy.io/niedieta/letni-jadlospis-wegetarianski-1800-kcal-ra5"
                     demoUrl="https://www.naffy.io/niedieta/probny-jadlospis-wegetarianski-1800-kcal-C88"
                 />
-                <StoreItem
-                    src="/letni-jadlospis-wegetarianski.png"
-                    title="Letni Jadłospis Wegetariański 1800 kcal"
-                    purchaseUrl="https://www.naffy.io/niedieta/letni-jadlospis-wegetarianski-1800-kcal-ra5"
-                    demoUrl="https://www.naffy.io/niedieta/probny-jadlospis-wegetarianski-1800-kcal-C88"
-                />
-                <StoreItem
-                    src="/letni-jadlospis-wegetarianski.png"
-                    title="Letni Jadłospis Wegetariański 1800 kcal"
-                    purchaseUrl="https://www.naffy.io/niedieta/letni-jadlospis-wegetarianski-1800-kcal-ra5"
-                    demoUrl="https://www.naffy.io/niedieta/probny-jadlospis-wegetarianski-1800-kcal-C88"
-                />
-                <StoreItem
-                    src="/letni-jadlospis-wegetarianski.png"
-                    title="Letni Jadłospis Wegetariański 1800 kcal"
-                    purchaseUrl="https://www.naffy.io/niedieta/letni-jadlospis-wegetarianski-1800-kcal-ra5"
-                    demoUrl="https://www.naffy.io/niedieta/probny-jadlospis-wegetarianski-1800-kcal-C88"
-                />
             </div>
         </div>
     );
