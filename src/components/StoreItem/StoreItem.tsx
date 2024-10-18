@@ -1,11 +1,14 @@
 import Image from "next/image";
 import styles from "./StoreItem.module.css";
 
+type StoreItemType = 'Paid' | 'Free';
+
 interface Props {
     src: string,
     title: string,
-    purchaseUrl: string,
-    demoUrl: string
+    type: StoreItemType,
+    url: string,
+    demoUrl?: string
 }
 
 export default function StoreItem(props: Props) {
@@ -17,12 +20,18 @@ export default function StoreItem(props: Props) {
             <div className={styles.title}>
                 {props.title}
             </div>
-            <a href={props.purchaseUrl} className={styles.buy}>
-                <Image src="/buy.svg" alt="Purchase Icon" width={30} height={30} />
+            <a href={props.url} className={styles.buy}>
+                {props.type == 'Paid' ? (
+                    <Image src="/buy.svg" alt="Purchase Icon" width={30} height={30} />
+                ) : (
+                    <Image src="/get.svg" alt="Download Icon" width={30} height={30} />
+                )}
             </a>
-            <a href={props.demoUrl} className={styles.demo}>
-                WYPRÓBUJ<br/>ZA DARMO
-            </a>
+            {props.demoUrl && (
+                <a href={props.demoUrl} className={styles.demo}>
+                    WYPRÓBUJ<br/>ZA DARMO
+                </a>
+            )}
         </div>
     );
 }

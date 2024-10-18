@@ -18,6 +18,11 @@
     word-break: break-word;
     font-family: "DM Serif Display";
     font-size: 24px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a.buy {
