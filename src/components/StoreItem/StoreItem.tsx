@@ -20,13 +20,16 @@ export default function StoreItem(props: Props) {
             <div className={styles.title}>
                 {props.title}
             </div>
-            <a href={props.url} className={styles.buy}>
-                {props.type == 'Paid' ? (
+            {props.type == 'Paid' && (
+                <a href={props.url} className={styles.buy}>
                     <Image src="/buy.svg" alt="Purchase Icon" width={30} height={30} />
-                ) : (
+                </a>
+            )}
+            {props.type == 'Free' && (
+                <a href={props.url} className={styles.get}>
                     <Image src="/get.svg" alt="Download Icon" width={30} height={30} />
-                )}
-            </a>
+                </a>
+            )}
             {props.demoUrl && (
                 <a href={props.demoUrl} className={styles.demo}>
                     WYPRÓBUJ<br/>ZA DARMO

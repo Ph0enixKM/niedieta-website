@@ -43,6 +43,27 @@ a.buy {
     }
 }
 
+a.get {
+    display: inline-block;
+    width: 120px;
+    margin-top: 20px;
+    margin-left: 5px;
+    padding: 10px;
+    height: 50px;
+    color: #333;
+    border: 1pt solid #333;
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+    transition: 200ms;
+    font-family: 'Lato';
+    font-weight: 300;
+
+    &:hover {
+        transform: scale(1.1);
+    }    
+}
+
 a.demo {
     display: inline-block;
     width: 120px;

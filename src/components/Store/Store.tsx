@@ -7,6 +7,12 @@ export default function Store() {
             <div className={styles.title}>Nasze Produkty</div>
             <div className={styles.items} id="store">
                 <StoreItem
+                    src="/items/jesienny-jadlospis-wegetarianski.png"
+                    title="Jesienny Jadłospis Wegetariański 1800 kcal"
+                    type="Paid"
+                    url="https://www.naffy.io/niedieta/jesienny-jadlospis-wegetarianski-1800-kcal-HiR"
+                />
+                <StoreItem
                     src="/items/letni-jadlospis-wegetarianski.png"
                     title="Letni Jadłospis Wegetariański 1800 kcal"
                     type="Paid"

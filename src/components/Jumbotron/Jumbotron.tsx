@@ -13,7 +13,7 @@ export default function Jumbotron() {
                 <div className={styles.title}>
                     <div className={styles.inner}>
                         <div className={styles.lato}>
-                            Letni jadłospis
+                            Jesienny jadłospis
                         </div>
                         <div className={styles.playwrite}>
                             wegetariański
@@ -21,6 +21,20 @@ export default function Jumbotron() {
                         <div className={styles.cta} onClick={() => location.href='#store'}>
                             Już dostępny!
                         </div>
+
+                        <div className={styles.leaf}>
+                            <Image src="/leaf.png" alt="leaf" fill />
+                        </div>
+                        <div className={styles.leafnd}>
+                            <Image src="/leaf.png" alt="leaf" fill />
+                        </div>
+                        <div className={styles.leafrd}>
+                            <Image src="/leaf.png" alt="leaf" fill />
+                        </div>
+                        <div className={styles.leafth}>
+                            <Image src="/leaf.png" alt="leaf" fill />
+                        </div>
+
                     </div>
                 </div>
                 <div className={styles.image}>
