@@ -11,6 +11,7 @@ export default function Store() {
                     title="Jesienny Jadłospis Wegetariański 1800 kcal"
                     type="Paid"
                     url="https://www.naffy.io/niedieta/jesienny-jadlospis-wegetarianski-1800-kcal-HiR"
+                    demoUrl="https://www.naffy.io/niedieta/probny-jesienny-jadlospis-wegetarianski-1800-kcal-Ymr"
                 />
                 <StoreItem
                     src="/items/letni-jadlospis-wegetarianski.png"
