@@ -27,7 +27,7 @@ export default function Store() {
                     type="Paid"
                     url="https://www.naffy.io/niedieta/letni-jadlospis-wegetarianski-1800-kcal-ra5"
                     demoUrl="https://www.naffy.io/niedieta/probny-jadlospis-wegetarianski-1800-kcal-C88"
-                    // price={79.00}
+                    price={79.00}
                 />
                 <StoreItem
                     src="/items/tydzien-obiadow.png"
