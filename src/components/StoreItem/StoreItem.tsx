@@ -8,7 +8,8 @@ interface Props {
     title: string,
     type: StoreItemType,
     url: string,
-    demoUrl?: string
+    demoUrl?: string,
+    price?: number
 }
 
 export default function StoreItem(props: Props) {
@@ -20,21 +21,23 @@ export default function StoreItem(props: Props) {
             <div className={styles.title}>
                 {props.title}
             </div>
-            {props.type == 'Paid' && (
-                <a href={props.url} className={styles.buy}>
-                    <Image src="/buy.svg" alt="Purchase Icon" width={30} height={30} />
-                </a>
-            )}
-            {props.type == 'Free' && (
-                <a href={props.url} className={styles.get}>
-                    <Image src="/get.svg" alt="Download Icon" width={30} height={30} />
-                </a>
-            )}
-            {props.demoUrl && (
-                <a href={props.demoUrl} className={styles.demo}>
-                    WYPRÓBUJ<br/>ZA DARMO
-                </a>
-            )}
+            <div className={styles.buttons}>
+                {props.type == 'Paid' && (
+                    <a href={props.url} className={styles.buy}>
+                        {props.type == 'Paid' ? `${(props.price ?? 0).toFixed(2)} zł` : 'Darmowe'}
+                    </a>
+                )}
+                {props.type == 'Free' && (
+                    <a href={props.url} className={styles.get}>
+                        <Image src="/get.svg" alt="Download Icon" width={30} height={30} />
+                    </a>
+                )}
+                {props.demoUrl && (
+                    <a href={props.demoUrl} className={styles.demo}>
+                        WYPRÓBUJ<br/>ZA DARMO
+                    </a>
+                )}
+            </div>
         </div>
     );
 }

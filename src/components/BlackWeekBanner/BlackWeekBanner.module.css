@@ -1,0 +1,86 @@
+@keyframes banner {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.bg {
+    position: relative;
+    min-height: 3rem;
+    background-color: black;
+    background-image: url('/blackweeks.svg');
+    background-size: auto 100%;
+    animation: banner 50s linear infinite;
+}
+
+.container {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    font-family: "DM Serif Display", serif;
+    font-size: 1.25rem;
+    line-height: 3rem;
+    height: 3rem;
+    color: white;
+    background: linear-gradient(90deg, transparent 0, black 5rem, black calc(100% - 5rem), transparent 100%);
+    padding: 0 5rem;
+    color: #ddd;
+    vertical-align: middle;
+
+    & b {
+        display: inline-block;
+        font-size: 2rem;
+        vertical-align: middle;
+        color: white;
+        transform: translate(0, -5%);
+        padding: 0 0.5rem;
+    }
+
+    & code {
+        display: inline-block;
+        font-size: 1.5rem;
+        vertical-align: middle;
+        color: black;
+        background-color: white;
+        margin: 0 0.5rem;
+        line-height: 2rem;
+        transform: translate(0, -5%);
+        padding: 0rem 0.5rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .bg {
+        min-height: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .container {
+        position: absolute;
+        top: 100%;
+        background: black;
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        line-height: 2rem;
+        padding: 0 1rem 1rem 1rem;
+        text-align: center;
+        height: auto;
+
+        & b {
+            font-size: 1.5rem;
+        }
+
+        & code {
+            font-size: 1.75rem;
+            line-height: 2rem;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+}
