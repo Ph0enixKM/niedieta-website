@@ -19,7 +19,7 @@
             display: inline-block;
             position: relative;
             padding-left: 20px;
-    
+
             .inner {
                 position: relative;
                 display: inline-block;
@@ -61,16 +61,16 @@
                     transform: translate(-500px, -300px) scale(0.2, 0.2) rotate(-90deg);
                     filter: blur(18px);
                 }
-    
+
                 .lato {
                     font-family: 'Lato';
                     font-weight: 300;
                 }
-        
+
                 .playwrite {
                     font-family: 'Playwrite IS Variable';
                 }
-    
+
                 .cta {
                     display: inline-block;
                     position: relative;
@@ -85,6 +85,7 @@
                     cursor: pointer;
                     user-select: none;
                     transition: 200ms;
+                    z-index: 10;
 
                     &:hover {
                         transform: translate(0, -3px) scale(1.05);
@@ -93,7 +94,7 @@
                 }
             }
         }
-    
+
         .image {
             display: inline-block;
             position: absolute;
@@ -117,14 +118,14 @@
                 width: auto;
                 /* text-align: center; */
                 padding-left: 0px;
-        
+
                 .inner {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     font-size: 38px;
                 }
             }
-        
+
             .image {
                 display: none;
             }
