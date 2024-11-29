@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-          url: 'https://niedieta.pl/og.jpeg'
+          url: 'https://niedieta.pl/og.jpg'
       }
     ]
   }
