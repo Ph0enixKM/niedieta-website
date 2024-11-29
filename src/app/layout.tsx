@@ -10,7 +10,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "NieDieta",
-  description: "NieDieta: Jak jeść zdrowo i smacznie bez restrykcji"
+  description: "NieDieta: Jak jeść zdrowo i smacznie bez restrykcji",
+  openGraph: {
+    title: "NieDieta",
+    siteName: "Czyli jak jeść zdrowo i smacznie bez restrykcji",
+    type: 'website',
+    images: [
+      {
+          url: 'https://niedieta.pl/og.jpeg'
+      }
+    ]
+  }
 };
 
 export const viewport = {
@@ -24,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+        <body className={inter.className}>{children}</body>
     </html>
   );
 }
