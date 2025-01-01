@@ -6,6 +6,7 @@ export default function Store() {
         <div className={styles.container}>
             <div className={styles.title}>Nasze Produkty</div>
             <div className={styles.items} id="store">
+               {/*
                 <StoreItem
                     src="/items/pakiet-black-weeks.jpeg"
                     title="Pakiet 2 jadłospisów + Bonus"
@@ -13,6 +14,7 @@ export default function Store() {
                     url="https://www.naffy.io/niedieta/pakiet-black-week-3Ba"
                     price={79.00}
                 />
+                 */}
                 <StoreItem
                     src="/items/jesienny-jadlospis-wegetarianski.png"
                     title="Jesienny Jadłospis Wegetariański 1800 kcal"
