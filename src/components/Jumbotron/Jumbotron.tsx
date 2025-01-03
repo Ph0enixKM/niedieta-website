@@ -14,7 +14,7 @@ export default function Jumbotron() {
                 <div className={styles.title}>
                     <div className={styles.inner}>
                         <div className={styles.lato}>
-                            Jesienny jadłospis
+                            Jesienno-zimowy jadłospis
                         </div>
                         <div className={styles.playwrite}>
                             wegetariański
