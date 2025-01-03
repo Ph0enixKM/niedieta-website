@@ -8,7 +8,7 @@ export default function Home() {
     return (
 		<div className="container">
 			<Jumbotron />
-			{/* <BlackWeekBanner /> */}
+			<BlackWeekBanner />
 			<Store />
 		</div>
     );

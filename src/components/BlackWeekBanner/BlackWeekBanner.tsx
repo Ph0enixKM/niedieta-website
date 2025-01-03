@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './BlackWeekBanner.module.css';
 
 export default function BlackWeekBanner() {
