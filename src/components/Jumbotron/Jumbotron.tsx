@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./Jumbotron.module.css";
+import JumbotronImage from "@/../public/jumbotron.webp"
 
 export default function Jumbotron() {
     return (
@@ -21,24 +22,10 @@ export default function Jumbotron() {
                         <div className={styles.cta} onClick={() => location.href='#store'}>
                             Już dostępny!
                         </div>
-
-                        <div className={styles.leaf}>
-                            <Image src="/leaf.png" alt="leaf" fill />
-                        </div>
-                        <div className={styles.leafnd}>
-                            <Image src="/leaf.png" alt="leaf" fill />
-                        </div>
-                        <div className={styles.leafrd}>
-                            <Image src="/leaf.png" alt="leaf" fill />
-                        </div>
-                        <div className={styles.leafth}>
-                            <Image src="/leaf.png" alt="leaf" fill />
-                        </div>
-
                     </div>
                 </div>
                 <div className={styles.image}>
-                    <Image src="/jumbotron.png" alt="Jumbotron" fill />
+                    <Image src={JumbotronImage} alt="Jumbotron" fill />
                 </div>
             </div>
         </div>
