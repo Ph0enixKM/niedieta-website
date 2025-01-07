@@ -1,0 +1,28 @@
+.card {
+    background-color: #ddd;
+    padding: 1rem;
+    margin-top: 5rem;
+    flex: 1;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    &.top {
+        margin-top: 0;
+    }
+
+    .title {
+        font-family: "DM Serif Display", serif;
+        font-size: 2rem;
+    }
+
+    .price {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.5rem;
+    }
+
+    .list {
+        margin-top: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

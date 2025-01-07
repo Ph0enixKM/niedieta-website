@@ -1,0 +1,9 @@
+.container {
+    --spacing: 2rem;
+    display: flex;
+    gap: var(--spacing);
+    background-color: #eee;
+    padding: var(--spacing) var(--spacing) 0 var(--spacing);
+    margin: 4rem;
+    border-radius: 0.5rem;
+}
