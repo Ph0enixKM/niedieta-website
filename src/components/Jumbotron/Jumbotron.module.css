@@ -101,6 +101,17 @@
                 .inner {
                     transform: translate(0, 0);
                     top: 0;
+
+                    .display {
+                        font-family: "DM Serif Display", serif;
+                        font-size: 2.75rem;
+                        line-height: 2.25rem;
+                        padding: 0 1rem;
+                    }
+
+                    .cta {
+                        margin-top: 2rem;
+                    }
                 }
             }
 
