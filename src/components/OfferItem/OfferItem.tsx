@@ -26,6 +26,7 @@ export default function OfferItem({ title, price, color, top, details, href }: P
         <ul className={styles.list}>
             {details.map((item, index) => <li key={index} dangerouslySetInnerHTML={{ __html: parseMarkdown(item) }}></li>)}
         </ul>
+        <div className={styles.spacer} />
         <a className={styles.button} href={href}>
             Zobacz Ofertę
         </a>
