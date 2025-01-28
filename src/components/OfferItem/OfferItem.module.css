@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     background-color: #ddd;
     padding: 1rem;
     margin-top: 5rem;
@@ -24,5 +25,46 @@
         margin-top: 1rem;
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        margin-top: 0rem;
+        background-color: #eee;
+        border-radius: 0.5rem;
+        overflow-y: hidden;
+        max-height: 20rem;
+
+        .show-more {
+            width: calc(100% + 1rem);
+            left: -1rem;
+            height: 8rem;
+            background: #eeeeeeee;
+            mask-image: linear-gradient(transparent, #eee calc(100% - 3rem));
+            backdrop-filter: blur(2px);
+            position: absolute;
+            bottom: 0;
+    
+            &::after {
+                content: "Pokaż Więcej";
+                display: inline-block;
+                position: absolute;
+                text-decoration: underline;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                bottom: 0.5rem;
+                left: calc(50%);
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+
+    .card.full {
+        max-height: unset;
+        
+        .show-more {
+            display: none;
+        }
     }
 }
