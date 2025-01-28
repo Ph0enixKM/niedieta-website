@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./Jumbotron.module.css";
-import JumbotronImage from "@/../public/jumbotron.webp"
+import JumbotronImage from "@/../public/kinga-jumbo.webp"
 
 export default function Jumbotron() {
     return (
@@ -13,14 +13,16 @@ export default function Jumbotron() {
                 </div>
                 <div className={styles.title}>
                     <div className={styles.inner}>
+                        <div className={styles.display}>
+                            Smacznie, zdrowo,
+                            <br/>
+                            bez restrykcji.
+                        </div>
                         <div className={styles.lato}>
-                            Jesienno-zimowy jadłospis
+                            Dietetyk Kinga Sobańska
                         </div>
-                        <div className={styles.playwrite}>
-                            wegetariański
-                        </div>
-                        <div className={styles.cta} onClick={() => location.href='#store'}>
-                            Już dostępny!
+                        <div className={styles.cta} onClick={() => location.href='#offer'}>
+                            Umów wizytę
                         </div>
                     </div>
                 </div>

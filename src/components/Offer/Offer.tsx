@@ -9,7 +9,7 @@ export default function Offer() {
 
     return <div className={styles.outer}>
         <div className={styles.title}>Nasza Oferta</div>
-        <div className={[styles.container, showFull && styles.full].filter(Boolean).join(' ')}>
+        <div className={[styles.container, showFull && styles.full].filter(Boolean).join(' ')} id="offer">
             <OfferItem
                 title="Jadłospis"
                 price={150}
