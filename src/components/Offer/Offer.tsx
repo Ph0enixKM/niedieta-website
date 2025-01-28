@@ -12,6 +12,7 @@ export default function Offer() {
         <div className={[styles.container, showFull && styles.full].filter(Boolean).join(' ')} id="offer">
             <OfferItem
                 title="Jadłospis"
+                description="Wybierając ten plan otrzymujesz:"
                 price={150}
                 color="#fc3376"
                 details={[
@@ -29,14 +30,15 @@ export default function Offer() {
             />
             <OfferItem
                 title="Dieta+"
+                description="Wybierając ten plan otrzymujesz:"
                 price={200}
                 color="#eb4c44"
                 details={[
                     '60 minut rozmowy online',
-                    'Wywiad zdrowotny i żywieniowy',
-                    'Analiza aktualnego sposobu żywienia',
-                    'Wspólne opracowanie strategii działania',
-                    'Wsparcie i kontakt w aplikacji przez miesiąc od wizyty',
+                    'wywiad zdrowotny i żywieniowy',
+                    'analiza aktualnego sposobu żywienia',
+                    'wspólne opracowanie strategii działania',
+                    'wsparcie i kontakt w aplikacji przez miesiąc od wizyty',
                     'rozpoczęcie współpracy w ciągu **3 dni roboczych** (w tym czasie powstanie Twoje konto w aplikacji, poprzez którą możliwy będzie szybki kontakt, monitorowanie postępów i wypełnienie wstępnej ankiety)',
                     'indywidualny jadłospis 7-dniowy ułożony na podstawie ankiety (dostosowany do Twoich potrzeb i upodobań,  jadłospis otrzymasz w 7 dni roboczych od wypełnienia ankiety)',
                     'brak nielubianych produktów',
@@ -52,14 +54,15 @@ export default function Offer() {
             />
             <OfferItem
                 title="Konsultacje"
+                description="Wybierając ten plan otrzymujesz:"
                 price={150}
                 color="#ed6e40"
                 details={[
                     '60 minut rozmowy online',
-                    'Wywiad zdrowotny i żywieniowy',
-                    'Analiza aktualnego sposobu żywienia',
-                    'Wspólne opracowanie strategii działania',
-                    'Wsparcie i kontakt w aplikacji przez miesiąc od wizyty'
+                    'wywiad zdrowotny i żywieniowy',
+                    'analiza aktualnego sposobu żywienia',
+                    'wspólne opracowanie strategii działania',
+                    'wsparcie i kontakt w aplikacji przez miesiąc od wizyty'
                 ]}
                 href="https://www.naffy.io/niedieta/konsultacja-online-KeA"
             />
