@@ -26,6 +26,30 @@
         padding-left: 1rem;
         padding-right: 1rem;
     }
+
+    .button {
+        appearance: none;
+        display: block;
+        padding: 0.5rem 1rem;
+        background-color: #000;
+        text-align: center;
+        color: white;
+        border: none;
+        width: 100%;
+        max-width: 20rem;
+        font-size: 1.25rem;
+        font-family: "DM Serif Display", serif;
+        border-radius: 0.5rem;
+        margin-top: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+        transition: 100ms;
+
+        &:hover {
+            transform: scale(0.95);
+        }
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -33,7 +57,7 @@
         margin-top: 0rem;
         background-color: #eee;
         border-radius: 0.5rem;
-        overflow-y: hidden;
+        overflow: hidden;
         max-height: 20rem;
 
         .show-more {
@@ -45,9 +69,11 @@
             backdrop-filter: blur(2px);
             position: absolute;
             bottom: 0;
-    
+
             &::after {
                 content: "Pokaż Więcej";
+                width: 100%;
+                text-align: center;
                 display: inline-block;
                 position: absolute;
                 text-decoration: underline;
@@ -62,7 +88,7 @@
 
     .card.full {
         max-height: unset;
-        
+
         .show-more {
             display: none;
         }
