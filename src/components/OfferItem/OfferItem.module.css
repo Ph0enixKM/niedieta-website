@@ -25,10 +25,30 @@
         margin-top: 1rem;
     }
 
-    .price {
-        font-family: "DM Serif Display", serif;
-        font-size: 2rem;
+    .pricing {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+
+        .price {
+            font-family: "DM Serif Display", serif;
+            font-size: 2rem;
+
+            &.discount {
+                position: relative;
+                text-decoration: line-through;
+                color: #888 !important;
+                font-size: 1.5rem;
+                line-height: 100%;
+                padding: 0.1rem;
+                margin-bottom: -1rem;
+                z-index: 3;
+                display: inline-block;
+                margin-left: 0.75rem;
+            }
+        }
     }
+
 
     .list {
         margin-top: 1rem;
