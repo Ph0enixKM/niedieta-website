@@ -49,6 +49,8 @@
 @media screen and (max-width: 800px) {
     .container {
         .card {
+            margin: 2rem;
+
             .image {
                 display: none;
             }
