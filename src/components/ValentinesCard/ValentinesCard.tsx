@@ -19,6 +19,9 @@ export default function ValentinesCard() {
             <div className={styles.card}>
                 <Image src={valentinesImage} alt="Valentines offer" className={styles.image} />
                 <Image src={valentinesMobileImage} alt="Valentines offer" className={styles.mobile} />
+                <a className={styles.button} href='https://www.naffy.io/niedieta/jadlospis-ywS-qUDM'>
+                    Zobacz ofertę
+                </a>
             </div>
         </div>
     );
