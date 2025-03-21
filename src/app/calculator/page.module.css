@@ -1,0 +1,41 @@
+.page {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.paper {
+    background: #eee;
+    border-radius: 0.5rem;
+    padding: 1rem;
+
+    &.flex {
+        flex: 1;
+    }
+}
+
+.grid {
+    display: flex;
+    gap: 1rem;
+}
+
+.button {
+    border: 1px solid #ccc;
+    background-color: #ddd;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    flex: 1;
+}
+
+.title {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 0.75rem;
+    color: #555;
+}
