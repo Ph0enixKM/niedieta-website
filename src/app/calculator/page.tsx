@@ -117,7 +117,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
-                            placeholder="XX"
+                            placeholder="__"
                             value={age ?? ''}
                             className={[styles.input, styles.two].join(' ')}
                             onChange={(e) => setAge(e.target.value.length ? parseInt(e.target.value) : null)}
@@ -129,7 +129,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
-                            placeholder="XXX"
+                            placeholder="___"
                             value={height ?? ''}
                             className={[styles.input, styles.three].join(' ')}
                             onChange={(e) => setHeight(e.target.value.length ? parseInt(e.target.value) : null)}
@@ -141,7 +141,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
-                            placeholder="XX"
+                            placeholder="__"
                             value={weight ?? ''}
                             className={[styles.input, weight && weight > 99 ? styles.three : styles.two].join(' ')}
                             onChange={(e) => setWeight(e.target.value.length ? parseInt(e.target.value) : null)}
