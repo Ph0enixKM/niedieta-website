@@ -1,0 +1,195 @@
+.page {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.centered {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.paper {
+    position: relative;
+    background: #eee;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+.centered-image {
+    display: block;
+    margin: auto;
+}
+
+.grid {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+}
+
+.button {
+    border: 1px solid #ccc;
+    background-color: #e6e3e3;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    flex: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: 100ms;
+
+    &.male {
+        border-color: #55A1FF;
+        background: #CADFFF;
+    }
+
+    &.female {
+        border-color: #EC7CF3;
+        background: #FEDEFF;
+    }
+
+    &:not(.male,.female):hover {
+        background-color: #ddd;
+    }
+}
+
+.input {
+    border: 1px solid transparent;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    text-align: right;
+    transition: 100ms, width 300ms;
+
+    &.two {
+        width: calc(2ch + 0.8rem);
+        font-size: 3rem;
+        padding: 0.25rem;
+        font-weight: 500;
+    }
+
+    &.three {
+        width: calc(3ch + 0.8rem);
+        font-size: 3rem;
+        padding: 0.25rem;
+        font-weight: 500;
+    }
+
+    &:focus {
+        border: 1px solid #ccc;
+        background: white;
+        outline: none;
+    }
+
+    &.slider {
+        appearance: none;
+        font-size: 2rem;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-family: "DM Serif Display", serif;
+        outline: none;
+        width: 100%;
+        background: #ddd;
+        border: 1px solid var(--border);
+        border-radius: 999rem;
+        padding: 0.25rem;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            border-radius: 999rem;
+            width: 25px;
+            height: 15px;
+            /* transform: scaleY(1.5); */
+            background: #ffffffaa;
+            cursor: pointer;
+        }
+    }
+}
+
+.paper[pal] {
+    transition: filter 500ms;
+    --bg: #CDDCF3;
+    --border: #AFC1DD;
+    --fg: #55A1FF;
+    color: var(--fg);
+    background: var(--bg);
+
+    .input.slider {
+        border-color: var(--fg);
+
+        &::-webkit-slider-thumb {
+            border: 1px solid var(--fg);
+        }
+    }
+
+    &[pal='0'] {
+        filter: hue-rotate(0deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--fg) 1rem, var(--border), var(--border), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='1'] {
+        filter: hue-rotate(25deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--fg), var(--border), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='2'] {
+        filter: hue-rotate(50deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--fg), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='3'] {
+        filter: hue-rotate(75deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--fg), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='4'] {
+        filter: hue-rotate(100deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--border), var(--fg), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='5'] {
+        filter: hue-rotate(125deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--border), var(--border), var(--fg) calc(100% - 1rem));
+        }
+    }
+}
+
+.caption {
+    position: relative;
+    bottom: 0rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #555;
+    user-select: none;
+}
+
+.unit {
+    user-select: none;
+    cursor: default;
+    font-size: 3rem;
+    font-weight: 200;
+}
+
+.title {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 0.75rem;
+    color: #555;
+}
