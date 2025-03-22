@@ -88,6 +88,84 @@
         background: white;
         outline: none;
     }
+
+    &.slider {
+        appearance: none;
+        font-size: 2rem;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-family: "DM Serif Display", serif;
+        outline: none;
+        width: 100%;
+        background: #ddd;
+        border: 1px solid var(--border);
+        border-radius: 999rem;
+        padding: 0.25rem;
+
+        &::-webkit-slider-thumb {
+            appearance: none;
+            border-radius: 999rem;
+            width: 25px;
+            height: 15px;
+            /* transform: scaleY(1.5); */
+            background: #ffffffaa;
+            cursor: pointer;
+        }
+    }
+}
+
+.paper[pal] {
+    transition: filter 1000ms;
+    --bg: #CDDCF3;
+    --border: #AFC1DD;
+    --fg: #55A1FF;
+    color: var(--fg);
+    background: var(--bg);
+
+    .input.slider {
+        border-color: var(--fg);
+
+        &::-webkit-slider-thumb {
+            border: 1px solid var(--fg);
+        }
+    }
+
+    &[pal='0'] {
+        filter: hue-rotate(0deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--fg) 1rem, var(--border), var(--border), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='1'] {
+        filter: hue-rotate(25deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--fg), var(--border), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='2'] {
+        filter: hue-rotate(50deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--fg), var(--border), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='3'] {
+        filter: hue-rotate(75deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--fg), var(--border), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='4'] {
+        filter: hue-rotate(100deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--border), var(--fg), var(--border) calc(100% - 1rem));
+        }
+    }
+    &[pal='5'] {
+        filter: hue-rotate(125deg);
+        .input.slider {
+            background: linear-gradient(90deg, var(--border) 1rem, var(--border), var(--border), var(--border), var(--border), var(--fg) calc(100% - 1rem));
+        }
+    }
 }
 
 .caption {

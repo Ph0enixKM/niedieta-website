@@ -6,8 +6,42 @@ import Image from "next/image";
 import femaleIcon from "@/../public/calculator/female.svg";
 import maleIcon from "@/../public/calculator/male.svg";
 import { useState } from "react";
+import { Genos } from "next/font/google";
 
 type Gender = 'male' | 'female';
+
+const PAL = [
+    {
+        value: 1.2,
+        title: 'bardzo niska',
+        description: 'osoby leżące, unieruchomione'
+    },
+    {
+        value: 1.4,
+        title: 'niska',
+        description: 'praca siedząca, mało ruchu poza codziennymi obowiązkami'
+    },
+    {
+        value: 1.5,
+        title: 'umiarkowana',
+        description: 'regularna aktywność fizyczna, spacery, jeżdżenie na rowerze, siłownia'
+    },
+    {
+        value: 1.6,
+        title: 'wyższa',
+        description: 'codzienne treningi'
+    },
+    {
+        value: 1.8,
+        title: 'wysoka',
+        description: 'praca fizyczna, intensywne treningi'
+    },
+    {
+        value: 2.0,
+        title: 'bardzo wysoka',
+        description: 'np. sportowcy'
+    }
+];
 
 function getAgeUnit(n: number) {
     if (n == 1) return "rok";
@@ -18,11 +52,43 @@ function getAgeUnit(n: number) {
     return "lat";
 }
 
+function getBMI(height: number, weight: number) {
+    return weight / ((height / 100) ** 2);
+}
+
+function getPPMMifflin(gender: Gender, weight: number, height: number, age: number) {
+    if (gender === 'male') {
+        return 10 * weight + 6.25 * height - 5 * age + 5;
+    } else if (gender === 'female') {
+        return 10 * weight + 6.25 * height - 5 * age - 161;
+    }
+}
+
+function getPPMHarrisBenedict(gender: Gender, weight: number, height: number, age: number) {
+    if (gender === 'male') {
+        return 66.5 + 13.75 * weight + 5.003 * height - 6.775 * age;
+    } else if (gender === 'female') {
+        return 655.1 + 9.563 * weight + 1.850 * height - 4.676 * age;
+    }
+}
+
+function getCPM(ppm: number, pal: number) {
+    return ppm * PAL[pal].value;
+}
+
 export default function Home() {
     const [gender, setGender] = useState<Gender | null>(null);
     const [age, setAge] = useState<number | null>(null);
     const [height, setHeight] = useState<number | null>(null);
     const [weight, setWeight] = useState<number | null>(null);
+    const [pal, setPal] = useState<number>(0);
+
+    const isComputable = [gender, age, height, weight, pal].every(value => value !== null);
+    const bmi = isComputable ? getBMI(height!, weight!) : null;
+    const ppm = isComputable ? (bmi! > 24.9
+        ? getPPMMifflin(gender!, age!, height!, weight!)
+        : getPPMHarrisBenedict(gender!, age!, height!, weight!)) : null;
+    const cpm = isComputable ? getCPM(ppm!, pal) : null;
 
     return <>
         <Navbar />
@@ -83,10 +149,45 @@ export default function Home() {
                         <div className={styles.caption}>Waga</div>
                     </div>
                 </div>
-                <div className={[styles.paper, styles.flex].join(' ')}>
-                    TUTAJ BĘDZIE PAL
+                <div className={[styles.paper, styles.flex].join(' ')} style={{ width: 200 }} {...{ pal }}>
+                    <div className={styles.grid} style={{alignItems: 'center'}}>
+                        <h1>{PAL[pal].value.toFixed(1)}</h1>
+                        <div style={{textAlign: 'right', flex: 1}}>
+                            <div className={styles.caption} style={{textAlign: 'right'}}>
+                                Aktywność
+                            </div>
+                            <b>{PAL[pal].title}</b>
+                        </div>
+                    </div>
+                    <input type="range" min="0" max={PAL.length - 1} value={pal} className={[styles.input, styles.slider].join(' ')} onChange={(e) => setPal(parseInt(e.target.value))} />
+                    <div className={styles.caption}>
+                        {PAL[pal].description}
+                    </div>
                 </div>
             </div>
+
+            {isComputable && (
+                <div className={styles.grid}>
+                    <div className={styles.paper}>
+                        <div className={styles.grid} style={{alignItems: 'center'}}>
+                            <h1>{bmi?.toFixed()}</h1>
+                            <div className={styles.caption}>BMI</div>
+                        </div>
+                    </div>
+                    <div className={styles.paper}>
+                        <div className={styles.grid} style={{alignItems: 'center'}}>
+                            <h1>{ppm?.toFixed()}</h1>
+                            <div className={styles.caption}>PPM</div>
+                        </div>
+                    </div>
+                    <div className={styles.paper}>
+                        <div className={styles.grid} style={{alignItems: 'center'}}>
+                            <h1>{cpm?.toFixed()}</h1>
+                            <div className={styles.caption}>CPM</div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <div className={styles.paper}>
                 <p className={styles.description}>
