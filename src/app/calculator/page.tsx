@@ -52,7 +52,7 @@ function getAgeUnit(n: number) {
     return "lat";
 }
 
-function getBMI(height: number, weight: number) {
+function getBMI(weight: number, height: number) {
     return weight / ((height / 100) ** 2);
 }
 
@@ -68,6 +68,7 @@ function getPPMHarrisBenedict(gender: Gender, weight: number, height: number, ag
     if (gender === 'male') {
         return 66.5 + 13.75 * weight + 5.003 * height - 6.775 * age;
     } else if (gender === 'female') {
+        console.log('female', weight, height, age, 655.1 + 9.563 * weight + 1.850 * height - 4.676 * age);
         return 655.1 + 9.563 * weight + 1.850 * height - 4.676 * age;
     }
 }
@@ -84,10 +85,10 @@ export default function Home() {
     const [pal, setPal] = useState<number>(0);
 
     const isComputable = [gender, age, height, weight, pal].every(value => value !== null);
-    const bmi = isComputable ? getBMI(height!, weight!) : null;
+    const bmi = isComputable ? getBMI(weight!, height!) : null;
     const ppm = isComputable ? (bmi! > 24.9
-        ? getPPMMifflin(gender!, age!, height!, weight!)
-        : getPPMHarrisBenedict(gender!, age!, height!, weight!)) : null;
+        ? getPPMMifflin(gender!, weight!, height!, age!)
+        : getPPMHarrisBenedict(gender!, weight!, height!, age!)) : null;
     const cpm = isComputable ? getCPM(ppm!, pal) : null;
 
     return <>
@@ -170,7 +171,7 @@ export default function Home() {
                 <div className={styles.grid}>
                     <div className={styles.paper}>
                         <div className={styles.grid} style={{alignItems: 'center'}}>
-                            <h1>{bmi?.toFixed()}</h1>
+                            <h1>{bmi?.toFixed(1)}</h1>
                             <div className={styles.caption}>BMI</div>
                         </div>
                     </div>

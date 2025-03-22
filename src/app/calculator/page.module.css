@@ -115,7 +115,7 @@
 }
 
 .paper[pal] {
-    transition: filter 1000ms;
+    transition: filter 500ms;
     --bg: #CDDCF3;
     --border: #AFC1DD;
     --fg: #55A1FF;
