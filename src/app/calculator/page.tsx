@@ -117,6 +117,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
+                            type="number"
                             placeholder="__"
                             value={age ?? ''}
                             className={[styles.input, styles.two].join(' ')}
@@ -129,6 +130,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
+                            type="number"
                             placeholder="___"
                             value={height ?? ''}
                             className={[styles.input, styles.three].join(' ')}
@@ -141,6 +143,7 @@ export default function Home() {
                 <div className={styles.paper}>
                     <div className={styles.centered}>
                         <input
+                            type="number"
                             placeholder="__"
                             value={weight ?? ''}
                             className={[styles.input, weight && weight > 99 ? styles.three : styles.two].join(' ')}
