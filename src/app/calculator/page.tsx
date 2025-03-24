@@ -6,7 +6,6 @@ import Image from "next/image";
 import femaleIcon from "@/../public/calculator/female.svg";
 import maleIcon from "@/../public/calculator/male.svg";
 import { useState } from "react";
-import { Genos } from "next/font/google";
 
 type Gender = 'male' | 'female';
 
