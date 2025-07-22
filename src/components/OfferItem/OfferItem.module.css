@@ -98,7 +98,7 @@
 @media screen and (max-width: 800px) {
     .card {
         margin-top: 0rem;
-        background-color: #eee;
+        background-color: var(--bg);
         border-radius: 0.5rem;
         overflow: hidden;
         max-height: 20rem;
@@ -107,8 +107,8 @@
             width: calc(100% + 1rem);
             left: -1rem;
             height: 8rem;
-            background: #eeeeeeee;
-            mask-image: linear-gradient(transparent, #eee calc(100% - 3rem));
+            background: var(--bg-dark);
+            mask-image: linear-gradient(transparent, var(--bg) calc(100% - 2rem));
             backdrop-filter: blur(2px);
             position: absolute;
             bottom: 0;
