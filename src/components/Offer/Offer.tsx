@@ -8,7 +8,7 @@ export default function Offer() {
     const [showFull, setShowFull] = useState(false);
 
     return <div className={styles.outer}>
-        <div className={styles.title}>Nasza Oferta</div>
+        <div className={styles.title}>Oferta</div>
         <div className={[styles.container, showFull && styles.full].filter(Boolean).join(' ')} id="offer">
             <OfferItem
                 title="Jadłospis"
@@ -34,7 +34,7 @@ export default function Offer() {
                 price={200}
                 color="#eb4c44"
                 details={[
-                    '60 minut rozmowy online',
+                    '50 minut rozmowy online',
                     'wywiad zdrowotny i żywieniowy',
                     'analiza aktualnego sposobu żywienia',
                     'wspólne opracowanie strategii działania',
@@ -58,7 +58,7 @@ export default function Offer() {
                 price={150}
                 color="#ed6e40"
                 details={[
-                    '60 minut rozmowy online',
+                    '50 minut rozmowy online',
                     'wywiad zdrowotny i żywieniowy',
                     'analiza aktualnego sposobu żywienia',
                     'wspólne opracowanie strategii działania',

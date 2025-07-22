@@ -14,7 +14,7 @@
         gap: 1rem;
 
         .item {
-            color: #555;
+            color: var(--text-color);
             font-family: "DM Serif Display", serif;
             font-size: 1.25rem;
             padding: 0.5rem;

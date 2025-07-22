@@ -1,5 +1,5 @@
 .jumbotron {
-    background-color: #eee;
+    background: linear-gradient(var(--bg), #ffdcdc 53.78%, #fffaf7);
 
     .container {
         max-width: 1200px;
@@ -40,10 +40,7 @@
                 .cta {
                     display: inline-block;
                     position: relative;
-                    /* background: linear-gradient(-135deg, #e05093, #ff7b47); */
-                    /* background: linear-gradient(-135deg, #FFCAA0, #F07584); */
                     background: black;
-                    /* font-family: 'Lato'; */
                     font-family: "DM Serif Display", serif;
                     border-radius: 1rem;
                     padding: 0.5rem 1rem;

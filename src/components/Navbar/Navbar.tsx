@@ -6,7 +6,7 @@ interface Props {
     bg?: string
 }
 
-export default function Navbar({ bg = "#eee" }: Props) {
+export default function Navbar({ bg = "var(--bg)" }: Props) {
     return <>
         <div className={styles.navbar} style={{ background: `color-mix(in srgb, ${bg} 70%, transparent)` }}>
             <div className={styles.container}>

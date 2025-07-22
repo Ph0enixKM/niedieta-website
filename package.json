@@ -12,6 +12,7 @@
     "@fontsource-variable/playwrite-is": "^5.0.1",
     "@fontsource/dm-serif-display": "^5.0.20",
     "@fontsource/lato": "^5.0.21",
+    "@fontsource/inter": "^5.0.21",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"

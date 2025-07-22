@@ -7,7 +7,7 @@
         font-size: 48px;
         padding-left: 20px;
         padding-top: 50px;
-        color: #444;
+        color: var(--text-color);
         user-select: none;
         cursor: default;
     }
@@ -16,8 +16,8 @@
         --spacing: 2rem;
         display: flex;
         gap: var(--spacing);
-        background-color: #eee;
-        padding: var(--spacing) var(--spacing) 0 var(--spacing);
+        background: var(--bg);
+        padding: var(--spacing);
         margin: 4rem;
         border-radius: 0.5rem;
         position: relative;
@@ -27,9 +27,9 @@
 
         .show-more {
             width: 100%;
-            height: 8rem;
-            background: #eeeeeeee;
-            mask-image: linear-gradient(transparent, #eee calc(100% - 3rem));
+            height: 10rem;
+            background: var(--bg-dark);
+            mask-image: linear-gradient(transparent, var(--bg) calc(100% - 2rem));
             backdrop-filter: blur(2px);
             position: absolute;
             bottom: 0;

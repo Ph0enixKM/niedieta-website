@@ -18,7 +18,8 @@
 
 .paper {
     position: relative;
-    background: #eee;
+    background: var(--bg);
+    color: var(--text-color);
     border-radius: 0.5rem;
     padding: 1rem;
     flex-shrink: 0;
@@ -38,7 +39,7 @@
 
 .button {
     border: 1px solid #ccc;
-    background-color: #e6e3e3;
+    background-color: var(--bg-dark);
     padding: 1rem;
     border-radius: 0.5rem;
     flex: 1;
@@ -57,7 +58,7 @@
     }
 
     &:not(.male,.female):hover {
-        background-color: #ddd;
+        background-color: color-mix(in srgb, var(--bg-dark), black 10%);
     }
 }
 
@@ -68,6 +69,7 @@
     padding: 0.5rem;
     text-align: right;
     transition: 100ms, width 300ms;
+    color: var(--text-color);
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {

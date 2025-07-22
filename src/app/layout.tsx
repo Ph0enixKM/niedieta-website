@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import "@fontsource-variable/playwrite-is";
 import "@fontsource/dm-serif-display";
 import "@fontsource/lato";
 import "@fontsource/lato/300.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import "@fontsource/inter";
 
 export const metadata: Metadata = {
   title: "NieDieta",
@@ -24,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#eee",
+  themeColor: "#FFEBE1",
 };
 
 export default function RootLayout({
@@ -33,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-        <body className={inter.className}>
+    <html lang="pl">
+        <body>
           {children}
         </body>
     </html>
