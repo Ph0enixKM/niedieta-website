@@ -55,7 +55,7 @@ export default function Offer() {
             <OfferItem
                 title="Konsultacje"
                 description="Wybierając ten plan otrzymujesz:"
-                price={150}
+                price={100}
                 color="#ed6e40"
                 details={[
                     '50 minut rozmowy online',
