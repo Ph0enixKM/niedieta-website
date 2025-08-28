@@ -18,7 +18,7 @@ export default function StoreItem(props: Props) {
             <div className={styles.image}>
                 <Image src={props.src} alt="Shop item" fill />
             </div>
-            <div className={[styles.title, props.title.length < 10 && styles.short].filter(Boolean).join(' ')}>
+            <div className={[styles.title, props.title.length <= 10 && styles.short].filter(Boolean).join(' ')}>
                 {props.title}
             </div>
             <div className={styles.buttons}>

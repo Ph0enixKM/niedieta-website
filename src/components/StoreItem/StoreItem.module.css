@@ -15,11 +15,12 @@
 }
 
 .title {
-    max-width: 250px;
+    max-width: 210px;
     word-break: break-word;
     font-family: "DM Serif Display";
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     height: 75px;
+    margin: 5px 0 7px 0;
 
     display: flex;
     justify-content: center;
@@ -52,7 +53,6 @@ a.buy {
     justify-content: center;
     align-items: center;
     width: 120px;
-    margin-top: 20px;
     margin-right: 5px;
     height: 50px;
     color: white;
@@ -65,7 +65,6 @@ a.buy {
 a.get {
     display: inline-block;
     width: 120px;
-    margin-top: 20px;
     margin-right: 5px;
     height: 50px;
     padding: 10px;
@@ -77,7 +76,6 @@ a.get {
 a.demo {
     display: inline-block;
     width: 120px;
-    margin-top: 20px;
     margin-left: 5px;
     padding: 4px;
     height: 50px;

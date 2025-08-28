@@ -12,6 +12,13 @@ export default function Store() {
                     type="Free"
                     url="https://www.naffy.io/niedieta/bajgle-dSd"
                 />
+                <StoreItem
+                    src="/items/sniadania.jpeg"
+                    title="Śniadania."
+                    type="Paid"
+                    url="https://www.naffy.io/niedieta/sniadania-14o"
+                    price={39}
+                />
             </div>
         </div>
     );
