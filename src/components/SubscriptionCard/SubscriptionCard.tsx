@@ -14,7 +14,7 @@ export default function SubscriptionCard({ src, title, price, href }: Props) {
     const content = (
         <>
             <div className={styles.imageContainer}>
-                <Image src={src} alt={title} fill />
+                <Image src={src} alt={title} width={375} height={0} style={{ width: '100%', height: 'auto' }} />
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>{title}</div>
