@@ -9,6 +9,8 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
+    background: white;
+    border: 1px solid #e8d5cf;
 }
 
 .card:hover {
@@ -18,12 +20,11 @@
 .imageContainer {
     position: relative;
     width: 100%;
-    border-radius: 0.5rem;
     overflow: hidden;
 }
 
 .info {
-    padding: 1rem 0;
+    padding: 1.5rem;
     text-align: center;
 }
 
@@ -36,8 +37,9 @@
 
 .price {
     font-family: "DM Serif Display", serif;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: var(--text-color);
+    font-weight: 400;
 }
 
 @media screen and (max-width: 800px) {
