@@ -1,0 +1,48 @@
+.card {
+    display: block;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 200ms ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.info {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.title {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.price {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        max-width: 100%;
+    }
+}
