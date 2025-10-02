@@ -1,0 +1,47 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cardWrapper {
+    flex-shrink: 0;
+}
+
+.content {
+    display: none;
+}
+
+@media screen and (min-width: 925px) {
+    .section {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 3rem;
+    }
+
+    .content {
+        display: block;
+        flex: 1;
+        max-width: 500px;
+        padding-top: 2rem;
+    }
+
+    .title {
+        font-family: "DM Serif Display", serif;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+        line-height: 1.2;
+    }
+
+    .description {
+        font-family: "Lato", sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--text-color);
+    }
+}
