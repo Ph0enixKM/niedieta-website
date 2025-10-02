@@ -2,6 +2,11 @@
     max-width: 1200px;
     margin: auto;
 
+    .subscriptionWrapper {
+        padding: 2rem 4rem;
+        margin-top: 2rem;
+    }
+
     .title {
         font-family: "DM Serif Display", serif;
         font-size: 48px;
@@ -61,6 +66,11 @@
 
 @media screen and (max-width: 800px) {
     .outer {
+        .subscriptionWrapper {
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+        }
+
         .container {
             margin: 2rem;
             padding: 0;

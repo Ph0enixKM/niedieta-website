@@ -2,12 +2,21 @@
 
 import { useState } from "react"
 import OfferItem from "../OfferItem/OfferItem"
+import SubscriptionSection from "../SubscriptionSection/SubscriptionSection"
 import styles from "./Offer.module.css"
 
 export default function Offer() {
     const [showFull, setShowFull] = useState(false);
 
     return <div className={styles.outer}>
+        <div className={styles.subscriptionWrapper}>
+            <SubscriptionSection 
+                src="https://github.com/user-attachments/assets/4ee1a1ac-09aa-41ce-8454-56e854888b87"
+                title="NieDieta Balans"
+                price={29.99}
+                href="https://www.naffy.io/niedieta/niedieta-balans-2af"
+            />
+        </div>
         <div className={styles.title}>Oferta</div>
         <div className={[styles.container, showFull && styles.full].filter(Boolean).join(' ')} id="offer">
             <OfferItem
