@@ -14,6 +14,7 @@ export default function Offer() {
                 src="https://github.com/user-attachments/assets/4ee1a1ac-09aa-41ce-8454-56e854888b87"
                 title="NieDieta Balans"
                 price={29.99}
+                href="https://www.naffy.io/niedieta/niedieta-balans-2af"
             />
         </div>
         <div className={styles.title}>Oferta</div>
