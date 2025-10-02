@@ -24,7 +24,7 @@ export default function SubscriptionSection({ src, title, price, href }: Props) 
             <div className={styles.content}>
                 <h2 className={styles.title}>NieDieta Balans</h2>
                 <p className={styles.description}>
-                    NieDieta Balans, to comiesięczny 7-dniowy plan (1800 kcal, 100 g białka) z sezonowymi przepisami i listą zakupów; jesz bez wyrzeczeń, łatwiej utrzymujesz lub redukujesz wagę. Masz dostęp do archiwum jadłospisów i wsparcie dietetyczki. Dołącz i poczuj różnicę.
+                    NieDieta Balans, to comiesięczny 7-dniowy plan (1800&nbsp;kcal, 100&nbsp;g białka) z sezonowymi przepisami i listą zakupów; jesz bez wyrzeczeń, łatwiej utrzymujesz lub redukujesz wagę. Masz dostęp do archiwum jadłospisów i wsparcie dietetyczki. Dołącz i poczuj różnicę.
                 </p>
             </div>
         </div>
