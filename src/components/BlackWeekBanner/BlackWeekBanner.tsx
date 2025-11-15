@@ -14,7 +14,7 @@ export default function BlackWeekBanner() {
     return (
         <div className={styles.bg}>
             <div className={styles.container}>
-                Wszystkie jadłospisy <b>50%</b> taniej z kodem <code>BLACKWEEK50</code>!
+                Cała oferta i nasze produkty <b>30%</b> taniej!
             </div>
         </div>
     );
