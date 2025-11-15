@@ -36,6 +36,7 @@ export default function Offer() {
                 title="Dieta+"
                 description="Wybierając ten plan otrzymujesz:"
                 price={200}
+                discounted_price={100}
                 color="#eb4c44"
                 details={[
                     '50 minut rozmowy online',
