@@ -1,20 +1,19 @@
 'use client';
 
 import styles from './BlackWeekBanner.module.css';
+import { useEvent } from '@/hooks/useEvent';
 
 export default function BlackWeekBanner() {
-    const now = new Date();
-    const begin = new Date(now.getFullYear(), 10, 15);
-    const end = new Date(now.getFullYear(), 11, 24);
+    const event = useEvent();
 
-    if (now < begin || now > end) {
+    if (event.type !== 'BlackWeek') {
         return null;
     }
 
     return (
         <div className={styles.bg}>
             <div className={styles.container}>
-                Wszystkie jadłospisy <b>50%</b> taniej z kodem <code>BLACKWEEK50</code>!
+                Cała oferta i nasze produkty <b>{event.discount}%</b> taniej!
             </div>
         </div>
     );

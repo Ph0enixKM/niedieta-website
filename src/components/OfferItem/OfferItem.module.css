@@ -38,7 +38,13 @@
     .pricing {
         display: flex;
         flex-direction: row;
-        align-items: baseline;
+        align-items: center;
+
+        .priceGroup {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0.75rem;
+        }
 
         .price {
             font-family: "DM Serif Display", serif;
@@ -48,14 +54,20 @@
                 position: relative;
                 text-decoration: line-through;
                 color: #888 !important;
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 line-height: 100%;
                 padding: 0.1rem;
-                margin-bottom: -1rem;
+                margin-bottom: 0.1rem;
                 z-index: 3;
                 display: inline-block;
-                margin-left: 0.75rem;
             }
+        }
+
+        .lowestPrice {
+            font-size: 0.45rem;
+            color: #666;
+            line-height: 1;
+            margin-top: 0rem;
         }
     }
 

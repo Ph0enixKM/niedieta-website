@@ -11,7 +11,7 @@
     position: relative;
     min-height: 3rem;
     background-color: black;
-    background-image: url('/blackweeks.svg');
+    background-image: linear-gradient(#00000088, #00000088), url('/blackweeks.svg');
     background-size: auto 100%;
     animation: banner 50s linear infinite;
 }
