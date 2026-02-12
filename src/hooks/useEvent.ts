@@ -20,7 +20,7 @@ export function useEvent(): EventInfo {
         };
     }
 
-    const kingasBdayBegin = new Date(2026, 1, 12); // February 13 2026
+    const kingasBdayBegin = new Date(2026, 1, 13); // February 13 2026
     const kingasBdayEnd = new Date(2026, 1, 15); // February 15 2026
     if (now >= kingasBdayBegin && now <= kingasBdayEnd) {
         return {
