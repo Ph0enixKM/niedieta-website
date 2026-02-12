@@ -24,6 +24,8 @@ export default function StoreItem(props: Props) {
     const finalPrice = hasDiscount
         ? (parseFloat(originalPrice) * (1 - event.discount / 100)).toFixed(2)
         : originalPrice;
+
+    console.log(event, hasDiscount);
     return (
         <div className={styles.container}>
             <div className={styles.image}>

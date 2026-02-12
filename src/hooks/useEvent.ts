@@ -1,6 +1,6 @@
 'use client';
 
-export type EventType = 'BlackWeek' | 'None';
+export type EventType = 'BlackWeek' | 'KingasBday' | 'None';
 
 export interface EventInfo {
     type: EventType;
@@ -17,6 +17,15 @@ export function useEvent(): EventInfo {
         return {
             type: 'BlackWeek',
             discount: 30
+        };
+    }
+
+    const kingasBdayBegin = new Date(2026, 1, 12); // February 13 2026
+    const kingasBdayEnd = new Date(2026, 1, 15); // February 15 2026
+    if (now >= kingasBdayBegin && now <= kingasBdayEnd) {
+        return {
+            type: 'KingasBday',
+            discount: 24
         };
     }
 

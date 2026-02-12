@@ -11,9 +11,9 @@
   "dependencies": {
     "@fontsource-variable/playwrite-is": "^5.0.1",
     "@fontsource/dm-serif-display": "^5.0.20",
-    "@fontsource/lato": "^5.0.21",
     "@fontsource/inter": "^5.0.21",
-    "next": "16.0.7",
+    "@fontsource/lato": "^5.0.21",
+    "next": "^16.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
