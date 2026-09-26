@@ -32,7 +32,7 @@ export default function Hero() {
                     </p>
 
                     <div className={styles.ctas}>
-                        <a href="#oferta" className="btn btn-primary">
+                        <a href="#oferta" className="btn btn-deep">
                             Umów konsultację
                             <ArrowRight />
                         </a>

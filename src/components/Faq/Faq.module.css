@@ -64,9 +64,19 @@
     --lift: 0deg;
     --swing: 0deg;
     --l: 0;
-    --bend: max(var(--l), var(--hl));
+    /* the resting curl every note has even when nothing moves (set per note in Faq.tsx) */
+    --rest-lift: 0deg;
+    --rest-bend: 0;
+    --rest-sway: 0deg;
+    --skew: 0;
+    --bend: max(calc(var(--l) + var(--rest-bend)), var(--hl));
+    --sway: calc(var(--swing) + var(--rest-sway));
     --tone: var(--sky);
     --ink: var(--berry);
+    /* how the paper catches the light when it is pressed into relief (see .emboss) */
+    --emboss-hi: rgba(255, 255, 255, 0.8);
+    --emboss-lo: rgba(41, 46, 76, 0.22);
+    --emboss-sheen: rgba(255, 255, 255, 0.22);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -75,7 +85,7 @@
     color: var(--ink);
     /* everything bends at the lower edge of the glued strip */
     transform-origin: 50% 13%;
-    transform: translate(var(--x), var(--y)) rotate(var(--tilt)) rotate(var(--swing)) rotateX(calc(var(--lift) + var(--peek)));
+    transform: translate(var(--x), var(--y)) rotate(var(--tilt)) rotate(var(--swing)) rotateX(calc(var(--rest-lift) + var(--lift) + var(--peek)));
     filter: drop-shadow(0 calc(3px + var(--bend) * 16px) calc(4px + var(--bend) * 14px) rgba(28, 32, 54, calc(0.2 + var(--bend) * 0.1)));
     transition:
         --peek 0.45s var(--ease-spring),
@@ -106,6 +116,9 @@
 .ask {
     --tone: var(--berry);
     --ink: var(--cream);
+    --emboss-hi: rgba(255, 255, 255, 0.2);
+    --emboss-lo: rgba(10, 12, 26, 0.6);
+    --emboss-sheen: rgba(255, 255, 255, 0.06);
 }
 
 /* the glued strip never moves: only the free part below it lifts, bends and flips */
@@ -190,7 +203,7 @@
     background:
         /* elliptical bands, so the sheen and the shadow follow the bowed free edge instead of cutting straight across */
         radial-gradient(
-            ellipse 92% 100% at calc(50% + var(--swing) * 6) 0%,
+            ellipse 92% 100% at calc(50% + var(--sway) * 6) 0%,
             transparent 0 16%,
             rgba(255, 255, 255, 0.34) 38%,
             rgba(255, 255, 255, 0) 56%,
@@ -198,7 +211,7 @@
             rgba(41, 46, 76, 0.3) 100%
         ),
         linear-gradient(
-            calc(90deg + var(--swing) * 8),
+            calc(90deg + var(--sway) * 8),
             rgba(41, 46, 76, 0.13),
             transparent 30% 70%,
             rgba(41, 46, 76, 0.13)
@@ -206,8 +219,9 @@
 }
 
 .face {
-    border-bottom-left-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 20px);
-    border-bottom-right-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 20px);
+    /* --skew lets one corner curl a little more than the other */
+    border-bottom-left-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * (20px - var(--skew) * 9px));
+    border-bottom-right-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * (20px + var(--skew) * 9px));
 }
 
 .front {
@@ -216,8 +230,9 @@
 }
 
 .front:focus-visible,
-.backButton:focus-visible {
-    outline: 2.5px solid var(--berry);
+.backButton:focus-visible,
+.askButton:focus-visible {
+    outline: 2.5px solid var(--ink);
     outline-offset: 4px;
 }
 
@@ -310,6 +325,37 @@
     transform: scaleY(-1);
 }
 
+/* the buttons aren't stuck onto the notes: they're the paper itself, pushed up from behind — lit along the top rim,
+   shaded under the bottom one. Pressing flattens the relief into a dent. */
+.emboss {
+    color: inherit;
+    background: linear-gradient(var(--emboss-sheen), transparent 75%);
+    box-shadow:
+        inset 0 1px 0.5px var(--emboss-hi),
+        inset 0 -1px 1px var(--emboss-lo),
+        0 1px 1px var(--emboss-lo),
+        0 3px 6px -3px var(--emboss-lo);
+    transition: box-shadow 0.3s ease;
+}
+
+.emboss:hover,
+.front:hover .emboss {
+    box-shadow:
+        inset 0 1.5px 0.5px var(--emboss-hi),
+        inset 0 -1.5px 1.5px var(--emboss-lo),
+        0 1.5px 1.5px var(--emboss-lo),
+        0 6px 10px -4px var(--emboss-lo);
+}
+
+.emboss:active,
+.front:active .emboss {
+    box-shadow:
+        inset 0 1.5px 2px var(--emboss-lo),
+        inset 0 -1px 0.5px var(--emboss-hi),
+        0 0 0 transparent,
+        0 0 0 transparent;
+}
+
 .question {
     font-family: var(--font-hand);
     font-size: clamp(1.45rem, 1.95vw, 1.8rem);
@@ -325,9 +371,8 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
     transition:
-        transform 0.55s var(--ease-spring),
+        box-shadow 0.3s ease,
         opacity 0.3s ease;
 }
 
@@ -340,7 +385,12 @@
     transition-delay: 0s, 0.6s;
 }
 
-.front:hover .flipIcon {
+/* only the arrows turn: spinning the whole relief would swing its lighting round with it */
+.flipIcon svg {
+    transition: transform 0.55s var(--ease-spring);
+}
+
+.front:hover .flipIcon svg {
     transform: rotate(180deg);
 }
 
@@ -363,14 +413,8 @@
     align-self: center;
     padding: 6px 12px 6px 9px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.22);
-    transition: background-color 0.25s ease;
     font-size: 0.8rem;
     font-weight: 600;
-}
-
-.backButton:hover {
-    background: rgba(255, 255, 255, 0.45);
 }
 
 .askFace {
@@ -391,8 +435,26 @@
     letter-spacing: -0.02em;
 }
 
-.askFace :global(.btn) {
-    align-self: flex-start;
+.askButton {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 0.65em;
+    min-height: 48px;
+    padding: 0 1.45em;
+    border-radius: 999px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.askButton svg {
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.askButton:hover svg {
+    transform: translateX(3px);
 }
 
 /* three per row on tablets, the question note centred below */

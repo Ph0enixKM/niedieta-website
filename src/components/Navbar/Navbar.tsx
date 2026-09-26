@@ -55,7 +55,19 @@ export default function Navbar({ home = true }: Props) {
     return (
         <header className={classes}>
             <nav className={styles.bar} aria-label="Nawigacja główna">
-                <Link href="/" className={styles.brand} aria-label="NieDieta — strona główna" onClick={() => setOpen(false)}>
+                <Link
+                    href="/"
+                    className={styles.brand}
+                    aria-label="NieDieta — strona główna"
+                    onClick={(e) => {
+                        setOpen(false);
+                        if (!home) return;
+                        // Already on the home page: scroll back to the top instead of navigating.
+                        e.preventDefault();
+                        if (window.location.hash) history.replaceState(null, "", window.location.pathname);
+                        window.scrollTo({ top: 0 });
+                    }}
+                >
                     <Logo />
                 </Link>
 
@@ -77,11 +89,11 @@ export default function Navbar({ home = true }: Props) {
                 </ul>
 
                 <div className={styles.actions}>
-                    <Link href="/calculator" className={`btn btn-sky btn-small ${styles.calc}`} aria-label="Kalkulator BMI i zapotrzebowania">
+                    <Link href="/calculator" className={`btn btn-bright btn-small ${styles.calc}`} aria-label="Kalkulator BMI i zapotrzebowania">
                         <CalculatorIcon />
                         <span className={styles.calcLabel}>Kalkulator</span>
                     </Link>
-                    <a href={href("#oferta")} className={`btn btn-primary btn-small ${styles.cta}`}>
+                    <a href={href("#oferta")} className={`btn btn-deep btn-small ${styles.cta}`}>
                         <span className={styles.ctaLong}>Umów konsultację</span>
                         <span className={styles.ctaShort}>Umów się</span>
                     </a>
@@ -113,7 +125,7 @@ export default function Navbar({ home = true }: Props) {
                         </Link>
                     </li>
                 </ul>
-                <a href={href("#oferta")} className="btn btn-primary btn-block" onClick={() => setOpen(false)}>
+                <a href={href("#oferta")} className="btn btn-deep btn-block" onClick={() => setOpen(false)}>
                     Umów konsultację
                 </a>
                 <div className={styles.socials}>

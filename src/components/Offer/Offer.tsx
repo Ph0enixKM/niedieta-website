@@ -41,7 +41,7 @@ export default function Offer() {
                                     </li>
                                 ))}
                             </ul>
-                            <a href={PROGRAM.href} className={`btn btn-cream btn-block ${styles.cta}`}>
+                            <a href={PROGRAM.href} className={`btn btn-bright btn-block ${styles.cta}`}>
                                 Zaczynam współpracę
                                 <ArrowUpRight />
                             </a>
@@ -68,7 +68,7 @@ export default function Offer() {
                                 <a href={NAFFY.appTrialClassic}>wersja klasyczna</a>
                                 <a href={NAFFY.appTrialVege}>wersja wege</a>
                             </div>
-                            <a href={APP.href} className={`btn btn-primary btn-block ${styles.cta}`}>
+                            <a href={APP.href} className={`btn btn-deep btn-block ${styles.cta}`}>
                                 Dołączam
                                 <ArrowUpRight />
                             </a>
@@ -92,7 +92,7 @@ export default function Offer() {
                                     <p>{book.text}</p>
                                     <div className={styles.bookFoot}>
                                         <Price amount={book.price} rounding="cents" size="sm" />
-                                        <a href={book.href} className="btn btn-ghost btn-small">
+                                        <a href={book.href} className="btn btn-bright btn-small">
                                             {book.cta}
                                         </a>
                                     </div>

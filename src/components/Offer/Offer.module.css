@@ -51,6 +51,7 @@
 }
 
 .card {
+    --surface: var(--paper);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -70,6 +71,8 @@
 }
 
 .featured {
+    /* a light key reads best on the dark card */
+    --surface: var(--cream);
     margin-block: -20px;
     padding-block: 54px 50px;
     color: var(--cream);
@@ -273,6 +276,7 @@
 }
 
 .book {
+    --surface: var(--paper);
     display: grid;
     grid-template-columns: 100px minmax(0, 1fr);
     align-items: center;

@@ -5,6 +5,8 @@
     --sky: #bfcfd9;
     --sky-soft: #dae4ea;
     --sky-deep: #9cb3c3;
+    /* the site's primary button colour */
+    --surface-deep: #627fa2;
     --berry: #292e4c;
     --berry-soft: #474d75;
     --berry-deep: #1c2036;
@@ -155,6 +157,7 @@ ol {
 .btn {
     --btn-bg: var(--berry);
     --btn-fg: var(--cream);
+    --btn-depth: 4px;
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -196,45 +199,79 @@ ol {
     transform: translateX(3px);
 }
 
-.btn-primary {
-    box-shadow: 0 14px 28px -16px rgba(28, 32, 54, 0.75);
+/* tactile keys: deep (primary) is darker than the surface it sits on, bright (secondary) a shade lighter
+   than it (--surface on an ancestor, cream by default) */
+.btn-deep {
+    --btn-face: var(--surface-deep);
+    --btn-wall: oklch(from var(--btn-face) calc(l - 0.12) c h);
+    --btn-fg: #fff;
 }
 
-.btn-primary:hover {
-    --btn-bg: var(--berry-deep);
-    box-shadow: 0 20px 34px -18px rgba(28, 32, 54, 0.85);
-}
-
-.btn-ghost {
-    --btn-bg: transparent;
-    --btn-fg: var(--berry);
-    box-shadow: inset 0 0 0 1.5px rgba(41, 46, 76, 0.28);
-}
-
-.btn-ghost:hover {
-    --btn-bg: rgba(191, 207, 217, 0.45);
-    box-shadow: inset 0 0 0 1.5px rgba(41, 46, 76, 0.5);
-}
-
-.btn-sky {
-    --btn-bg: var(--sky);
+.btn-bright {
+    --btn-face: oklch(from var(--surface, var(--cream)) min(l + 0.08, 0.99) calc(c * 0.6) h);
+    --btn-wall: oklch(from var(--surface, var(--cream)) calc(l - 0.06) c h);
     --btn-fg: var(--berry);
 }
 
-.btn-sky:hover {
-    --btn-bg: var(--sky-deep);
+.btn-deep,
+.btn-bright {
+    background: linear-gradient(
+        180deg,
+        oklch(from var(--btn-face) calc(l + 0.035) c h),
+        oklch(from var(--btn-face) calc(l - 0.015) c h)
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.55),
+        inset 0 -2px 3px rgba(41, 46, 76, 0.06),
+        0 var(--btn-depth) 0 var(--btn-wall),
+        0 calc(var(--btn-depth) + 1px) 2px rgba(28, 32, 54, 0.14),
+        0 16px 24px -10px rgba(28, 32, 54, 0.3);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition:
+        transform 0.2s var(--ease-out),
+        box-shadow 0.2s var(--ease-out);
 }
 
-.btn-cream {
-    --btn-bg: var(--cream);
-    --btn-fg: var(--berry);
+.btn-deep svg,
+.btn-bright svg {
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.4));
 }
 
-.btn-cream:hover {
-    --btn-bg: #fff;
+/* light lettering on the deep key sits pressed into it, lit from above */
+.btn-deep {
+    text-shadow: 0 -1px 0 rgba(28, 32, 54, 0.35);
+}
+
+.btn-deep svg {
+    filter: drop-shadow(0 -1px 0 rgba(28, 32, 54, 0.35));
+}
+
+.btn-deep:hover,
+.btn-bright:hover {
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -2px 3px rgba(41, 46, 76, 0.06),
+        0 calc(var(--btn-depth) + 1px) 0 var(--btn-wall),
+        0 calc(var(--btn-depth) + 2px) 2px rgba(28, 32, 54, 0.14),
+        0 20px 28px -10px rgba(28, 32, 54, 0.32);
+}
+
+/* pressed: the key sinks onto its wall */
+.btn-deep:active,
+.btn-bright:active {
+    transform: translateY(calc(var(--btn-depth) - 1px));
+    transition-duration: 0.06s;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 2px 4px rgba(41, 46, 76, 0.12),
+        0 1px 0 var(--btn-wall),
+        0 2px 1px rgba(28, 32, 54, 0.16),
+        0 6px 10px -6px rgba(28, 32, 54, 0.3);
 }
 
 .btn-small {
+    --btn-depth: 3px;
     min-height: 42px;
     padding: 0 1.1em;
     font-size: 0.92rem;

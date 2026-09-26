@@ -1,27 +1,28 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styles from "./Berry.module.css";
 
 function supportsWebGL() {
     try {
-        const canvas = document.createElement("canvas");
-        return !!(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+        const gl = document.createElement("canvas").getContext("webgl2") ?? document.createElement("canvas").getContext("webgl");
+        // browsers cap live contexts; don't keep the probe around
+        gl?.getExtension("WEBGL_lose_context")?.loseContext();
+        return !!gl;
     } catch {
         return false;
     }
 }
 
 /**
- * Mounts the fixed 3D layer. three.js and the model load lazily after hydration;
- * when WebGL is unavailable the static berry images inside each BerrySlot are shown instead.
+ * Starts the 3D berries. three.js and the model load lazily after hydration; the engine then moves its canvas into
+ * the BerrySlot (or track) of whichever berry is on screen. When WebGL is unavailable the static berry images inside
+ * each BerrySlot are shown instead.
  */
 export default function BerryStage() {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-
     useEffect(() => {
         const html = document.documentElement;
-        const canvas = canvasRef.current;
+        if (!document.querySelector("[data-berry]")) return;
         let cancelled = false;
         let dispose: (() => void) | undefined;
 
@@ -30,10 +31,14 @@ export default function BerryStage() {
             html.classList.add("berry-fallback");
         };
 
-        if (!canvas || !supportsWebGL()) {
+        if (!supportsWebGL()) {
             fallback();
             return;
         }
+
+        const canvas = document.createElement("canvas");
+        canvas.className = styles.stage;
+        canvas.setAttribute("aria-hidden", "true");
 
         import("./engine")
             .then(({ createBerryEngine }) => createBerryEngine(canvas, fallback))
@@ -57,5 +62,5 @@ export default function BerryStage() {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className={styles.stage} aria-hidden="true" />;
+    return null;
 }

@@ -7,19 +7,30 @@ import styles from "./Faq.module.css";
 
 type Tone = "sky" | "soft" | "paper" | "sand";
 
-// Controlled chaos: every note gets its own tilt, nudge and colour (fixed values, so SSR matches).
-const NOTES: { tilt: number; x: number; y: number; tone: Tone }[] = [
-    { tilt: -3.2, x: 6, y: 12, tone: "sky" },
-    { tilt: 2.4, x: -8, y: -4, tone: "paper" },
-    { tilt: -1.3, x: 4, y: 20, tone: "sand" },
-    { tilt: 3.4, x: -6, y: 2, tone: "soft" },
-    { tilt: -2.6, x: 10, y: -2, tone: "paper" },
-    { tilt: 1.7, x: -4, y: 14, tone: "sky" },
+type Curl = { lift: number; bend: number; sway: number; skew: number };
+
+// Controlled chaos: every note gets its own tilt, nudge, colour and resting curl (fixed values, so SSR matches).
+// curl: lift = how far the free edge already stands off the wall (deg), bend = how bowed the paper is (0–1),
+// sway = which way the light rolls across it, skew = which corner curls more (-1 left … 1 right)
+const NOTES: { tilt: number; x: number; y: number; tone: Tone; curl: Curl }[] = [
+    { tilt: -3.2, x: 6, y: 12, tone: "sky", curl: { lift: 7, bend: 0.3, sway: -1.2, skew: 0.35 } },
+    { tilt: 2.4, x: -8, y: -4, tone: "paper", curl: { lift: 3.5, bend: 0.18, sway: 0.8, skew: -0.25 } },
+    { tilt: -1.3, x: 4, y: 20, tone: "sand", curl: { lift: 9, bend: 0.36, sway: 1.5, skew: -0.45 } },
+    { tilt: 3.4, x: -6, y: 2, tone: "soft", curl: { lift: 5, bend: 0.24, sway: -0.6, skew: 0.15 } },
+    { tilt: -2.6, x: 10, y: -2, tone: "paper", curl: { lift: 8, bend: 0.32, sway: 1.1, skew: 0.4 } },
+    { tilt: 1.7, x: -4, y: 14, tone: "sky", curl: { lift: 4, bend: 0.2, sway: -1.4, skew: -0.3 } },
 ];
+
+const curlStyle = (c: Curl) => ({
+    "--rest-lift": `${c.lift}deg`,
+    "--rest-bend": c.bend,
+    "--rest-sway": `${c.sway}deg`,
+    "--skew": c.skew,
+});
 const MAX_LIFT = 24;
 // above this speed (px/s) a scroll counts as a flick and the notes really start to flap
 const FLICK = 1200;
-const ASK = { tilt: -3.8, x: 2, y: 6 };
+const ASK = { tilt: -3.8, x: 2, y: 6, curl: { lift: 6, bend: 0.26, sway: 0.9, skew: -0.2 } };
 
 function FlipIcon() {
     return (
@@ -157,7 +168,7 @@ export default function Faq() {
                                 <div
                                     className={`${styles.note} ${styles[layout.tone]}`}
                                     data-note=""
-                                    style={{ "--tilt": `${layout.tilt}deg`, "--x": `${layout.x}px`, "--y": `${layout.y}px` } as CSSProperties}
+                                    style={{ "--tilt": `${layout.tilt}deg`, "--x": `${layout.x}px`, "--y": `${layout.y}px`, ...curlStyle(layout.curl) } as CSSProperties}
                                 >
                                     <span className={styles.glue} aria-hidden="true" />
                                     <div className={styles.flipper} data-flipped={isFlipped || undefined}>
@@ -171,13 +182,13 @@ export default function Faq() {
                                             onClick={() => flip(i, true)}
                                         >
                                             <span className={styles.question}>{item.q}</span>
-                                            <span className={styles.flipIcon}>
+                                            <span className={`${styles.flipIcon} ${styles.emboss}`}>
                                                 <FlipIcon />
                                             </span>
                                         </button>
                                         <div id={`faq-back-${i}-panel`} className={`${styles.face} ${styles.back}`} inert={!isFlipped}>
                                             <p className={styles.answer}>{item.a}</p>
-                                            <button id={`faq-back-${i}`} type="button" className={styles.backButton} onClick={() => flip(i, false)}>
+                                            <button id={`faq-back-${i}`} type="button" className={`${styles.backButton} ${styles.emboss}`} onClick={() => flip(i, false)}>
                                                 <FlipIcon />
                                                 Wróć do pytania
                                             </button>
@@ -192,12 +203,12 @@ export default function Faq() {
                         <div
                             className={`${styles.note} ${styles.ask}`}
                             data-note=""
-                            style={{ "--tilt": `${ASK.tilt}deg`, "--x": `${ASK.x}px`, "--y": `${ASK.y}px` } as CSSProperties}
+                            style={{ "--tilt": `${ASK.tilt}deg`, "--x": `${ASK.x}px`, "--y": `${ASK.y}px`, ...curlStyle(ASK.curl) } as CSSProperties}
                         >
                             <span className={styles.glue} aria-hidden="true" />
                             <div className={`${styles.face} ${styles.askFace}`}>
                                 <p className={styles.askTitle}>Nie ma tu Twojego pytania?</p>
-                                <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-cream">
+                                <a href={`mailto:${CONTACT_EMAIL}`} className={`${styles.askButton} ${styles.emboss}`}>
                                     <MailIcon />
                                     Napisz do mnie!
                                 </a>

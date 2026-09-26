@@ -78,6 +78,13 @@ export function RoughEdge({ className, seed = 1, flip = false }: { className?: s
     );
 }
 
+/** RoughEdge as a masked box, so it can take any CSS background (e.g. the grain texture). */
+export function RoughEdgeMask({ className, seed = 1 }: { className?: string; seed?: number }) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" preserveAspectRatio="none"><path d="${roughEdge(seed)}"/></svg>`;
+    const mask = `url("data:image/svg+xml,${encodeURIComponent(svg)}") 0 0 / 100% 100% no-repeat`;
+    return <div className={className} style={{ mask, WebkitMask: mask }} aria-hidden="true" />;
+}
+
 export function MarkerBlob({ className, seed = 1, style }: { className?: string; seed?: number; style?: CSSProperties }) {
     return (
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className={className} style={style} aria-hidden="true">

@@ -143,7 +143,8 @@
 
 .media .berry {
     position: absolute;
-    z-index: 2;
+    /* above the copy: the 3D berry drops in over the headline */
+    z-index: 4;
     left: -6%;
     bottom: -11%;
     width: clamp(118px, 14.5vw, 196px);

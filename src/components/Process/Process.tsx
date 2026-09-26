@@ -21,6 +21,7 @@ interface Geometry {
     h: number;
     d: string;
     stations: Point[];
+    start: Point;
     end: Point;
     orientation: "h" | "v";
     mode: "pin" | "scrub" | "follow";
@@ -80,6 +81,7 @@ export default function Process() {
                     h: TRACK_H,
                     d: smoothPath(pts),
                     stations: anchors.map((a) => ({ x: a.x, y: lineY })),
+                    start: { x: startX, y: lineY },
                     end: { x: endX, y: lineY - 2 },
                     orientation: "h",
                     mode: pinQuery.matches ? "pin" : "scrub",
@@ -102,6 +104,7 @@ export default function Process() {
                     h: b.height,
                     d: smoothPath(pts),
                     stations: anchors.map((a) => ({ x: lineX, y: a.y })),
+                    start: { x: lineX, y: 4 },
                     end: { x: lineX, y: endY },
                     orientation: "v",
                     mode: "follow",
@@ -207,6 +210,13 @@ export default function Process() {
                             >
                                 <HandHeart className={styles.heart} draw={false} />
                                 <span>efekty, które zostają</span>
+                            </div>
+                        )}
+
+                        {geo?.orientation === "v" && (
+                            // narrow layouts: the 3D berry's canvas rides on this, kept level with the reading line by CSS
+                            <div className={styles.lane} style={{ top: geo.start.y, height: geo.end.y - geo.start.y }}>
+                                <div className={styles.rider} data-berry-rider="" />
                             </div>
                         )}
                     </div>

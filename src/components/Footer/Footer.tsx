@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Logo from "@/components/Logo/Logo";
 import { ArrowRight, MailIcon, SOCIAL_ICONS } from "@/components/Icons/Icons";
-import { RoughEdge } from "@/components/Sketch/Sketch";
+import { RoughEdgeMask } from "@/components/Sketch/Sketch";
 import { CONTACT_EMAIL, NAV_LINKS, SOCIALS } from "@/content/site";
 import ArLink from "./ArLink";
 import styles from "./Footer.module.css";
@@ -17,7 +17,7 @@ export default function Footer({ home = true }: Props) {
 
     return (
         <footer className={styles.footer}>
-            <RoughEdge className={styles.edge} seed={14} />
+            <RoughEdgeMask className={styles.edge} seed={14} />
             <div className={styles.body}>
                 <div className="container">
                     <div className={styles.cta}>
@@ -28,11 +28,11 @@ export default function Footer({ home = true }: Props) {
                             Resztę przejdziemy razem — w Twoim tempie.
                         </p>
                         <div className={styles.ctaButtons} data-reveal>
-                            <a href={href("#oferta")} className="btn btn-primary">
+                            <a href={href("#oferta")} className="btn btn-deep">
                                 Umów konsultację
                                 <ArrowRight />
                             </a>
-                            <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-cream">
+                            <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-bright">
                                 <MailIcon />
                                 Napisz do mnie
                             </a>

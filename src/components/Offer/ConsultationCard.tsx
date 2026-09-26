@@ -45,7 +45,7 @@ export default function ConsultationCard() {
             </ul>
             {variant.note && <p className={styles.fine}>{variant.note}</p>}
 
-            <a href={variant.href} className={`btn btn-primary btn-block ${styles.cta}`}>
+            <a href={variant.href} className={`btn btn-deep btn-block ${styles.cta}`}>
                 {variant.cta}
                 <ArrowUpRight />
             </a>

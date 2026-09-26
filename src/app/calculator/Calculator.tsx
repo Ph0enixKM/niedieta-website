@@ -266,7 +266,7 @@ export default function Calculator() {
 
                 <div className={styles.cta}>
                     <p>Chcesz przełożyć liczby na codzienne jedzenie — bez restrykcji?</p>
-                    <a href="/#oferta" className="btn btn-primary">
+                    <a href="/#oferta" className="btn btn-deep">
                         Umów konsultację
                         <ArrowRight />
                     </a>

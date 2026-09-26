@@ -181,6 +181,22 @@ html:not(:global(.js)) .num::before {
     transition-delay: 0s;
 }
 
+/* narrow layouts: carries the 3D berry's canvas down the track; sticky holds it at the reading line,
+   so the berry glides with the page's own scrolling (see Berry/engine.ts → Roller) */
+.lane {
+    position: absolute;
+    left: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.rider {
+    position: sticky;
+    top: 55vh;
+    top: 55svh;
+    height: 0;
+}
+
 .goal[data-reached] .heart {
     animation: beat 1.2s var(--ease-out) 0.5s;
 }
