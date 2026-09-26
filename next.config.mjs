@@ -1,3 +1,5 @@
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
@@ -11,3 +13,6 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
+// gives `next dev` access to the Cloudflare bindings from wrangler.jsonc
+initOpenNextCloudflareForDev();
