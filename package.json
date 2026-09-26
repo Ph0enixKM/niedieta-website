@@ -9,18 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fontsource-variable/playwrite-is": "^5.0.1",
-    "@fontsource/dm-serif-display": "^5.0.20",
-    "@fontsource/inter": "^5.0.21",
-    "@fontsource/lato": "^5.0.21",
     "next": "^16.1.6",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
     "typescript": "^5"
   }
 }

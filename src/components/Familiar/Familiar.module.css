@@ -1,0 +1,157 @@
+.familiar {
+    position: relative;
+    color: var(--berry);
+}
+
+/* horizontal top rail capping the vertical boards */
+.beam {
+    position: relative;
+    z-index: 2;
+    height: clamp(26px, 2.6vw, 36px);
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)) 0 0 / 100% 2px no-repeat,
+        linear-gradient(transparent calc(100% - 3px), rgba(41, 46, 76, 0.16) calc(100% - 3px)),
+        color-mix(in srgb, var(--sky) 88%, var(--berry));
+    box-shadow: 0 14px 18px -14px rgba(28, 32, 54, 0.5);
+}
+
+.band {
+    position: relative;
+    background: var(--sky) var(--grain);
+    padding: clamp(56px, 7vw, 96px) 0 clamp(120px, 13vw, 180px);
+    overflow: hidden;
+    /* the fence fades into the page instead of ending on a hard edge */
+    -webkit-mask-image: linear-gradient(#000 calc(100% - clamp(100px, 11vw, 160px)), transparent);
+    mask-image: linear-gradient(#000 calc(100% - clamp(100px, 11vw, 160px)), transparent);
+}
+
+/* vertical fence boards: a seam every 64px and a light strip along each board */
+.band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(41, 46, 76, 0.07) 0 6px,
+            rgba(255, 255, 255, 0.12) 6px 10px,
+            transparent 10px 58px,
+            rgba(41, 46, 76, 0.07) 58px 64px
+        );
+    pointer-events: none;
+}
+
+.band > :global(.container) {
+    position: relative;
+}
+
+.title {
+    position: relative;
+    text-align: center;
+}
+
+
+.cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 2.6vw, 36px);
+    margin-top: clamp(40px, 5vw, 64px);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 34px 28px 32px;
+    border-radius: 26px;
+    background: var(--paper);
+    box-shadow: 0 30px 50px -36px rgba(28, 32, 54, 0.55);
+    rotate: var(--tilt);
+    height: 100%;
+    transition:
+        rotate 0.6s var(--ease-spring),
+        translate 0.6s var(--ease-spring),
+        box-shadow 0.4s ease;
+}
+
+.card:hover {
+    rotate: 0deg;
+    translate: 0 -6px;
+    box-shadow: 0 40px 60px -40px rgba(28, 32, 54, 0.65);
+}
+
+.card p {
+    font-family: var(--font-wide);
+    font-size: clamp(1.02rem, 1.3vw, 1.14rem);
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.tape {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    width: 86px;
+    height: 26px;
+    margin-left: -43px;
+    background: color-mix(in srgb, var(--cream) 70%, transparent);
+    border-left: 2px dotted rgba(41, 46, 76, 0.12);
+    border-right: 2px dotted rgba(41, 46, 76, 0.12);
+    transform: rotate(-4deg);
+    box-shadow: 0 2px 6px -3px rgba(28, 32, 54, 0.3);
+}
+
+li:nth-child(2) .tape {
+    transform: rotate(5deg);
+}
+
+.icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+}
+
+.icon > svg:last-child {
+    width: 40px;
+    height: 40px;
+}
+
+.ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--sky-deep);
+    overflow: visible;
+}
+
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 520px;
+        margin-inline: auto;
+        gap: 30px;
+    }
+
+    .card {
+        flex-direction: row;
+        align-items: center;
+        padding: 26px 22px;
+    }
+
+    .icon {
+        flex-shrink: 0;
+        width: 64px;
+        height: 64px;
+    }
+
+    .icon > svg:last-child {
+        width: 34px;
+        height: 34px;
+    }
+}

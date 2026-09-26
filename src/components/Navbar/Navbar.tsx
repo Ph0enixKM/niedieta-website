@@ -1,23 +1,132 @@
-import Link from "next/link"
-import Image from "next/image"
-import styles from "./Navbar.module.css"
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState, type CSSProperties } from "react";
+import Logo from "@/components/Logo/Logo";
+import { SketchUnderline } from "@/components/Sketch/Sketch";
+import { CalculatorIcon, CloseIcon, MenuIcon, SOCIAL_ICONS } from "@/components/Icons/Icons";
+import { NAV_LINKS, SOCIALS } from "@/content/site";
+import styles from "./Navbar.module.css";
 
 interface Props {
-    bg?: string
+    /** On sub-pages section links point back to the home page. */
+    home?: boolean;
 }
 
-export default function Navbar({ bg = "var(--bg)" }: Props) {
-    return <>
-        <div className={styles.navbar} style={{ background: `color-mix(in srgb, ${bg} 70%, transparent)` }}>
-            <div className={styles.container}>
-                <Link href="/">
-                    <Image src="/logo.svg" alt="Logo" width={200} height={50} />
+export default function Navbar({ home = true }: Props) {
+    const [scrolled, setScrolled] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [active, setActive] = useState<string | null>(null);
+    const href = (hash: string) => (home ? hash : `/${hash}`);
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 12);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    useEffect(() => {
+        if (!home) return;
+        const sections = NAV_LINKS.map((link) => document.querySelector(link.href)).filter(
+            (el): el is Element => el !== null,
+        );
+        const io = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+                }
+            },
+            { rootMargin: "-45% 0px -50% 0px" },
+        );
+        sections.forEach((section) => io.observe(section));
+        return () => io.disconnect();
+    }, [home]);
+
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, [open]);
+
+    const classes = [styles.header, scrolled && styles.scrolled, open && styles.open].filter(Boolean).join(" ");
+
+    return (
+        <header className={classes}>
+            <nav className={styles.bar} aria-label="Nawigacja główna">
+                <Link href="/" className={styles.brand} aria-label="NieDieta — strona główna" onClick={() => setOpen(false)}>
+                    <Logo />
                 </Link>
-                <div className={styles.item}>
-                    <Link href="/calculator">Kalkulatory</Link>
+
+                <ul className={styles.links}>
+                    {NAV_LINKS.map((link, i) => (
+                        <li key={link.href}>
+                            <a
+                                href={href(link.href)}
+                                className={styles.link}
+                                aria-current={active === link.href ? "true" : undefined}
+                            >
+                                {link.label}
+                                {active === link.href && (
+                                    <SketchUnderline className={styles.underline} seed={i + 2} strokeWidth={6} draw={false} />
+                                )}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+
+                <div className={styles.actions}>
+                    <Link href="/calculator" className={`btn btn-sky btn-small ${styles.calc}`} aria-label="Kalkulator BMI i zapotrzebowania">
+                        <CalculatorIcon />
+                        <span className={styles.calcLabel}>Kalkulator</span>
+                    </Link>
+                    <a href={href("#oferta")} className={`btn btn-primary btn-small ${styles.cta}`}>
+                        <span className={styles.ctaLong}>Umów konsultację</span>
+                        <span className={styles.ctaShort}>Umów się</span>
+                    </a>
+                    <button
+                        type="button"
+                        className={styles.menuButton}
+                        aria-expanded={open}
+                        aria-controls="menu-mobilne"
+                        aria-label={open ? "Zamknij menu" : "Otwórz menu"}
+                        onClick={() => setOpen((v) => !v)}
+                    >
+                        {open ? <CloseIcon /> : <MenuIcon />}
+                    </button>
+                </div>
+            </nav>
+
+            <div id="menu-mobilne" className={styles.sheet} hidden={!open}>
+                <ul>
+                    {NAV_LINKS.map((link, i) => (
+                        <li key={link.href} style={{ "--i": i } as CSSProperties}>
+                            <a href={href(link.href)} onClick={() => setOpen(false)}>
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
+                    <li style={{ "--i": NAV_LINKS.length } as CSSProperties}>
+                        <Link href="/calculator" onClick={() => setOpen(false)}>
+                            Kalkulator
+                        </Link>
+                    </li>
+                </ul>
+                <a href={href("#oferta")} className="btn btn-primary btn-block" onClick={() => setOpen(false)}>
+                    Umów konsultację
+                </a>
+                <div className={styles.socials}>
+                    {SOCIALS.map((social) => {
+                        const Icon = SOCIAL_ICONS[social.name];
+                        return (
+                            <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.name}>
+                                <Icon />
+                            </a>
+                        );
+                    })}
                 </div>
             </div>
-        </div>
-        <div className={styles.padding} style={{ background: bg }} />
-    </>
+        </header>
+    );
 }

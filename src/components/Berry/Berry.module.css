@@ -1,0 +1,42 @@
+.stage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 40;
+}
+
+.slot {
+    position: relative;
+    display: block;
+    pointer-events: none;
+}
+
+.fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+:global(.js) .fallback {
+    opacity: 0;
+}
+
+:global(.berry-fallback) .fallback {
+    opacity: 1;
+}
+
+@media print {
+    .stage {
+        display: none;
+    }
+
+    .fallback {
+        opacity: 1 !important;
+    }
+}

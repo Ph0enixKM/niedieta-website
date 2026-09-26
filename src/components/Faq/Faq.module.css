@@ -1,0 +1,448 @@
+@property --peek {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+/* how bent the paper looks: the scroll springs write --l, hovering eases --hl in */
+@property --hl {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+.faq {
+    position: relative;
+    padding: calc(var(--section-space) * 0.5) 0 var(--section-space);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 40px;
+}
+
+.header :global(.h2) {
+    max-width: 14ch;
+}
+
+/* ---------- the board: bricks of notes, four on top, three below ---------- */
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: clamp(30px, 3.4vw, 48px) clamp(16px, 2vw, 28px);
+    margin-top: clamp(44px, 5vw, 68px);
+}
+
+.slot {
+    display: flex;
+    grid-column: span 2;
+    perspective: 1100px;
+}
+
+.slot:nth-child(5) {
+    grid-column: 2 / span 2;
+}
+
+.slot:nth-child(6) {
+    grid-column: 4 / span 2;
+}
+
+.slot:nth-child(7) {
+    grid-column: 6 / span 2;
+}
+
+/* ---------- a note: glued along the top edge, the bottom is free to lift ---------- */
+
+.note {
+    --tilt: 0deg;
+    --x: 0px;
+    --y: 0px;
+    --lift: 0deg;
+    --swing: 0deg;
+    --l: 0;
+    --bend: max(var(--l), var(--hl));
+    --tone: var(--sky);
+    --ink: var(--berry);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    color: var(--ink);
+    /* everything bends at the lower edge of the glued strip */
+    transform-origin: 50% 13%;
+    transform: translate(var(--x), var(--y)) rotate(var(--tilt)) rotate(var(--swing)) rotateX(calc(var(--lift) + var(--peek)));
+    filter: drop-shadow(0 calc(3px + var(--bend) * 16px) calc(4px + var(--bend) * 14px) rgba(28, 32, 54, calc(0.2 + var(--bend) * 0.1)));
+    transition:
+        --peek 0.45s var(--ease-spring),
+        --hl 0.45s var(--ease-spring);
+}
+
+.slot:hover .note:not(:has([data-flipped])) {
+    --peek: 16deg;
+    --hl: 0.7;
+}
+
+.sky {
+    --tone: var(--sky);
+}
+
+.soft {
+    --tone: var(--sky-soft);
+}
+
+.paper {
+    --tone: #fffaf0;
+}
+
+.sand {
+    --tone: var(--cream-deep);
+}
+
+.ask {
+    --tone: var(--berry);
+    --ink: var(--cream);
+}
+
+/* the glued strip never moves: only the free part below it lifts, bends and flips */
+.glue {
+    flex: none;
+    aspect-ratio: 100 / 13;
+    border-radius: 3px 3px 0 0;
+    background:
+        linear-gradient(rgba(41, 46, 76, 0.05), rgba(41, 46, 76, 0.05)),
+        linear-gradient(172deg, rgba(255, 255, 255, 0.38), transparent),
+        var(--grain),
+        var(--tone);
+}
+
+.ask .glue {
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)),
+        var(--grain),
+        var(--tone);
+}
+
+.flipper {
+    display: grid;
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: 100 / 87;
+    transform-style: preserve-3d;
+    /* the note stays glued: it flips up over its top edge like a calendar page */
+    transform-origin: 50% 0;
+    transform: perspective(1200px) rotateX(0deg);
+    transition: transform 0.85s cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+
+.flipper[data-flipped] {
+    transform: perspective(1200px) rotateX(180deg);
+}
+
+/* a flipped note hangs over whatever sits above it (Faq.tsx keeps it raised until it has landed back) */
+.slot {
+    position: relative;
+}
+
+.slot[data-raised] {
+    z-index: 5;
+}
+
+.face {
+    grid-area: 1 / 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    min-width: 0;
+    padding: 12px 22px 18px;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    background:
+        linear-gradient(172deg, rgba(255, 255, 255, 0.3), transparent 36%),
+        linear-gradient(to top, rgba(41, 46, 76, 0.08), transparent 26%),
+        var(--grain),
+        var(--tone);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* fake bend: the glued top stays flat, the free part curves away from the light, a soft sheen rides the bend
+   and the bottom edge bows — gradients only, driven by the same --l / --swing the scroll springs write */
+.face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: min(1, calc(var(--bend) * 2.2));
+    /* right at the hinge the paper is still flat, so the shading eases in below it */
+    -webkit-mask-image: linear-gradient(transparent, #000 20%);
+    mask-image: linear-gradient(transparent, #000 20%);
+    background:
+        /* elliptical bands, so the sheen and the shadow follow the bowed free edge instead of cutting straight across */
+        radial-gradient(
+            ellipse 92% 100% at calc(50% + var(--swing) * 6) 0%,
+            transparent 0 16%,
+            rgba(255, 255, 255, 0.34) 38%,
+            rgba(255, 255, 255, 0) 56%,
+            rgba(41, 46, 76, 0.16) 80%,
+            rgba(41, 46, 76, 0.3) 100%
+        ),
+        linear-gradient(
+            calc(90deg + var(--swing) * 8),
+            rgba(41, 46, 76, 0.13),
+            transparent 30% 70%,
+            rgba(41, 46, 76, 0.13)
+        );
+}
+
+.face {
+    border-bottom-left-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 20px);
+    border-bottom-right-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 20px);
+}
+
+.front {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.front:focus-visible,
+.backButton:focus-visible {
+    outline: 2.5px solid var(--berry);
+    outline-offset: 4px;
+}
+
+.back {
+    transform: rotateX(180deg);
+    /* seen from behind, the glued edge is now at the bottom and the free edge bows at the top */
+    background:
+        /* the fold never creases flat: the paper rolls over the hinge, lit on the crown of the roll, shaded where it tucks under */
+        linear-gradient(
+            to top,
+            rgba(41, 46, 76, 0.26),
+            rgba(41, 46, 76, 0.08) 4%,
+            rgba(255, 255, 255, 0.34) 9%,
+            rgba(255, 255, 255, 0) 17%,
+            rgba(41, 46, 76, 0.06) 22%,
+            transparent 30%
+        ),
+        linear-gradient(8deg, rgba(255, 255, 255, 0.3), transparent 36%),
+        linear-gradient(rgba(41, 46, 76, 0.08), transparent 26%),
+        var(--grain),
+        var(--tone);
+    border-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 50%) 0 0 / calc(5px + var(--bend) * 20px) calc(5px + var(--bend) * 20px) 0 0;
+    /* the rolled fold: a straight, full-width edge at the hinge whose corners round out into a slight swell
+       around the back button, then straight again — the face is drawn wider and clipped to that silhouette */
+    --bulge: clamp(7px, 0.8vw, 11px);
+    width: calc(100% + 2 * var(--bulge));
+    margin-inline: calc(-1 * var(--bulge));
+    padding-inline: calc(22px + var(--bulge));
+    clip-path: polygon(
+        var(--bulge) 0%,
+        var(--bulge) 30%,
+        calc(var(--bulge) * 0.976) 35.6%,
+        calc(var(--bulge) * 0.905) 41.2%,
+        calc(var(--bulge) * 0.794) 46.8%,
+        calc(var(--bulge) * 0.655) 52.4%,
+        calc(var(--bulge) * 0.5) 58%,
+        calc(var(--bulge) * 0.345) 63.6%,
+        calc(var(--bulge) * 0.206) 69.2%,
+        calc(var(--bulge) * 0.095) 74.8%,
+        calc(var(--bulge) * 0.024) 80.4%,
+        0px 86%,
+        calc(var(--bulge) * 0.005) 87.37%,
+        calc(var(--bulge) * 0.019) 88.73%,
+        calc(var(--bulge) * 0.043) 90.06%,
+        calc(var(--bulge) * 0.076) 91.36%,
+        calc(var(--bulge) * 0.118) 92.6%,
+        calc(var(--bulge) * 0.169) 93.78%,
+        calc(var(--bulge) * 0.227) 94.88%,
+        calc(var(--bulge) * 0.293) 95.9%,
+        calc(var(--bulge) * 0.366) 96.82%,
+        calc(var(--bulge) * 0.444) 97.64%,
+        calc(var(--bulge) * 0.529) 98.35%,
+        calc(var(--bulge) * 0.617) 98.93%,
+        calc(var(--bulge) * 0.71) 99.4%,
+        calc(var(--bulge) * 0.805) 99.73%,
+        calc(var(--bulge) * 0.902) 99.93%,
+        var(--bulge) 100%,
+        calc(100% - var(--bulge)) 100%,
+        calc(100% - var(--bulge) * 0.902) 99.93%,
+        calc(100% - var(--bulge) * 0.805) 99.73%,
+        calc(100% - var(--bulge) * 0.71) 99.4%,
+        calc(100% - var(--bulge) * 0.617) 98.93%,
+        calc(100% - var(--bulge) * 0.529) 98.35%,
+        calc(100% - var(--bulge) * 0.444) 97.64%,
+        calc(100% - var(--bulge) * 0.366) 96.82%,
+        calc(100% - var(--bulge) * 0.293) 95.9%,
+        calc(100% - var(--bulge) * 0.227) 94.88%,
+        calc(100% - var(--bulge) * 0.169) 93.78%,
+        calc(100% - var(--bulge) * 0.118) 92.6%,
+        calc(100% - var(--bulge) * 0.076) 91.36%,
+        calc(100% - var(--bulge) * 0.043) 90.06%,
+        calc(100% - var(--bulge) * 0.019) 88.73%,
+        calc(100% - var(--bulge) * 0.005) 87.37%,
+        100% 86%,
+        calc(100% - var(--bulge) * 0.024) 80.4%,
+        calc(100% - var(--bulge) * 0.095) 74.8%,
+        calc(100% - var(--bulge) * 0.206) 69.2%,
+        calc(100% - var(--bulge) * 0.345) 63.6%,
+        calc(100% - var(--bulge) * 0.5) 58%,
+        calc(100% - var(--bulge) * 0.655) 52.4%,
+        calc(100% - var(--bulge) * 0.794) 46.8%,
+        calc(100% - var(--bulge) * 0.905) 41.2%,
+        calc(100% - var(--bulge) * 0.976) 35.6%,
+        calc(100% - var(--bulge)) 30%,
+        calc(100% - var(--bulge)) 0%
+    );
+}
+
+.back::after {
+    transform: scaleY(-1);
+}
+
+.question {
+    font-family: var(--font-hand);
+    font-size: clamp(1.45rem, 1.95vw, 1.8rem);
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.flipIcon {
+    display: grid;
+    place-items: center;
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition:
+        transform 0.55s var(--ease-spring),
+        opacity 0.3s ease;
+}
+
+/* it has done its job once the note is flipped; it fades back in after the note has landed again */
+.flipper[data-flipped] .flipIcon {
+    opacity: 0;
+}
+
+.flipper:not([data-flipped]) .flipIcon {
+    transition-delay: 0s, 0.6s;
+}
+
+.front:hover .flipIcon {
+    transform: rotate(180deg);
+}
+
+.flipIcon svg,
+.backButton svg {
+    width: 17px;
+    height: 17px;
+}
+
+.answer {
+    font-size: 0.84rem;
+    line-height: 1.52;
+    text-wrap: pretty;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: center;
+    padding: 6px 12px 6px 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    transition: background-color 0.25s ease;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.backButton:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.askFace {
+    flex: 1;
+    aspect-ratio: 100 / 87;
+    justify-content: center;
+    gap: 22px;
+    background:
+        linear-gradient(172deg, rgba(255, 255, 255, 0.12), transparent 42%),
+        var(--grain),
+        var(--tone);
+}
+
+.askTitle {
+    font-family: var(--font-hand);
+    font-size: clamp(1.7rem, 2.3vw, 2.1rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.askFace :global(.btn) {
+    align-self: flex-start;
+}
+
+/* three per row on tablets, the question note centred below */
+@media (max-width: 1100px) {
+    .board {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .slot:nth-child(n) {
+        grid-column: span 2;
+    }
+
+    .slot:nth-child(7) {
+        grid-column: 3 / span 2;
+    }
+}
+
+/* one column on phones, notes zig-zag left and right */
+@media (max-width: 700px) {
+    .board {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: auto;
+        gap: 34px;
+    }
+
+    .slot:nth-child(n) {
+        grid-column: auto;
+        width: min(100%, 330px);
+    }
+
+    .slot:nth-child(odd) {
+        justify-self: start;
+    }
+
+    .slot:nth-child(even) {
+        justify-self: end;
+    }
+
+    .flipper,
+    .askFace {
+        aspect-ratio: 100 / 67;
+    }
+
+    .note {
+        transform-origin: 50% 16%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flipper {
+        transition: none;
+    }
+}
