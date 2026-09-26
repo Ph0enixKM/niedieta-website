@@ -1,6 +1,6 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
-    "name": "niedieta",
+    "name": "niedieta-website",
     "main": ".open-next/worker.js",
     "compatibility_date": "2026-09-01",
     "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -12,7 +12,7 @@
         {
             // lets the worker call itself (used by OpenNext for caching and revalidation)
             "binding": "WORKER_SELF_REFERENCE",
-            "service": "niedieta"
+            "service": "niedieta-website"
         }
     ],
     // next/image optimisation through Cloudflare Images
