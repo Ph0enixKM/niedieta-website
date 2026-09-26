@@ -21,5 +21,12 @@
     },
     "observability": {
         "enabled": true
+    },
+    // Worker Previews (`wrangler preview`): service bindings aren't supported there, and the self-reference
+    // isn't needed since nothing revalidates
+    "previews": {
+        "images": {
+            "binding": "IMAGES"
+        }
     }
 }
