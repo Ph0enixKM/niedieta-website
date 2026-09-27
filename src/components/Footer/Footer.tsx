@@ -9,9 +9,11 @@ import styles from "./Footer.module.css";
 interface Props {
     /** On sub-pages section links point back to the home page. */
     home?: boolean;
+    /** The closing "Zrób pierwszy mały krok" call to action above the columns. */
+    cta?: boolean;
 }
 
-export default function Footer({ home = true }: Props) {
+export default function Footer({ home = true, cta = true }: Props) {
     const href = (hash: string) => (home ? hash : `/${hash}`);
     const year = new Date().getFullYear();
 
@@ -20,26 +22,28 @@ export default function Footer({ home = true }: Props) {
             <RoughEdgeMask className={styles.edge} seed={14} />
             <div className={styles.body}>
                 <div className="container">
-                    <div className={styles.cta}>
-                        <h2 className={styles.ctaTitle} data-reveal>
-                            Zrób pierwszy <span className={styles.hand}>mały krok</span>.
-                        </h2>
-                        <p className={styles.ctaText} data-reveal>
-                            Resztę przejdziemy razem — w Twoim tempie.
-                        </p>
-                        <div className={styles.ctaButtons} data-reveal>
-                            <a href={href("#oferta")} className="btn btn-deep">
-                                Umów konsultację
-                                <ArrowRight />
-                            </a>
-                            <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-bright">
-                                <MailIcon />
-                                Napisz do mnie
-                            </a>
+                    {cta && (
+                        <div className={styles.cta}>
+                            <h2 className={styles.ctaTitle} data-reveal>
+                                Zrób pierwszy <span className={styles.hand}>mały krok</span>.
+                            </h2>
+                            <p className={styles.ctaText} data-reveal>
+                                Resztę przejdziemy razem — w Twoim tempie.
+                            </p>
+                            <div className={styles.ctaButtons} data-reveal>
+                                <a href={href("#oferta")} className="btn btn-deep">
+                                    Umów konsultację
+                                    <ArrowRight />
+                                </a>
+                                <a href={`mailto:${CONTACT_EMAIL}`} className="btn btn-bright">
+                                    <MailIcon />
+                                    Napisz do mnie
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
-                    <div className={styles.grid}>
+                    <div className={cta ? styles.grid : `${styles.grid} ${styles.bare}`}>
                         <div className={styles.brand}>
                             <Link href="/" aria-label="NieDieta — strona główna">
                                 <Logo size="lg" />

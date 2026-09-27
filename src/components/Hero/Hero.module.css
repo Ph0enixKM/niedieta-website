@@ -56,7 +56,7 @@
     line-height: 0.75;
     letter-spacing: -0.055em;
     vertical-align: -0.1em;
-    color: var(--berry);
+    color: var(--ink);
     padding-right: 0.08em;
     clip-path: inset(-40% 100% -60% -6%);
     animation: write 1.3s var(--ease-in-out) forwards;

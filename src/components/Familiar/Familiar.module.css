@@ -1,53 +1,81 @@
 .familiar {
     position: relative;
-    color: var(--berry);
+    color: var(--cream);
 }
 
-/* horizontal top rail capping the vertical boards */
+/* horizontal oak rails capping the vertical boards, lit from above */
 .beam {
     position: relative;
     z-index: 2;
     height: clamp(26px, 2.6vw, 36px);
     background:
-        linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)) 0 0 / 100% 2px no-repeat,
-        linear-gradient(transparent calc(100% - 3px), rgba(41, 46, 76, 0.16) calc(100% - 3px)),
-        color-mix(in srgb, var(--sky) 88%, var(--berry));
-    box-shadow: 0 14px 18px -14px rgba(28, 32, 54, 0.5);
+        /* lit top arris, shaded underside */
+        linear-gradient(rgba(255, 224, 192, 0.2), rgba(255, 224, 192, 0) 2px),
+        linear-gradient(transparent calc(100% - 3px), rgba(0, 0, 0, 0.5) calc(100% - 3px)),
+        linear-gradient(rgba(255, 224, 192, 0.05), rgba(0, 0, 0, 0.14)),
+        var(--oak-h) 0 0 / var(--oak-h-size),
+        var(--espresso);
+    box-shadow: 0 12px 16px -10px rgba(6, 3, 1, 0.8);
+}
+
+/* the bottom rail sits over the boards' ends, so it throws no shadow onto them */
+.base {
+    background-position: 0 0, 0 0, 0 0, -380px -170px;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
 
 .band {
+    --board-w: clamp(72px, 6.5vw, 92px);
     position: relative;
-    background: var(--sky) var(--grain);
-    padding: clamp(56px, 7vw, 96px) 0 clamp(120px, 13vw, 180px);
+    background: var(--espresso);
+    padding: clamp(56px, 7vw, 96px) 0 clamp(72px, 8.5vw, 124px);
     overflow: hidden;
-    /* the fence fades into the page instead of ending on a hard edge */
-    -webkit-mask-image: linear-gradient(#000 calc(100% - clamp(100px, 11vw, 160px)), transparent);
-    mask-image: linear-gradient(#000 calc(100% - clamp(100px, 11vw, 160px)), transparent);
 }
 
-/* vertical fence boards: a seam every 64px and a light strip along each board */
-.band::before {
+/* vertical oak boards: a dark gap at every seam, each edge eased off — lit on the left, shaded on the right */
+.boards {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.boards > span {
+    flex: none;
+    width: var(--board-w);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.62) 0 1px,
+            rgba(255, 224, 192, 0.13) 1px 2.5px,
+            rgba(255, 224, 192, 0) 8px calc(100% - 11px),
+            rgba(0, 0, 0, 0.34) calc(100% - 1.5px),
+            rgba(0, 0, 0, 0.62) calc(100% - 1px)
+        ),
+        linear-gradient(rgba(10, 4, 1, var(--stain)), rgba(10, 4, 1, var(--stain))),
+        var(--oak-v) var(--grain-x) var(--grain-y) / var(--oak-v-size);
+}
+
+/* light falls from above: the fence dims towards its foot */
+.band::after {
     content: "";
     position: absolute;
     inset: 0;
     background:
-        repeating-linear-gradient(
-            90deg,
-            rgba(41, 46, 76, 0.07) 0 6px,
-            rgba(255, 255, 255, 0.12) 6px 10px,
-            transparent 10px 58px,
-            rgba(41, 46, 76, 0.07) 58px 64px
-        );
+        radial-gradient(80% 60% at 50% 0%, rgba(255, 214, 170, 0.07), rgba(255, 214, 170, 0) 70%),
+        linear-gradient(rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.26));
     pointer-events: none;
 }
 
 .band > :global(.container) {
     position: relative;
+    z-index: 1;
 }
 
 .title {
     position: relative;
     text-align: center;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
 
@@ -66,8 +94,11 @@
     gap: 22px;
     padding: 34px 28px 32px;
     border-radius: 26px;
+    color: var(--ink);
     background: var(--paper);
-    box-shadow: 0 30px 50px -36px rgba(28, 32, 54, 0.55);
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.3),
+        0 30px 50px -30px rgba(6, 3, 1, 0.85);
     rotate: var(--tilt);
     height: 100%;
     transition:
@@ -79,7 +110,9 @@
 .card:hover {
     rotate: 0deg;
     translate: 0 -6px;
-    box-shadow: 0 40px 60px -40px rgba(28, 32, 54, 0.65);
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.24),
+        0 40px 60px -34px rgba(6, 3, 1, 0.9);
 }
 
 .card p {
@@ -96,11 +129,11 @@
     width: 86px;
     height: 26px;
     margin-left: -43px;
-    background: color-mix(in srgb, var(--cream) 70%, transparent);
-    border-left: 2px dotted rgba(41, 46, 76, 0.12);
-    border-right: 2px dotted rgba(41, 46, 76, 0.12);
+    background: color-mix(in srgb, var(--cream) 84%, transparent);
+    border-left: 2px dotted rgba(28, 15, 8, 0.14);
+    border-right: 2px dotted rgba(28, 15, 8, 0.14);
     transform: rotate(-4deg);
-    box-shadow: 0 2px 6px -3px rgba(28, 32, 54, 0.3);
+    box-shadow: 0 2px 6px -3px rgba(6, 3, 1, 0.45);
 }
 
 li:nth-child(2) .tape {

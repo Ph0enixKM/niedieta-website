@@ -1,9 +1,19 @@
 import type { CSSProperties } from "react";
 import { SketchRing } from "@/components/Sketch/Sketch";
 import { PAINS, type PainIcon } from "@/content/site";
+import { rng } from "@/lib/sketch";
 import styles from "./Familiar.module.css";
 
 const TILT = ["-2.4deg", "1.6deg", "-1.2deg"];
+
+// Enough oak boards for a very wide screen. Each takes its grain from a different spot of the texture, so the
+// grain breaks at every seam, and takes the stain a little differently (fixed seed, so SSR matches).
+const plank = rng(9);
+const BOARDS = Array.from({ length: 40 }, () => ({
+    "--grain-x": `${Math.round(plank() * -512)}px`,
+    "--grain-y": `${Math.round(plank() * -1024)}px`,
+    "--stain": (plank() * 0.22).toFixed(3),
+}));
 
 function Icon({ name }: { name: PainIcon }) {
     const common = {
@@ -47,6 +57,11 @@ export default function Familiar() {
         <section className={styles.familiar} aria-labelledby="znajomo-title">
             <div className={styles.beam} aria-hidden="true" />
             <div className={styles.band}>
+                <div className={styles.boards} aria-hidden="true">
+                    {BOARDS.map((board, i) => (
+                        <span key={i} style={board as CSSProperties} />
+                    ))}
+                </div>
                 <div className="container">
                     <h2 id="znajomo-title" className={`h2 ${styles.title}`} data-reveal>
                         Brzmi znajomo?
@@ -68,6 +83,7 @@ export default function Familiar() {
                     </ul>
                 </div>
             </div>
+            <div className={`${styles.beam} ${styles.base}`} aria-hidden="true" />
         </section>
     );
 }

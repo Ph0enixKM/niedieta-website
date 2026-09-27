@@ -1,6 +1,26 @@
 .page {
+    position: relative;
     padding: calc(var(--nav-h) + clamp(40px, 7vh, 80px)) 0 var(--section-space);
 }
+
+/* dotted notebook paper behind the top of the page, as behind the home page's hero */
+.page::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: min(100%, 1100px);
+    background-image: radial-gradient(rgba(41, 46, 76, 0.2) 1.1px, transparent 1.4px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 72% 58% at 32% 22%, #000 12%, transparent 72%);
+    mask-image: radial-gradient(ellipse 72% 58% at 32% 22%, #000 12%, transparent 72%);
+    pointer-events: none;
+}
+
+.page > :global(.container) {
+    position: relative;
+}
+
+/* ---------- header ---------- */
 
 .header {
     max-width: 760px;
@@ -13,9 +33,13 @@
     font-size: clamp(2.3rem, 4.8vw, 3.9rem);
     line-height: 1.05;
     letter-spacing: -0.005em;
+    animation: rise 1s var(--ease-out) both 0.1s;
 }
 
+/* written in by hand, then underlined, like the home page's headline */
 .hand {
+    position: relative;
+    display: inline-block;
     font-family: var(--font-hand);
     font-weight: 400;
     font-size: var(--hand-in-title);
@@ -23,34 +47,64 @@
     letter-spacing: -0.055em;
     vertical-align: -0.1em;
     white-space: nowrap;
+    padding-right: 0.08em;
+    clip-path: inset(-40% 100% -60% -6%);
+    animation: write 1.3s var(--ease-in-out) forwards 0.45s;
 }
+
+.underline {
+    position: absolute;
+    left: 1%;
+    bottom: -0.14em;
+    width: 97%;
+    height: 0.3em;
+    color: var(--sky-deep);
+    overflow: visible;
+}
+
+.underline path {
+    stroke-width: 5;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 0.9s var(--ease-in-out) forwards 1.65s;
+}
+
+.lead {
+    max-width: 46ch;
+    animation: rise 1s var(--ease-out) both 0.3s;
+}
+
+/* ---------- layout: the form on a clipboard, the results stuck on notes beside it ---------- */
 
 .layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     align-items: start;
-    gap: clamp(20px, 3vw, 40px);
-    margin-top: clamp(40px, 5vw, 64px);
+    gap: clamp(40px, 5vw, 72px);
+    margin-top: clamp(64px, 7vw, 100px);
+}
+
+.clipboard {
+    --clipboard-w: 640px;
+    --clipboard-tilt: -0.9deg;
 }
 
 .form {
     display: grid;
-    gap: 16px;
+    gap: 26px;
 }
 
-.card,
-.numberField {
-    min-width: 0;
-    padding: 22px 24px;
-    border-radius: 26px;
-    border: 1px solid var(--line);
-    background: var(--paper);
-    box-shadow: var(--shadow-card);
+.formTitle {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
 }
 
-.fieldLabel {
+/* printed field labels */
+.label {
     display: block;
-    padding: 0;
     font-family: var(--font-wide);
     font-weight: 800;
     font-size: 0.7rem;
@@ -59,85 +113,143 @@
     color: var(--ink-soft);
 }
 
-.card > .fieldLabel {
+.group {
+    min-width: 0;
+    border: 0;
+}
+
+/* a legend sits on the fieldset's border by default: float it so it lays out like any other label */
+.group > legend {
     float: left;
     width: 100%;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
-.gender {
+.group > legend + * {
     clear: both;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
 }
 
-.genderOption {
+.ruled {
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid color-mix(in srgb, var(--sky) 75%, transparent);
+}
+
+/* ---------- sex: tick one box ---------- */
+
+.choices {
     display: flex;
+    flex-wrap: wrap;
+    gap: 4px 34px;
+}
+
+.choice {
+    position: relative;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 64px;
-    padding: 12px;
-    border-radius: 18px;
-    background: var(--cream);
-    border: 1.5px solid transparent;
-    font-weight: 600;
-    font-size: 1.02rem;
-    color: var(--berry);
-    transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.4s var(--ease-spring);
+    gap: 13px;
+    min-height: 44px;
+    font-family: var(--font-wide);
+    font-size: 1.05rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.genderOption svg {
-    width: 30px;
-    height: 30px;
+.box {
+    position: relative;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--ink);
+    border-radius: 5px 7px 4px 6px / 7px 4px 6px 5px;
+    rotate: -3deg;
+    transition: background-color 0.2s ease;
 }
 
-.genderOption:hover {
-    border-color: var(--sky-deep);
+.choice:nth-child(2) .box {
+    rotate: 2deg;
 }
 
-.genderOption:active {
-    transform: scale(0.97);
+.choice:hover .box {
+    background: color-mix(in srgb, var(--sky) 45%, transparent);
 }
 
-.genderOption[aria-pressed="true"] {
-    background: var(--berry);
-    color: var(--cream);
-    border-color: var(--berry);
+.choice input:focus-visible + .box {
+    outline: 2.5px solid var(--berry);
+    outline-offset: 4px;
 }
 
-.numbers {
+/* the tick overshoots the box, like a quick pen tick, and is drawn in when the box gets ticked */
+.check {
+    position: absolute;
+    left: -2px;
+    bottom: 1px;
+    width: 36px;
+    height: 32px;
+    color: var(--ink);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.check path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 0.45s var(--ease-in-out);
+}
+
+.choice input:checked + .box .check path {
+    stroke-dashoffset: 0;
+}
+
+/* ---------- age, height, weight: blanks on the ruled lines ---------- */
+
+.measures {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 18px 26px;
 }
 
-.numberField {
+.field {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid color-mix(in srgb, var(--sky) 75%, transparent);
     cursor: text;
-    transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: border-color 0.2s ease;
 }
 
-.numberField:focus-within {
-    border-color: var(--sky-deep);
-    box-shadow:
-        0 0 0 4px color-mix(in srgb, var(--sky) 55%, transparent),
-        var(--shadow-card);
-}
-
-.numberRow {
-    display: flex;
+.entry {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-self: flex-start;
     align-items: baseline;
     gap: 6px;
+}
+
+/* focus: a swipe of highlighter behind the number, which then reads in berry like any writing on blue */
+.entry::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -6px;
+    right: -6px;
+    bottom: 5px;
+    height: 17px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--sky) 85%, transparent);
+    rotate: -1deg;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s var(--ease-out);
+}
+
+.field:focus-within {
+    border-bottom-color: var(--sky-deep);
+}
+
+.field:focus-within .entry::before {
+    transform: none;
 }
 
 .input {
@@ -147,222 +259,299 @@
     border: 0;
     outline: none;
     background: transparent;
-    font-family: var(--font-wide);
-    font-size: clamp(2rem, 3.2vw, 2.6rem);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    color: var(--berry);
-    font-variant-numeric: tabular-nums;
+    font-family: var(--font-title);
+    font-size: clamp(1.9rem, 2.8vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    transition: color 0.2s ease;
+}
+
+/* hug the number exactly where the browser can ("0" is Cal Sans's widest digit, so the fallback never clips) */
+@supports (field-sizing: content) {
+    .input {
+        width: auto;
+        field-sizing: content;
+    }
 }
 
 .input::placeholder {
-    color: rgba(41, 46, 76, 0.22);
+    color: rgba(28, 15, 8, 0.2);
+}
+
+.field:focus-within .input {
+    color: var(--berry);
 }
 
 .unit {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--ink-soft);
 }
 
-.activity {
-    display: grid;
-}
+/* ---------- activity: read-out under the slider ---------- */
 
-.activityHead {
-    clear: both;
+.level {
     display: flex;
     align-items: center;
-    gap: 18px;
-    min-height: 64px;
+    gap: 16px;
+    margin-top: 12px;
 }
 
-.activityHead b {
+/* the level's number in a sky disc with a pen ring round it, like the steps on the home page */
+.levelValue {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 58px;
+    height: 58px;
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    color: var(--berry);
+}
+
+.levelValue::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--sky);
+}
+
+.levelValue > span {
+    position: relative;
+}
+
+.levelRing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--berry);
+    overflow: visible;
+}
+
+.levelTitle {
     display: block;
     font-weight: 600;
     font-size: 1.05rem;
-    text-transform: capitalize;
+    line-height: 1.3;
 }
 
-.palValue {
-    font-family: var(--font-title);
-    font-size: 2.6rem;
-    line-height: 1;
-    letter-spacing: -0.005em;
+.levelTitle::first-letter {
+    text-transform: uppercase;
 }
 
-.palDescription {
+.levelDescription {
     display: block;
+    margin-top: 2px;
     font-size: 0.9rem;
+    line-height: 1.45;
     color: var(--ink-soft);
-}
-
-.slider {
-    --p: 0;
-    width: 100%;
-    height: 44px;
-    margin-top: 14px;
-    background: transparent;
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-}
-
-.slider::-webkit-slider-runnable-track {
-    height: 12px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--sky-deep) calc(var(--p) * 100%), var(--cream-deep) calc(var(--p) * 100%));
-}
-
-.slider::-moz-range-track {
-    height: 12px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--sky-deep) calc(var(--p) * 100%), var(--cream-deep) calc(var(--p) * 100%));
-}
-
-.slider::-webkit-slider-thumb {
-    width: 44px;
-    height: 44px;
-    margin-top: -16px;
-    border: 0;
-    border-radius: 50%;
-    background: url("/brand/berry-96.webp") center / contain no-repeat;
-    filter: drop-shadow(0 6px 6px rgba(28, 32, 54, 0.3));
-    appearance: none;
-    -webkit-appearance: none;
-    transition: transform 0.3s var(--ease-spring);
-}
-
-.slider::-moz-range-thumb {
-    width: 44px;
-    height: 44px;
-    border: 0;
-    border-radius: 50%;
-    background: url("/brand/berry-96.webp") center / contain no-repeat;
-}
-
-.slider:active::-webkit-slider-thumb {
-    transform: scale(1.12) rotate(-12deg);
-}
-
-.slider:focus-visible {
-    outline: none;
-}
-
-.slider:focus-visible::-webkit-slider-thumb {
-    outline: 2.5px solid var(--berry);
-    outline-offset: 2px;
-}
-
-.ticks {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 6px;
-    padding: 0 12px;
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    font-variant-numeric: tabular-nums;
-}
-
-.ticks [data-active] {
-    color: var(--berry);
-    font-weight: 700;
+    text-wrap: pretty;
 }
 
 /* ---------- results ---------- */
 
-.results {
-    position: sticky;
-    top: calc(var(--nav-h) + 24px);
-    display: grid;
-    gap: 16px;
-    padding: 26px;
-    border-radius: 32px;
-    background: var(--sky) var(--grain);
-}
-
 .resultsTitle {
     font-family: var(--font-title);
     font-weight: 400;
-    font-size: 1.7rem;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
     line-height: 1.1;
     letter-spacing: -0.005em;
 }
 
-.resultGrid {
+/* both messages share one cell, so swapping them never nudges the notes */
+.status {
     display: grid;
-    gap: 12px;
+    margin-top: 8px;
+    font-family: var(--font-hand);
+    font-size: 1.45rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--ink-soft);
+    text-wrap: pretty;
 }
 
-.result {
+.status > span {
+    grid-area: 1 / 1;
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s;
+}
+
+.status > span:not([data-shown]) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* bricks of notes: two on top, one below */
+.notes {
     display: grid;
-    gap: 2px;
-    padding: 18px 20px;
-    border-radius: 22px;
-    background: var(--paper);
-    animation: pop 0.55s var(--ease-spring) both;
-}
-
-.result:nth-child(2) {
-    animation-delay: 60ms;
-}
-
-.result:nth-child(3) {
-    animation-delay: 120ms;
-}
-
-.resultSky {
-    background: color-mix(in srgb, var(--sky-soft) 70%, var(--paper));
-}
-
-.resultBerry {
-    background: var(--berry);
-    color: var(--cream);
-}
-
-.resultLabel {
-    font-family: var(--font-wide);
-    font-weight: 800;
-    font-size: 0.72rem;
-    letter-spacing: 0.17em;
-    opacity: 0.7;
-}
-
-.resultValue {
-    font-family: var(--font-title);
-    font-size: clamp(2.1rem, 3.4vw, 2.6rem);
-    line-height: 1.05;
-    letter-spacing: -0.005em;
-    font-variant-numeric: tabular-nums;
-}
-
-.resultValue small {
-    font-size: 0.45em;
-}
-
-.resultHint {
-    font-size: 0.85rem;
-    opacity: 0.75;
-}
-
-.empty {
-    padding: 22px;
-    border-radius: 22px;
-    border: 1.5px dashed rgba(41, 46, 76, 0.3);
-    font-size: 0.98rem;
-    line-height: 1.6;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 20px;
+    margin-top: 22px;
 }
 
 .note {
+    --tone: var(--sky);
+    --ink: var(--berry);
+    /* the paper's shading: shadows take on --shade, highlights are white scaled by --sheen */
+    --shade: var(--berry);
+    --sheen: 1;
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    min-width: 0;
+    /* the handwriting scales with the note */
+    container-type: inline-size;
+    color: var(--ink);
+    rotate: -2.4deg;
+    filter: drop-shadow(0 7px 8px rgba(28, 32, 54, 0.22));
+    animation: stick 0.7s var(--ease-spring) both 0.5s;
+}
+
+.note:nth-child(2) {
+    rotate: 1.8deg;
+    translate: 0 12px;
+    animation-delay: 0.62s;
+}
+
+.note:nth-child(3) {
+    grid-column: 2 / span 2;
+    rotate: -1.2deg;
+    animation-delay: 0.74s;
+}
+
+/* the warm papers are written in espresso, the dark one in cream; the blue one keeps berry */
+.sand {
+    --tone: var(--cream-deep);
+    --ink: var(--espresso);
+    --shade: var(--espresso);
+}
+
+.espresso {
+    --tone: var(--espresso);
+    --ink: var(--cream);
+    --shade: #000;
+    --sheen: 0.3;
+}
+
+.glue {
+    flex: none;
+    aspect-ratio: 100 / 13;
+    border-radius: 3px 3px 0 0;
+    background:
+        linear-gradient(color-mix(in srgb, var(--shade) 5%, transparent), color-mix(in srgb, var(--shade) 5%, transparent)),
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.38 * var(--sheen))), transparent),
+        var(--grain),
+        var(--tone);
+}
+
+/* the free part below the glue, resting with a slight curl at its corners */
+.face {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+    aspect-ratio: 100 / 66;
+    padding: 12px 18px 16px;
+    border-radius: 0 0 calc(5px + 12%) calc(5px + 12%) / 0 0 11px 13px;
+    background:
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.3 * var(--sheen))), transparent 36%),
+        linear-gradient(to top, color-mix(in srgb, var(--shade) 8%, transparent), transparent 26%),
+        var(--grain),
+        var(--tone);
+}
+
+/* the curl: flat under the glue, rolling away from the light towards the bowed free edge */
+.face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.55;
+    -webkit-mask-image: linear-gradient(transparent, #000 20%);
+    mask-image: linear-gradient(transparent, #000 20%);
+    background:
+        radial-gradient(
+            ellipse 92% 100% at 50% 0%,
+            transparent 0 16%,
+            rgba(255, 255, 255, calc(0.34 * var(--sheen))) 38%,
+            rgba(255, 255, 255, 0) 56%,
+            color-mix(in srgb, var(--shade) 16%, transparent) 80%,
+            color-mix(in srgb, var(--shade) 30%, transparent) 100%
+        ),
+        linear-gradient(90deg, color-mix(in srgb, var(--shade) 13%, transparent), transparent 30% 70%, color-mix(in srgb, var(--shade) 13%, transparent));
+    pointer-events: none;
+}
+
+.face > * {
+    position: relative;
+    z-index: 1;
+}
+
+.noteLabel {
+    font-family: var(--font-wide);
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.17em;
+    opacity: 0.72;
+}
+
+/* jotted down in Kinga's hand */
+.value {
+    font-family: var(--font-hand);
+    font-size: clamp(2.1rem, 21cqi, 3.7rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+}
+
+.value small {
+    font-size: 0.56em;
+    letter-spacing: 0;
+}
+
+.blank {
+    opacity: 0.35;
+}
+
+/* once everything is filled in, the numbers get written in one after another */
+.notes[data-filled] .value {
+    animation: write 0.9s var(--ease-in-out) both 0.1s;
+}
+
+.notes[data-filled] .note:nth-child(2) .value {
+    animation-delay: 0.3s;
+}
+
+.notes[data-filled] .note:nth-child(3) .value {
+    animation-delay: 0.5s;
+}
+
+.hint {
+    margin-top: auto;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    opacity: 0.82;
+    text-wrap: pretty;
+}
+
+.disclaimer {
+    margin-top: 36px;
     font-size: 0.82rem;
     line-height: 1.55;
-    color: var(--berry-soft);
+    color: var(--ink-soft);
 }
 
 .cta {
     display: grid;
     gap: 12px;
-    padding-top: 16px;
-    border-top: 1.5px dashed rgba(41, 46, 76, 0.25);
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1.5px dashed rgba(28, 15, 8, 0.2);
 }
 
 .cta p {
@@ -373,10 +562,35 @@
     justify-self: start;
 }
 
-@keyframes pop {
+/* ---------- keyframes ---------- */
+
+@keyframes rise {
     from {
         opacity: 0;
-        transform: translateY(10px) scale(0.97);
+        transform: translateY(22px);
+    }
+}
+
+@keyframes write {
+    from {
+        clip-path: inset(-40% 100% -60% -6%);
+    }
+    to {
+        clip-path: inset(-40% -10% -60% -6%);
+    }
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* a note is pressed onto the page */
+@keyframes stick {
+    from {
+        opacity: 0;
+        transform: translateY(-14px) scale(1.05);
     }
 }
 
@@ -385,24 +599,59 @@
         grid-template-columns: minmax(0, 1fr);
     }
 
+    .clipboard {
+        margin-inline: auto;
+    }
+
     .results {
-        position: static;
+        width: min(100%, 560px);
+        margin-inline: auto;
     }
 }
 
 @media (max-width: 560px) {
-    .numbers {
+    .measures {
         grid-template-columns: minmax(0, 1fr);
+        gap: 0;
     }
 
-    .numberField {
+    .field {
         flex-direction: row;
-        align-items: center;
+        align-items: baseline;
         justify-content: space-between;
+        gap: 12px;
+        padding: 12px 0 6px;
     }
 
-    .card,
-    .numberField {
-        padding: 18px 20px;
+    .notes {
+        gap: 24px 14px;
+    }
+
+    .face {
+        padding: 10px 14px 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .title,
+    .lead,
+    .note,
+    .notes[data-filled] .value {
+        animation: none;
+    }
+
+    .hand {
+        animation: none;
+        clip-path: none;
+    }
+
+    .underline path {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+
+    .check path,
+    .entry::before {
+        transition: none;
     }
 }

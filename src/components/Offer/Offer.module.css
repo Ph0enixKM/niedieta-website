@@ -18,6 +18,8 @@
     letter-spacing: -0.055em;
     vertical-align: -0.1em;
     white-space: nowrap;
+    /* written over the blue highlight, so it stays berry */
+    color: var(--berry);
 }
 
 .now::before {
@@ -71,8 +73,9 @@
 }
 
 .featured {
-    /* a light key reads best on the dark card */
+    /* a light key reads best on the dark card, lettered in the card's own berry */
     --surface: var(--cream);
+    --ink: var(--berry);
     margin-block: -20px;
     padding-block: 54px 50px;
     color: var(--cream);
@@ -158,7 +161,7 @@
     flex: 1;
     margin-top: 22px;
     padding-top: 22px;
-    border-top: 1.5px dashed rgba(41, 46, 76, 0.18);
+    border-top: 1.5px dashed rgba(28, 15, 8, 0.18);
 }
 
 .featured .features {
@@ -203,6 +206,7 @@
     margin-top: 22px;
     padding: 12px 12px 12px 16px;
     border-radius: 18px;
+    color: var(--berry);
     background: var(--sky-soft);
     font-size: 0.86rem;
 }
@@ -242,7 +246,7 @@
 }
 
 
-/* ---------- e-books ---------- */
+/* ---------- e-books: laid out on an espresso-stained oak board ---------- */
 
 .shelf {
     display: grid;
@@ -252,7 +256,26 @@
     margin-top: clamp(64px, 7vw, 96px);
     padding: clamp(24px, 3.2vw, 40px);
     border-radius: 32px;
-    background: var(--cream-deep) var(--grain);
+    color: var(--cream);
+    background:
+        /* satin finish, lit from the top-left */
+        radial-gradient(90% 130% at 8% 0%, rgba(255, 224, 192, 0.11), rgba(255, 224, 192, 0) 60%),
+        linear-gradient(rgba(255, 224, 192, 0.03), rgba(0, 0, 0, 0.16)),
+        var(--oak-h) -240px -130px / var(--oak-h-size),
+        var(--espresso);
+    box-shadow:
+        /* eased edge: lit along the top, shaded along the bottom */
+        inset 0 1.5px 0 rgba(255, 224, 192, 0.2),
+        inset 0 3px 5px -2px rgba(255, 224, 192, 0.1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+        inset 0 -5px 8px -5px rgba(0, 0, 0, 0.45),
+        /* the board's thickness */
+        0 1px 0 #2c180d,
+        0 2.5px 0 #160b05,
+        0 4px 0 #0d0603,
+        /* contact and ambient shadow */
+        0 6px 5px -2px rgba(28, 15, 8, 0.3),
+        0 30px 44px -24px rgba(28, 15, 8, 0.4);
 }
 
 .shelfTitle {
@@ -266,7 +289,7 @@
 .shelfIntro p {
     margin-top: 10px;
     font-size: 0.96rem;
-    color: var(--ink-soft);
+    color: color-mix(in srgb, var(--cream) 74%, transparent);
 }
 
 .books {
@@ -283,7 +306,11 @@
     gap: 18px;
     padding: 14px 18px 14px 14px;
     border-radius: 22px;
+    color: var(--ink);
     background: var(--paper);
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.3),
+        0 20px 30px -18px rgba(6, 3, 1, 0.75);
 }
 
 .cover {
@@ -329,6 +356,13 @@
     margin-top: 12px;
 }
 
+/* on the narrowest phones the label wraps rather than spilling off the card */
+.bookFoot :global(.btn) {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+}
+
 @keyframes feature-in {
     from {
         opacity: 0;
@@ -357,5 +391,18 @@
 
     .books {
         grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* phones: a slimmer frame and cover leave the buttons room for their labels */
+@media (max-width: 480px) {
+    .shelf {
+        padding: 22px 16px 16px;
+    }
+
+    .book {
+        grid-template-columns: 84px minmax(0, 1fr);
+        gap: 14px;
+        padding: 12px 14px 12px 12px;
     }
 }

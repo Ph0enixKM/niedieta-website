@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
+import Clipboard from "@/components/Clipboard/Clipboard";
 import { HandCheck, HandStrike } from "@/components/Sketch/Sketch";
 import { GAINS } from "@/content/site";
-import Clip from "./Clip";
 import ScrollWords from "./ScrollWords";
 import styles from "./Approach.module.css";
 
@@ -30,22 +30,19 @@ export default function Approach() {
                         </p>
                     </div>
 
-                    <div className={styles.board} data-reveal="scale" style={{ "--d": 120 } as CSSProperties}>
-                        <Clip className={styles.clip} />
-                        <div className={styles.sheet}>
-                            <h3 className={styles.gainsTitle}>Co zyskasz zamiast kolejnej diety?</h3>
-                            <ul className={styles.gains}>
-                                {GAINS.map((gain, i) => (
-                                    <li key={gain}>
-                                        <span className={styles.box} aria-hidden="true">
-                                            <HandCheck className={styles.check} delay={650 + i * 260} />
-                                        </span>
-                                        {gain}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                    <Clipboard data-reveal="scale" style={{ "--d": 120 } as CSSProperties}>
+                        <h3 className={styles.gainsTitle}>Co zyskasz zamiast kolejnej diety?</h3>
+                        <ul className={styles.gains}>
+                            {GAINS.map((gain, i) => (
+                                <li key={gain}>
+                                    <span className={styles.box} aria-hidden="true">
+                                        <HandCheck className={styles.check} delay={650 + i * 260} />
+                                    </span>
+                                    {gain}
+                                </li>
+                            ))}
+                        </ul>
+                    </Clipboard>
                 </div>
             </div>
         </section>

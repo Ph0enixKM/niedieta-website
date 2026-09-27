@@ -1,0 +1,153 @@
+.track {
+    --thumb: 44px;
+    position: relative;
+}
+
+/* the track drawn under the slider, at 1:1 so the dots stay round (ActivityTrack.tsx measures it) */
+.art {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--thumb);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.line {
+    fill: none;
+    stroke: var(--berry);
+    stroke-opacity: 0.32;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 1.5 11;
+}
+
+.trail {
+    fill: none;
+    stroke: var(--sky-deep);
+    stroke-width: 7;
+    stroke-linecap: round;
+    opacity: 0.9;
+}
+
+.dot {
+    fill: #fffdf8;
+    stroke: var(--berry);
+    stroke-width: 2;
+    transition: fill 0.3s ease;
+}
+
+.dot[data-reached] {
+    fill: var(--berry);
+}
+
+/* a bare slider: the track is the drawing underneath, the thumb is the berry, rolling as it goes */
+.slider {
+    --grab: 1;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: var(--thumb);
+    margin: 0;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slider::-webkit-slider-runnable-track {
+    height: var(--thumb);
+    background: transparent;
+}
+
+.slider::-moz-range-track {
+    height: var(--thumb);
+    background: transparent;
+}
+
+.slider::-moz-range-progress {
+    background: transparent;
+}
+
+.slider::-webkit-slider-thumb {
+    width: var(--thumb);
+    height: var(--thumb);
+    border: 0;
+    border-radius: 50%;
+    background: url("/brand/berry-96.webp") center / contain no-repeat;
+    filter: drop-shadow(0 6px 6px rgba(28, 32, 54, 0.3));
+    transform: rotate(calc(var(--p) * 1turn)) scale(var(--grab));
+    transition: transform 0.45s var(--ease-spring);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.slider::-moz-range-thumb {
+    width: var(--thumb);
+    height: var(--thumb);
+    border: 0;
+    border-radius: 50%;
+    background: url("/brand/berry-96.webp") center / contain no-repeat;
+    filter: drop-shadow(0 6px 6px rgba(28, 32, 54, 0.3));
+    transform: rotate(calc(var(--p) * 1turn)) scale(var(--grab));
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.slider:active {
+    --grab: 1.12;
+}
+
+.slider:focus-visible {
+    outline: none;
+}
+
+.slider:focus-visible::-webkit-slider-thumb {
+    outline: 2.5px solid var(--berry);
+    outline-offset: 2px;
+}
+
+.slider:focus-visible::-moz-range-thumb {
+    outline: 2.5px solid var(--berry);
+    outline-offset: 2px;
+}
+
+/* the level labels, each centred under its dot */
+.levels {
+    position: relative;
+    height: 24px;
+    margin-top: 2px;
+}
+
+.levels button {
+    position: absolute;
+    top: 0;
+    left: calc(var(--thumb) / 2 + var(--at) * (100% - var(--thumb)));
+    translate: -50% 0;
+    padding: 2px 5px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+}
+
+.levels button:hover {
+    color: var(--ink);
+}
+
+.levels button[data-active] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .slider::-webkit-slider-thumb {
+        transition: none;
+    }
+
+    .slider::-moz-range-thumb {
+        transition: none;
+    }
+}

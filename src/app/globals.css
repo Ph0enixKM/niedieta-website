@@ -1,5 +1,5 @@
 :root {
-    --cream: #f6f0e3;
+    --cream: #f5f0e4;
     --cream-deep: #ebe2ce;
     --paper: #fcf9f2;
     --sky: #bfcfd9;
@@ -10,9 +10,13 @@
     --berry: #292e4c;
     --berry-soft: #474d75;
     --berry-deep: #1c2036;
-    --ink: var(--berry);
-    --ink-soft: #595e7e;
-    --line: rgba(41, 46, 76, 0.13);
+    /* espresso: dark-stained oak. The ink on cream and paper and the stain on every wooden surface; text on
+       anything blue keeps berry */
+    --espresso: #1c0f08;
+    --espresso-soft: #685346;
+    --ink: var(--espresso);
+    --ink-soft: var(--espresso-soft);
+    --line: rgba(28, 15, 8, 0.12);
 
     --font-brand: var(--font-tan), Georgia, serif;
     --font-hand: var(--font-kinga), var(--font-hand-fallback), "Segoe Script", cursive;
@@ -41,6 +45,12 @@
         0 34px 60px -42px rgba(41, 46, 76, 0.5),
         0 10px 24px -18px rgba(41, 46, 76, 0.22);
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.18 0 0 0 0 0.3 0 0 0 0.075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* espresso-stained oak, fine and straight-grained: seamless tiles drawn at 2x, with the grain running
+       down (--oak-v, 512 × 1024) or across (--oak-h, 1024 × 512); size them with --oak-v-size / --oak-h-size */
+    --oak-v: url("./textures/oak-v.webp");
+    --oak-h: url("./textures/oak-h.webp");
+    --oak-v-size: 512px 1024px;
+    --oak-h-size: 1024px 512px;
 }
 
 *,
@@ -210,7 +220,8 @@ ol {
 .btn-bright {
     --btn-face: oklch(from var(--surface, var(--cream)) min(l + 0.08, 0.99) calc(c * 0.6) h);
     --btn-wall: oklch(from var(--surface, var(--cream)) calc(l - 0.06) c h);
-    --btn-fg: var(--berry);
+    /* lettered in the ink of wherever it sits: espresso on cream and paper, berry on blue */
+    --btn-fg: var(--ink);
 }
 
 .btn-deep,

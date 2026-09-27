@@ -5,7 +5,7 @@ import { MailIcon } from "@/components/Icons/Icons";
 import { CONTACT_EMAIL, FAQ } from "@/content/site";
 import styles from "./Faq.module.css";
 
-type Tone = "sky" | "soft" | "paper" | "sand";
+type Tone = "sky" | "soft" | "paper" | "sand" | "espresso";
 
 type Curl = { lift: number; bend: number; sway: number; skew: number };
 
@@ -14,7 +14,7 @@ type Curl = { lift: number; bend: number; sway: number; skew: number };
 // sway = which way the light rolls across it, skew = which corner curls more (-1 left … 1 right)
 const NOTES: { tilt: number; x: number; y: number; tone: Tone; curl: Curl }[] = [
     { tilt: -3.2, x: 6, y: 12, tone: "sky", curl: { lift: 7, bend: 0.3, sway: -1.2, skew: 0.35 } },
-    { tilt: 2.4, x: -8, y: -4, tone: "paper", curl: { lift: 3.5, bend: 0.18, sway: 0.8, skew: -0.25 } },
+    { tilt: 2.4, x: -8, y: -4, tone: "espresso", curl: { lift: 3.5, bend: 0.18, sway: 0.8, skew: -0.25 } },
     { tilt: -1.3, x: 4, y: 20, tone: "sand", curl: { lift: 9, bend: 0.36, sway: 1.5, skew: -0.45 } },
     { tilt: 3.4, x: -6, y: 2, tone: "soft", curl: { lift: 5, bend: 0.24, sway: -0.6, skew: 0.15 } },
     { tilt: -2.6, x: 10, y: -2, tone: "paper", curl: { lift: 8, bend: 0.32, sway: 1.1, skew: 0.4 } },
@@ -201,7 +201,7 @@ export default function Faq() {
 
                     <li className={styles.slot} data-reveal style={{ "--d": 60 + FAQ.length * 70 } as CSSProperties}>
                         <div
-                            className={`${styles.note} ${styles.ask}`}
+                            className={`${styles.note} ${styles.espresso}`}
                             data-note=""
                             style={{ "--tilt": `${ASK.tilt}deg`, "--x": `${ASK.x}px`, "--y": `${ASK.y}px`, ...curlStyle(ASK.curl) } as CSSProperties}
                         >

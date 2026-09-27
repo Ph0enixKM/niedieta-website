@@ -3,7 +3,7 @@
     display: inline-flex;
     align-items: flex-end;
     gap: 0.14em;
-    color: var(--berry);
+    color: var(--espresso);
     font-size: var(--size);
     line-height: 1;
 }

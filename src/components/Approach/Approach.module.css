@@ -68,113 +68,6 @@
     text-wrap: pretty;
 }
 
-/* clipboard: a baby-blue plastic board with a steel lever clip holding a sheet of paper, lit from the top-left */
-.board {
-    --board: #bcd3e4;
-    --board-rim: color-mix(in srgb, var(--board) 78%, var(--berry));
-    /* the clip's geometry lives in a 240-unit wide viewBox (see Clip.tsx): the board's top edge is at y = 28,
-       the sheet slides under the lever just below the base plate (y = 67) and the jaw ends at y = 106 */
-    --clip-w: 216px;
-    --clip-unit: calc(var(--clip-w) / 240);
-    position: relative;
-    width: min(100%, 600px);
-    padding: calc(var(--clip-unit) * 39) clamp(14px, 2.6vw, 26px) clamp(16px, 2.6vw, 26px);
-    border-radius: 24px;
-    background:
-        var(--grain),
-        /* soft sheen of matte plastic */
-        radial-gradient(110% 75% at 12% 0%, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0) 62%),
-        linear-gradient(118deg, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.13) 50%, rgba(255, 255, 255, 0) 64%),
-        linear-gradient(
-            165deg,
-            color-mix(in srgb, var(--board) 90%, #fff),
-            var(--board) 45%,
-            color-mix(in srgb, var(--board) 90%, var(--berry))
-        );
-    box-shadow:
-        /* rounded edge: lit along the top and left, shaded along the bottom and right */
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.75),
-        inset 0 3px 5px -2px rgba(255, 255, 255, 0.6),
-        inset 2px 0 4px -2px rgba(255, 255, 255, 0.45),
-        inset 0 -2px 0 rgba(41, 46, 76, 0.1),
-        inset 0 -5px 8px -5px rgba(41, 46, 76, 0.22),
-        inset -3px 0 6px -4px rgba(41, 46, 76, 0.16),
-        /* the board's thickness */
-        0 1px 0 color-mix(in srgb, var(--board-rim) 70%, var(--board)),
-        0 2.5px 0 var(--board-rim),
-        0 4px 0 color-mix(in srgb, var(--board-rim) 88%, var(--berry)),
-        /* contact and ambient shadow */
-        0 6px 5px -2px rgba(28, 32, 54, 0.28),
-        0 26px 40px -16px rgba(28, 32, 54, 0.32),
-        0 54px 80px -42px rgba(28, 32, 54, 0.3);
-    rotate: -1.4deg;
-}
-
-.clip {
-    /* brushed steel, faintly cooled by the blue board it reflects */
-    --m-hi: #f8fafc;
-    --m-light: #dfe5ec;
-    --m-mid: #b6c0cb;
-    --m-dark: #8d98a6;
-    --m-deep: #5c6676;
-    --r-light: #eef1f5;
-    --r-mid: #aab4bf;
-    --r-dark: #697383;
-    position: absolute;
-    top: calc(var(--clip-unit) * -28);
-    left: 50%;
-    z-index: 2;
-    width: var(--clip-w);
-    height: auto;
-    translate: -50% 0;
-    overflow: visible;
-    pointer-events: none;
-}
-
-.sheet {
-    --margin: clamp(16px, 3vw, 38px);
-    position: relative;
-    /* clear the clip's jaw, which bites calc(var(--clip-unit) * 39) into the sheet */
-    padding: calc(var(--clip-unit) * 39 + 24px) clamp(22px, 4vw, 44px) clamp(26px, 3.4vw, 36px)
-        clamp(30px, 5.6vw, 64px);
-    rotate: 0.9deg;
-}
-
-/* the paper itself; it lives on a pseudo-element so the curl shadow below can sit underneath it */
-.sheet::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: 3px;
-    background:
-        /* margin line */
-        linear-gradient(color-mix(in srgb, var(--sky-deep) 70%, transparent) 0 0) var(--margin) 0 / 1.5px 100% no-repeat,
-        /* the bottom corners lift a little and turn away from the light */
-        radial-gradient(34% 22% at 0% 100%, rgba(41, 46, 76, 0.05), rgba(41, 46, 76, 0) 70%),
-        radial-gradient(34% 22% at 100% 100%, rgba(41, 46, 76, 0.06), rgba(41, 46, 76, 0) 70%),
-        var(--grain),
-        linear-gradient(172deg, #fffdf8, var(--paper) 38%, color-mix(in srgb, var(--paper) 94%, var(--cream-deep)));
-    box-shadow:
-        inset 0 0 0 0.5px rgba(41, 46, 76, 0.07),
-        0 0.5px 0.5px rgba(28, 32, 54, 0.16),
-        0 2px 5px -1px rgba(28, 32, 54, 0.14);
-}
-
-/* lifted corners: the shadow only peeks out beyond the paper near the bottom corners */
-.sheet::after {
-    content: "";
-    position: absolute;
-    right: -3px;
-    bottom: -6px;
-    left: -3px;
-    z-index: -2;
-    height: 56px;
-    background:
-        radial-gradient(closest-side, rgba(28, 32, 54, 0.26), rgba(28, 32, 54, 0)) 0 100% / 34% 100% no-repeat,
-        radial-gradient(closest-side, rgba(28, 32, 54, 0.3), rgba(28, 32, 54, 0)) 100% 100% / 34% 100% no-repeat;
-}
-
 .gainsTitle {
     margin-bottom: 10px;
     font-family: var(--font-title);
@@ -201,7 +94,7 @@
     flex-shrink: 0;
     width: 24px;
     height: 24px;
-    border: 2px solid var(--berry);
+    border: 2px solid var(--ink);
     border-radius: 5px 7px 4px 6px / 7px 4px 6px 5px;
     rotate: -3deg;
 }
@@ -217,7 +110,7 @@
     bottom: 1px;
     width: 34px;
     height: 30px;
-    color: var(--berry);
+    color: var(--ink);
     overflow: visible;
 }
 
@@ -226,10 +119,6 @@
 }
 
 @media (max-width: 560px) {
-    .board {
-        --clip-w: 150px;
-    }
-
     .gains li {
         gap: 13px;
     }

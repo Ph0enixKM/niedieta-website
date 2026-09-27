@@ -147,7 +147,7 @@ html:not(:global(.js)) .num::before {
     font-size: 0.95rem;
     line-height: 1.35;
     text-align: center;
-    color: var(--berry);
+    color: var(--ink);
     pointer-events: none;
 }
 

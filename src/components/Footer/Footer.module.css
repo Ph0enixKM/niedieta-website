@@ -1,6 +1,8 @@
+/* a blue surface, so it keeps berry ink */
 .footer {
+    --ink: var(--berry);
     position: relative;
-    color: var(--berry);
+    color: var(--ink);
 }
 
 .edge {
@@ -58,6 +60,12 @@
 }
 
 /* ---------- columns ---------- */
+
+/* without the call to action the columns open the footer, so they need no rule above them */
+.grid.bare {
+    border-top: 0;
+    padding-top: clamp(28px, 4vw, 48px);
+}
 
 .grid {
     display: grid;

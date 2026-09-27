@@ -32,8 +32,8 @@ const geist = localFont({
     display: "swap",
 });
 
-// Kinga's own handwriting. It has letters only, so digits and punctuation
-// fall through to a tiny subset of Playwrite PL.
+// Kinga's own handwriting: letters, digits and . , : ; ! ?. Anything else
+// (dashes, quotes, …) falls through to a tiny subset of Playwrite PL.
 const kinga = localFont({
     src: "./fonts/kinga.woff2",
     variable: "--font-kinga",
@@ -72,14 +72,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    themeColor: "#f6f0e3",
+    themeColor: "#f5f0e4",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const fonts = [tan, garet, cal, geist, kinga, handFallback].map((font) => font.variable).join(" ");
 
     return (
-        <html lang="pl" className={fonts} suppressHydrationWarning>
+        <html lang="pl" className={fonts} data-scroll-behavior="smooth" suppressHydrationWarning>
             <head>
                 {/* lets CSS hide scroll-reveal content only when JS is running */}
                 <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

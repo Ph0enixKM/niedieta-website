@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 
-// Colours come from CSS custom properties (see .clip in Approach.module.css), so the metal can be retoned there.
+// Colours, shadows included, come from CSS custom properties (see .clip in Clipboard.module.css), so the metal can be
+// retoned there.
 const stop = (offset: number, color: string, opacity?: number) => (
     <stop offset={offset} style={{ stopColor: `var(${color})`, stopOpacity: opacity } as CSSProperties} />
 );
@@ -62,8 +63,8 @@ export default function Clip({ className }: { className?: string }) {
                     <stop offset="0" stopColor="#fff" stopOpacity="0.32" />
                     <stop offset="0.05" stopColor="#fff" stopOpacity="0.06" />
                     <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
-                    <stop offset="0.95" stopColor="#10132a" stopOpacity="0.06" />
-                    <stop offset="1" stopColor="#10132a" stopOpacity="0.28" />
+                    {stop(0.95, "--m-crease", 0.06)}
+                    {stop(1, "--m-crease", 0.28)}
                 </linearGradient>
                 <radialGradient id="clip-rivet" cx="0.38" cy="0.32" r="0.78">
                     <stop offset="0" stopColor="#fff" />
@@ -80,7 +81,7 @@ export default function Clip({ className }: { className?: string }) {
             </defs>
 
             {/* shadows: the raised lever and ear throw a soft one, the base and the jaw sit tight */}
-            <g fill="#1c2036">
+            <g style={{ fill: "var(--m-shadow)" }}>
                 <g opacity="0.3" filter="url(#clip-soft)" transform="translate(2 5)">
                     <path d={LEVER} />
                     <path d={EAR + HOLE} fillRule="evenodd" />
@@ -89,7 +90,7 @@ export default function Clip({ className }: { className?: string }) {
                 <path
                     d="M52 103Q120 108.5 188 103"
                     fill="none"
-                    stroke="#1c2036"
+                    style={{ stroke: "var(--m-shadow)" }}
                     strokeWidth="3"
                     opacity="0.5"
                     filter="url(#clip-tight)"
@@ -103,9 +104,9 @@ export default function Clip({ className }: { className?: string }) {
 
             {RIVETS.map((x) => (
                 <g key={x}>
-                    <circle cx={x + 0.6} cy={49.3} r={7} fill="#10132a" opacity="0.35" filter="url(#clip-tight)" />
+                    <circle cx={x + 0.6} cy={49.3} r={7} style={{ fill: "var(--m-crease)" }} opacity="0.35" filter="url(#clip-tight)" />
                     <circle cx={x} cy={48} r={6.5} fill="url(#clip-rivet)" />
-                    <circle cx={x} cy={48} r={6.5} fill="none" stroke="#10132a" strokeOpacity="0.25" strokeWidth="0.7" />
+                    <circle cx={x} cy={48} r={6.5} fill="none" style={{ stroke: "var(--m-crease)" }} strokeOpacity="0.25" strokeWidth="0.7" />
                     <ellipse cx={x - 2} cy={45.6} rx={2.1} ry={1.3} fill="#fff" opacity="0.85" />
                 </g>
             ))}
@@ -115,7 +116,7 @@ export default function Clip({ className }: { className?: string }) {
             <path d={LEVER} fill="url(#clip-sheen)" />
             <path d={LEVER} fill="url(#clip-side)" />
             {/* stamped stiffening panel: shaded upper lip, lit lower lip */}
-            <rect x="72" y="57" width="96" height="26" rx="9" fill="none" stroke="#10132a" strokeOpacity="0.16" strokeWidth="1.2" />
+            <rect x="72" y="57" width="96" height="26" rx="9" fill="none" style={{ stroke: "var(--m-crease)" }} strokeOpacity="0.16" strokeWidth="1.2" />
             <rect x="72" y="58.2" width="96" height="26" rx="9" fill="none" stroke="#fff" strokeOpacity="0.45" strokeWidth="0.9" />
             <path
                 d="M50 100.8Q120 104.6 190 100.8"
@@ -125,7 +126,7 @@ export default function Clip({ className }: { className?: string }) {
                 strokeWidth="1.1"
                 strokeLinecap="round"
             />
-            <path d="M54.5 104.5Q120 108 185.5 104.5" fill="none" stroke="#10132a" strokeOpacity="0.35" strokeWidth="1" />
+            <path d="M54.5 104.5Q120 108 185.5 104.5" fill="none" style={{ stroke: "var(--m-crease)" }} strokeOpacity="0.35" strokeWidth="1" />
 
             {/* ear with the hanging hole, rising from the back of the lever */}
             <path d={EAR + HOLE} fill="url(#clip-ear)" fillRule="evenodd" />
@@ -137,10 +138,10 @@ export default function Clip({ className }: { className?: string }) {
                 strokeWidth="0.9"
             />
             {/* hole: shaded inner wall at the top, lit rim at the bottom */}
-            <path d="M113.3 18A6.8 6.8 0 0 1 126.7 18" fill="none" stroke="#10132a" strokeOpacity="0.45" strokeWidth="1.4" />
+            <path d="M113.3 18A6.8 6.8 0 0 1 126.7 18" fill="none" style={{ stroke: "var(--m-crease)" }} strokeOpacity="0.45" strokeWidth="1.4" />
             <path d="M113.6 21.8A7.3 7.3 0 0 0 126.4 21.8" fill="none" stroke="#fff" strokeOpacity="0.6" strokeWidth="0.9" />
             {/* crease where the ear bends up out of the lever */}
-            <path d="M95 44.6H145" stroke="#10132a" strokeOpacity="0.35" strokeWidth="1.3" />
+            <path d="M95 44.6H145" style={{ stroke: "var(--m-crease)" }} strokeOpacity="0.35" strokeWidth="1.3" />
             <path d="M95 46.3H145" stroke="#fff" strokeOpacity="0.5" strokeWidth="0.9" />
         </svg>
     );

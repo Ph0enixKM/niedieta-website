@@ -73,9 +73,12 @@
     --sway: calc(var(--swing) + var(--rest-sway));
     --tone: var(--sky);
     --ink: var(--berry);
+    /* the paper's shading: shadows take on --shade, highlights are white scaled by --sheen */
+    --shade: var(--berry);
+    --sheen: 1;
     /* how the paper catches the light when it is pressed into relief (see .emboss) */
     --emboss-hi: rgba(255, 255, 255, 0.8);
-    --emboss-lo: rgba(41, 46, 76, 0.22);
+    --emboss-lo: color-mix(in srgb, var(--shade) 22%, transparent);
     --emboss-sheen: rgba(255, 255, 255, 0.22);
     position: relative;
     display: flex;
@@ -105,20 +108,28 @@
     --tone: var(--sky-soft);
 }
 
+/* the warm papers are written and shaded in espresso; the blue ones keep berry */
 .paper {
     --tone: #fffaf0;
+    --ink: var(--espresso);
+    --shade: var(--espresso);
 }
 
 .sand {
     --tone: var(--cream-deep);
+    --ink: var(--espresso);
+    --shade: var(--espresso);
 }
 
-.ask {
-    --tone: var(--berry);
+/* dark espresso paper, written in cream */
+.espresso {
+    --tone: var(--espresso);
     --ink: var(--cream);
-    --emboss-hi: rgba(255, 255, 255, 0.2);
-    --emboss-lo: rgba(10, 12, 26, 0.6);
-    --emboss-sheen: rgba(255, 255, 255, 0.06);
+    --shade: #000;
+    --sheen: 0.3;
+    --emboss-hi: rgba(255, 236, 214, 0.2);
+    --emboss-lo: rgba(0, 0, 0, 0.6);
+    --emboss-sheen: rgba(255, 236, 214, 0.06);
 }
 
 /* the glued strip never moves: only the free part below it lifts, bends and flips */
@@ -127,15 +138,8 @@
     aspect-ratio: 100 / 13;
     border-radius: 3px 3px 0 0;
     background:
-        linear-gradient(rgba(41, 46, 76, 0.05), rgba(41, 46, 76, 0.05)),
-        linear-gradient(172deg, rgba(255, 255, 255, 0.38), transparent),
-        var(--grain),
-        var(--tone);
-}
-
-.ask .glue {
-    background:
-        linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06)),
+        linear-gradient(color-mix(in srgb, var(--shade) 5%, transparent), color-mix(in srgb, var(--shade) 5%, transparent)),
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.38 * var(--sheen))), transparent),
         var(--grain),
         var(--tone);
 }
@@ -180,8 +184,8 @@
     font: inherit;
     text-align: left;
     background:
-        linear-gradient(172deg, rgba(255, 255, 255, 0.3), transparent 36%),
-        linear-gradient(to top, rgba(41, 46, 76, 0.08), transparent 26%),
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.3 * var(--sheen))), transparent 36%),
+        linear-gradient(to top, color-mix(in srgb, var(--shade) 8%, transparent), transparent 26%),
         var(--grain),
         var(--tone);
     backface-visibility: hidden;
@@ -205,16 +209,16 @@
         radial-gradient(
             ellipse 92% 100% at calc(50% + var(--sway) * 6) 0%,
             transparent 0 16%,
-            rgba(255, 255, 255, 0.34) 38%,
+            rgba(255, 255, 255, calc(0.34 * var(--sheen))) 38%,
             rgba(255, 255, 255, 0) 56%,
-            rgba(41, 46, 76, 0.16) 80%,
-            rgba(41, 46, 76, 0.3) 100%
+            color-mix(in srgb, var(--shade) 16%, transparent) 80%,
+            color-mix(in srgb, var(--shade) 30%, transparent) 100%
         ),
         linear-gradient(
             calc(90deg + var(--sway) * 8),
-            rgba(41, 46, 76, 0.13),
+            color-mix(in srgb, var(--shade) 13%, transparent),
             transparent 30% 70%,
-            rgba(41, 46, 76, 0.13)
+            color-mix(in srgb, var(--shade) 13%, transparent)
         );
 }
 
@@ -243,15 +247,15 @@
         /* the fold never creases flat: the paper rolls over the hinge, lit on the crown of the roll, shaded where it tucks under */
         linear-gradient(
             to top,
-            rgba(41, 46, 76, 0.26),
-            rgba(41, 46, 76, 0.08) 4%,
-            rgba(255, 255, 255, 0.34) 9%,
+            color-mix(in srgb, var(--shade) 26%, transparent),
+            color-mix(in srgb, var(--shade) 8%, transparent) 4%,
+            rgba(255, 255, 255, calc(0.34 * var(--sheen))) 9%,
             rgba(255, 255, 255, 0) 17%,
-            rgba(41, 46, 76, 0.06) 22%,
+            color-mix(in srgb, var(--shade) 6%, transparent) 22%,
             transparent 30%
         ),
-        linear-gradient(8deg, rgba(255, 255, 255, 0.3), transparent 36%),
-        linear-gradient(rgba(41, 46, 76, 0.08), transparent 26%),
+        linear-gradient(8deg, rgba(255, 255, 255, calc(0.3 * var(--sheen))), transparent 36%),
+        linear-gradient(color-mix(in srgb, var(--shade) 8%, transparent), transparent 26%),
         var(--grain),
         var(--tone);
     border-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 50%) 0 0 / calc(5px + var(--bend) * 20px) calc(5px + var(--bend) * 20px) 0 0;
@@ -423,7 +427,7 @@
     justify-content: center;
     gap: 22px;
     background:
-        linear-gradient(172deg, rgba(255, 255, 255, 0.12), transparent 42%),
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.4 * var(--sheen))), transparent 42%),
         var(--grain),
         var(--tone);
 }
