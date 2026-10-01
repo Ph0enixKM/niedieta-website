@@ -64,7 +64,7 @@ export default function Familiar() {
                 </div>
                 <div className="container">
                     <h2 id="znajomo-title" className={`h2 ${styles.title}`} data-reveal>
-                        Brzmi znajomo?
+                        Być może to o Tobie
                     </h2>
 
                     <ul className={styles.cards}>

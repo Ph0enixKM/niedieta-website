@@ -128,3 +128,20 @@
         display: none;
     }
 }
+
+/* her qualifications: underlined like a note in the margin, and a link to the diploma once one is set */
+.credential {
+    text-decoration: underline;
+    text-decoration-color: var(--sky-deep);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.2em;
+}
+
+.diploma {
+    color: inherit;
+    transition: text-decoration-color 0.3s ease, text-decoration-thickness 0.3s ease;
+}
+
+.diploma:hover {
+    text-decoration-thickness: 0.16em;
+}

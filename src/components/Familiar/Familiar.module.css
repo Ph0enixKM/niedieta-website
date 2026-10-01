@@ -32,7 +32,7 @@
     overflow: hidden;
 }
 
-/* vertical oak boards: a dark gap at every seam, each edge eased off — lit on the left, shaded on the right */
+/* vertical oak boards: a dark gap at every seam, each edge eased off - lit on the left, shaded on the right */
 .boards {
     position: absolute;
     inset: 0;

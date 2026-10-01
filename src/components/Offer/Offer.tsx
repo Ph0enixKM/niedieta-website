@@ -16,7 +16,7 @@ export default function Offer() {
                         Wybierz wsparcie, którego <span className={styles.now}>teraz</span> potrzebujesz
                     </h2>
                     <p className={styles.sub} data-reveal style={{ "--d": 160 } as CSSProperties}>
-                        Wszystkie spotkania odbywają się online — wystarczy telefon lub komputer.
+                        Wszystkie spotkania odbywają się online - wystarczy telefon lub komputer.
                     </p>
                 </header>
 
@@ -79,12 +79,12 @@ export default function Offer() {
                 <div className={styles.shelf} data-reveal>
                     <div className={styles.shelfIntro}>
                         <h3 className={styles.shelfTitle}>E-booki</h3>
-                        <p>Przepisy, które ułatwiają codzienność — do pobrania od razu.</p>
+                        <p>Przepisy, które ułatwiają codzienność - do pobrania od razu.</p>
                     </div>
                     <ul className={styles.books}>
                         {EBOOKS.map((book) => (
                             <li key={book.title} className={styles.book}>
-                                <a href={book.href} className={styles.cover} aria-label={`${book.title} — zobacz e-book`}>
+                                <a href={book.href} className={styles.cover} aria-label={`${book.title} - zobacz e-book`}>
                                     <Image src={book.cover} alt="" width={905} height={1280} sizes="120px" />
                                 </a>
                                 <div className={styles.bookBody}>

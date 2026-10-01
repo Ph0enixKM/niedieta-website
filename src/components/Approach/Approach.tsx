@@ -11,7 +11,8 @@ export default function Approach() {
             <div className="container">
                 <ScrollWords
                     className={styles.statement}
-                    text="Problemem nie musi być brak wiedzy, a dobór zaleceń niedopasowanych do Twojej sytuacji życiowej i zdrowotnej."
+                    // zero-width spaces let the slashed list wrap on narrow screens
+                    text={"Dlaczego do tej pory nie wychodziło? Problemem może być dobór zaleceń niedopasowanych do Twojej sytuacji życiowej/\u200Bzawodowej/\u200Bzdrowotnej."}
                 />
 
                 <div className={styles.stack}>
@@ -19,19 +20,18 @@ export default function Approach() {
                         <h2 id="podejscie-title" className={`h2 ${styles.nodiet}`} data-reveal>
                             Ode mnie nie dostaniesz kolejnej{" "}
                             <span className={styles.struck}>
-                                diety
+                                sztywnej diety
                                 <HandStrike className={styles.strike} delay={700} />
                             </span>
-                            .
+                            ,
                         </h2>
                         <p className={styles.copy} data-reveal style={{ "--d": 150 } as CSSProperties}>
-                            Za to razem popracujemy nad rozwiązaniami, które jesteś w stanie utrzymać — w swoim tempie
-                            i w swojej codzienności.
+                            za to popracujemy nad rozwiązaniami, które jesteś w stanie utrzymać.
                         </p>
                     </div>
 
                     <Clipboard data-reveal="scale" style={{ "--d": 120 } as CSSProperties}>
-                        <h3 className={styles.gainsTitle}>Co zyskasz zamiast kolejnej diety?</h3>
+                        <h3 className={styles.gainsTitle}>Co zyskasz w zamian?</h3>
                         <ul className={styles.gains}>
                             {GAINS.map((gain, i) => (
                                 <li key={gain}>

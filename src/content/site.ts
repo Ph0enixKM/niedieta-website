@@ -1,5 +1,5 @@
 // All copy, links and prices of the landing page live here.
-// Offers mirror the products in the Naffy store (https://www.naffy.io/niedieta) — keep prices in sync with it.
+// Offers mirror the products in the Naffy store (https://www.naffy.io/niedieta) - keep prices in sync with it.
 
 export const CONTACT_EMAIL = "kinganiedieta@gmail.com";
 
@@ -18,28 +18,33 @@ export const NAV_LINKS = [
     { href: "#faq", label: "FAQ" },
 ] as const;
 
+/**
+ * Kinga's diplomas, linked from her credentials in the "O mnie" section. Drop the scans into /public/dyplomy and
+ * set the paths here (e.g. "/dyplomy/dietetyka-kliniczna.pdf"); until then the credentials are only highlighted.
+ */
+export const DIPLOMAS: { clinical?: string; psychodietetics?: string } = {};
+
 export const PAINS = [
+    {
+        icon: "voices",
+        text: "Każdy mówi co innego i nie wiesz, kogo słuchać i co będzie dla Ciebie dobre.",
+    },
     {
         icon: "notes",
         text: "Znasz wiele zaleceń, ale nie wiesz, jak je wdrożyć.",
     },
     {
-        icon: "voices",
-        text: "Każdy mówi co innego i nie wiesz już, kogo słuchać.",
-    },
-    {
         icon: "heart",
-        text: "Chcesz zadbać o siebie i swoje zdrowie, ale bez podporządkowywania temu całego życia.",
+        text: "Chcesz zadbać o swoje zdrowie, ale bez podporządkowania temu całego życia.",
     },
 ] as const;
 
 export type PainIcon = (typeof PAINS)[number]["icon"];
 
 export const GAINS = [
-    "Plan dopasowany do Twojej sytuacji",
-    "Nawyki, które realnie da się wdrożyć",
-    "Spokój i pewność siebie przy jedzeniu",
-    "Wsparcie na każdym etapie zmiany",
+    "plan dopasowany do Twojej sytuacji",
+    "akceptowalne przez Ciebie nawyki do wdrożenia",
+    "wsparcie podczas całego procesu",
 ] as const;
 
 export const STEPS = [
@@ -62,11 +67,13 @@ export const STEPS = [
 ] as const;
 
 export interface Testimonial {
+    /** Client message as sent, with only typos and punctuation corrected. */
     quote: string;
-    name: string;
-    context: string;
+    /** Omit for anonymous opinions - the card is then signed "Opinia anonimowa". */
+    name?: string;
+    context?: string;
     /**
-     * PLACEHOLDER — replace with real, consented client opinions before publishing.
+     * PLACEHOLDER - replace with real, consented client opinions before publishing.
      * Placeholders are rendered only in development (with a visible badge) and never in production builds.
      */
     placeholder?: boolean;
@@ -74,22 +81,15 @@ export interface Testimonial {
 
 export const TESTIMONIALS: Testimonial[] = [
     {
-        quote: "Pierwszy raz nie czułam, że jestem na diecie. Jem normalnie, widzę zmiany i przestałam myśleć o jedzeniu non stop.",
-        name: "Anna",
-        context: "8-tygodniowa współpraca",
-        placeholder: true,
+        quote: "Kinga, bardzo dziękuję za przygotowaną dietę ❤️ potrawy są bardzo smaczne, szybko i łatwo można je przygotować, a przede wszystkim bardzo dobrze się po nich czuję ❤️ używam Twoich przepisów już ponad 3 miesiące, zgubiłam „brzuszek” i czuję się naprawdę świetnie. Uwzględniłaś wszystkie moje sugestie i dzięki temu nawet nie czuję, że to dieta, bo jem po prostu co lubię. Oczywiście na weekendach często zdarza mi się zjeść coś na mieście, ale mimo to kaloryczność z „tygodnia” powoduje, że waga spada ❤️ chciałabym domówić u Ciebie dietę na sezon jesienno-zimowy i kontynuować dalej współpracę 💪💪💪💪 dziękuję jeszcze raz ❤️❤️❤️",
+        name: "Ewa",
     },
     {
-        quote: "Kinga pomogła mi ułożyć posiłki pod moją pracę zmianową. Mam więcej energii i wreszcie wiem, co jeść, kiedy brakuje mi czasu.",
-        name: "Magda",
-        context: "Konsultacja + jadłospis",
-        placeholder: true,
+        quote: "Myślałam kiedyś tak samo, że diety cud, że redukcja, że wyrzeczenia, ale od kiedy zdaję się na fachową konsultację dietetyczną, już wiem. Zmiany muszą wyjść od nas samych, żadnych wyrzeczeń, żadnych restrykcji. Tylko zdrowa zmiana nawyków. Ja razem z synkiem wprowadziliśmy takie zmiany i są efekty. Nie ma podjadania, bo jesteśmy zaspokojeni kalorycznie. A zmiany na ciele i większa energia przychodzą same. Dziękujemy za porady i prowadzenie.\nNajlepsza dietetyk 💗 Polecam 🤗",
+        name: "Iza",
     },
     {
-        quote: "Najbardziej doceniam spokój. Bez oceniania i bez zakazów, małymi krokami doszłam do nawyków, które zostały ze mną.",
-        name: "Kasia",
-        context: "8-tygodniowa współpraca",
-        placeholder: true,
+        quote: "Dzień dobry Kingo\nTak, jadłospis dobiegł końca. Muszę przyznać, że bardzo mi służy i myślę jeszcze go stosować. Tym bardziej, że zrobiłem już zakupy na cały tydzień 😆 Od początku stosowania diety schudłem 7 kg, a ciśnienie krwi utrzymuje się w granicach normy. Przed chwilą mierzyłem i mam 120/67. Czasami jest jeszcze niższe. Jak tak dalej będzie, to skonsultuję z lekarzem zmniejszenie dawki leków albo całkowite ich odstawienie. Dużym plusem Twojej diety jest też zmiana nawyków żywieniowych. Już wiem mniej więcej kiedy, jakie produkty i ile jeść w ciągu dnia. Za jakiś czas się odezwę i poproszę o zmianę jadłospisu. Dziękuję bardzo za pomoc i pozdrawiam serdecznie 🙂",
     },
 ];
 
@@ -150,7 +150,7 @@ export const CONSULTATION: OfferVariant[] = [
 
 export const PROGRAM = {
     name: "8-tygodniowa metamorfoza",
-    tagline: "Schudnij, popraw wyniki i uporządkuj jedzenie bez zaczynania od kolejnej diety.",
+    tagline: "Uporządkuj jedzenie, popraw wyniki i zadbaj o masę ciała - małymi krokami, ze stałym wsparciem.",
     price: 899,
     href: NAFFY.program,
     features: [
@@ -198,29 +198,54 @@ export const EBOOKS = [
     },
 ] as const;
 
+// Each answer is a list of paragraphs.
 export const FAQ = [
     {
         q: "Czy dostanę gotowy jadłospis?",
-        a: "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz w pakiecie „Konsultacja + jadłospis” — w PDF i w aplikacji, w ciągu 3 dni od spotkania. Gotowe plany posiłków, odświeżane co dwa tygodnie, znajdziesz też w NieDiecie w Apce. Sama konsultacja nie obejmuje jadłospisu: skupiamy się na planie zmiany dopasowanym do Ciebie.",
+        a: [
+            "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz w pakiecie „Konsultacja + jadłospis” - w PDF i w aplikacji, w ciągu 3 dni od spotkania. Wówczas na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
+            "Gotowe plany posiłków, odświeżane co dwa tygodnie, znajdziesz też w NieDiecie w Apce.",
+            "Sama konsultacja nie obejmuje jadłospisu: skupiamy się na planie zmiany dopasowanym do Ciebie, bazując na Twoich dotychczasowych przyzwyczajeniach.",
+        ],
     },
     {
         q: "Czy muszę liczyć kalorie?",
-        a: "Nie. Liczenie kalorii nie jest warunkiem współpracy. Pracujemy na nawykach, komponowaniu posiłków i sygnałach płynących z Twojego ciała — tak, żeby jedzenie przestało być ciągłym rachunkiem.",
+        a: [
+            "Liczenie kalorii nie jest warunkiem współpracy, ponieważ każda z nas jest inna i nie każdej to narzędzie służy. Skupiamy się głównie na nawykach, komponowaniu posiłków oraz obserwacji sygnałów płynących z organizmu. Jestem jednak świadoma, że łatwo przeszacować kalorie i często na początku współpracy proponuję to rozwiązanie, choćby jako eksperyment czy jedno z narzędzi samokontroli.",
+        ],
     },
     {
         q: "Jak wyglądają spotkania?",
-        a: "Spotykamy się online, więc wystarczy telefon lub komputer z internetem. Rozmawiamy o Twoim zdrowiu, stylu życia, nawykach i celach — w spokojnej atmosferze, bez oceniania. W 8-tygodniowej współpracy między spotkaniami jesteśmy w stałym kontakcie przez aplikację.",
+        a: [
+            "Spotykamy się online, dlatego zawsze sugeruję, aby to było miejsce, w którym czujesz się komfortowo. Rozmawiamy o Twoich celach, stylu życia, drodze, którą przebyłaś, i o miejscu, w którym się teraz znajdujesz - wszystko w spokojnej atmosferze i bez oceniania.",
+            "W przypadku 8-tygodniowej współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
+            "W przypadku jednorazowych konsultacji nie zostawiam Cię samej - jesteśmy w kontakcie przez miesiąc od wizyty, więc w przypadku pojawienia się jakichkolwiek wątpliwości jestem pod telefonem.",
+        ],
     },
     {
-        q: "Czy współpraca jest dla mnie, jeśli mam choroby lub przyjmuję leki?",
-        a: "Najczęściej tak. Jako dietetyczka kliniczna dopasowuję zalecenia do Twojego stanu zdrowia, wyników badań i przyjmowanych leków. Dietoterapia wspiera leczenie, ale go nie zastępuje, dlatego ważne, byś pozostawała pod opieką lekarza. Nie prowadzę współpracy z osobami z zaburzeniami odżywiania ani ze sportowcami.",
+        q: "Czy współpraca jest dla mnie, jeśli choruję i/lub przyjmuję leki?",
+        a: [
+            "Jak najbardziej. Jako dietetyczka kliniczna dopasowuję zalecenia do Twojego stanu zdrowia, wyników badań i przyjmowanych leków. Dietoterapia jest ważnym wsparciem dla leczenia, ale go nie zastępuje, dlatego warto zostać także pod opieką lekarza.",
+        ],
     },
     {
-        q: "Nie wiem, którą opcję wybrać — co zrobić?",
-        a: "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeśli zależy Ci na zmianie z regularnym wsparciem, wybierz 8-tygodniową współpracę. A jeśli wolisz działać samodzielnie, sprawdź NieDietę w Apce — 3 dni możesz przetestować za darmo. Wciąż masz wątpliwości? Napisz do mnie, pomogę wybrać.",
+        q: "Z jakimi osobami nie współpracujesz?",
+        a: [
+            "Nie współpracuję z osobami cierpiącymi na zaburzenia odżywiania, dziećmi poniżej 12. roku życia oraz sportowcami. W przypadku wątpliwości skontaktuj się ze mną :)",
+        ],
     },
     {
-        q: "Jakie efekty mogę osiągnąć?",
-        a: "To zależy od Twojego punktu startu i celu. Dla jednej osoby będzie to redukcja masy ciała, dla innej lepsze wyniki badań, więcej energii albo spokojniejsza relacja z jedzeniem. Nie obiecuję cudów w tydzień — stawiam na zmiany, które zostają z Tobą na dłużej.",
+        q: "Nie wiem, którą opcję wybrać - co zrobić?",
+        a: [
+            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz 8-tygodniową współpracę.",
+            "A jeśli wolisz działać samodzielnie, ale szukasz inspiracji na zbilansowane zdrowe posiłki i chcesz otrzymywać sezonowe plany żywieniowe co 2 tygodnie, sprawdź NieDietę w Apce - 3 dni próbnego jadłospisu możesz przetestować za darmo.",
+            "Jeżeli nadal masz wątpliwości - napisz do mnie, pomogę Ci dobrać opcję, która będzie dla Ciebie odpowiednia.",
+        ],
+    },
+    {
+        q: "Jakie mogę osiągnąć efekty?",
+        a: [
+            "To zależy od Twojego celu - dla jednej osoby będzie nauka lepszych wyborów żywieniowych, dla innej konkretna poprawa wyników badań. Z doświadczenia jednak wiem, że często to pytanie zadajecie w kontekście utraty masy ciała. Nie obiecuję cudów, ponieważ prawdą jest, że zmiana zależy w znacznej większości od Ciebie, a ja jestem Twoją towarzyszką w tej drodze. Gdybyśmy miały operować na statystykach i liczbach, zdrową redukcję szacuje się na 0,5-1\u00a0kg masy ciała na tydzień i w taką zazwyczaj celujemy przy nadwadze/otyłości.",
+        ],
     },
 ] as const;

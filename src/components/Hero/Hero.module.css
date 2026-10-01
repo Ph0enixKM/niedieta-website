@@ -147,7 +147,7 @@
     z-index: 4;
     left: -6%;
     bottom: -11%;
-    width: clamp(118px, 14.5vw, 196px);
+    width: clamp(88px, 10.9vw, 147px);
     aspect-ratio: 1;
 }
 
@@ -196,7 +196,7 @@
     }
 
     .media .berry {
-        width: clamp(92px, 25vw, 150px);
+        width: clamp(69px, 18.75vw, 112px);
         left: -9%;
         bottom: -14%;
     }

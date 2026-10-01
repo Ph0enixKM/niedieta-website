@@ -49,22 +49,22 @@ const handFallback = localFont({
 });
 
 const description =
-    "Dietetyczka kliniczna i psychodietetyczka Kinga Sobańska. Pomogę Ci poczuć się lepiej w swoim ciele — bez restrykcji. Konsultacje online, 8-tygodniowa współpraca, plany posiłków w aplikacji i e-booki.";
+    "Dietetyczka kliniczna i psychodietetyczka Kinga Sobańska. Pomogę Ci lepiej poczuć się w swojej skórze - małymi krokami, z uwzględnieniem Twojego zdrowia. Konsultacje online, 8-tygodniowa współpraca, plany posiłków w aplikacji i e-booki.";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://niedieta.pl"),
     title: {
-        default: "NieDieta — Jedz normalnie, czuj się dobrze",
+        default: "NieDieta - Jedz jak lubisz i czuj się dobrze",
         template: "%s · NieDieta",
     },
     description,
     openGraph: {
-        title: "NieDieta — Jedz normalnie, czuj się dobrze",
+        title: "NieDieta - Jedz jak lubisz i czuj się dobrze",
         description,
         siteName: "NieDieta",
         locale: "pl_PL",
         type: "website",
-        images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "NieDieta — Kinga Sobańska" }],
+        images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "NieDieta - Kinga Sobańska" }],
     },
     twitter: {
         card: "summary_large_image",

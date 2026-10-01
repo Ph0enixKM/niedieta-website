@@ -15,12 +15,12 @@ export default function Hero() {
                         <span className={styles.row}>
                             Jedz{" "}
                             <em className={styles.word} style={{ "--w": 0 } as CSSProperties}>
-                                normalnie
+                                jak lubisz
                                 <SketchUnderline className={styles.underline} seed={4} draw={false} />
                             </em>
                         </span>
                         <span className={styles.row}>
-                            czuj się{" "}
+                            i czuj się{" "}
                             <em className={styles.word} style={{ "--w": 1 } as CSSProperties}>
                                 dobrze
                             </em>
@@ -28,7 +28,7 @@ export default function Hero() {
                     </h1>
 
                     <p className={`lead ${styles.lead}`}>
-                        Pomogę Ci poczuć się lepiej w swoim ciele — bez restrykcji i bez zaczynania od nowa w każdy poniedziałek.
+                        Pomogę Ci lepiej poczuć się w swojej skórze - małymi krokami, z uwzględnieniem Twojego zdrowia i bez zaczynania od nowa w każdy poniedziałek.
                     </p>
 
                     <div className={styles.ctas}>

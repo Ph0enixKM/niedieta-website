@@ -187,7 +187,11 @@ export default function Faq() {
                                             </span>
                                         </button>
                                         <div id={`faq-back-${i}-panel`} className={`${styles.face} ${styles.back}`} inert={!isFlipped}>
-                                            <p className={styles.answer}>{item.a}</p>
+                                            <div className={styles.answer}>
+                                                {item.a.map((paragraph) => (
+                                                    <p key={paragraph}>{paragraph}</p>
+                                                ))}
+                                            </div>
                                             <button id={`faq-back-${i}`} type="button" className={`${styles.backButton} ${styles.emboss}`} onClick={() => flip(i, false)}>
                                                 <FlipIcon />
                                                 Wróć do pytania

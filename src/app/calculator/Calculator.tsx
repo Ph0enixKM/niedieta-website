@@ -232,7 +232,7 @@ export default function Calculator() {
                         <ActivityTrack
                             labels={PAL_LABELS}
                             value={pal}
-                            valueText={`${format(activity.value, 1)} — ${activity.title}`}
+                            valueText={`${format(activity.value, 1)} - ${activity.title}`}
                             onChange={setPal}
                         />
                         <div className={styles.level}>
@@ -255,9 +255,9 @@ export default function Calculator() {
                 </h2>
                 <p className={styles.status}>
                     <span data-shown={!isComputable || undefined}>
-                        Uzupełnij płeć, wiek, wzrost i wagę — wyniki pojawią się tutaj od razu.
+                        Uzupełnij płeć, wiek, wzrost i wagę - wyniki pojawią się tutaj od razu.
                     </span>
-                    <span data-shown={isComputable || undefined}>Zmieniaj dane śmiało — wyniki przeliczą się od razu.</span>
+                    <span data-shown={isComputable || undefined}>Zmieniaj dane śmiało - wyniki przeliczą się od razu.</span>
                 </p>
 
                 <div className={styles.notes} data-filled={isComputable || undefined} aria-live="polite">
@@ -284,7 +284,7 @@ export default function Calculator() {
                 </p>
 
                 <div className={styles.cta}>
-                    <p>Chcesz przełożyć liczby na codzienne jedzenie — bez restrykcji?</p>
+                    <p>Chcesz przełożyć liczby na codzienne jedzenie, które jesteś w stanie utrzymać?</p>
                     <a href="/#oferta" className="btn btn-deep">
                         Umów konsultację
                         <ArrowRight />

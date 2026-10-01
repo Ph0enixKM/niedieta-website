@@ -892,7 +892,7 @@ export async function createBerryEngine(canvas: HTMLCanvasElement, onLost: () =>
     };
 
     // Two berries in view at once (on wide screens the end of the track and the offer card can be, and both then
-    // scroll with the page): one canvas covering both, laid out on the document itself — its containing block is the
+    // scroll with the page): one canvas covering both, laid out on the document itself - its containing block is the
     // initial one, which sits at the document's origin. Snapped to a coarse grid so small moves don't resize it.
     const GRID = 32;
     const coverAll = (ps: Placement[], scrollX: number, scrollY: number): Placement => {

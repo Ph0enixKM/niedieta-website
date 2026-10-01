@@ -1,6 +1,18 @@
 import type { CSSProperties } from "react";
+import type { ReactNode } from "react";
 import { HandArrow, HandHeart, SketchRing } from "@/components/Sketch/Sketch";
+import { DIPLOMAS } from "@/content/site";
 import styles from "./About.module.css";
+
+/** A highlighted qualification that opens its diploma, once the scan is in place. */
+function Credential({ diploma, children }: { diploma?: string; children: ReactNode }) {
+    if (!diploma) return <span className={styles.credential}>{children}</span>;
+    return (
+        <a className={`${styles.credential} ${styles.diploma}`} href={diploma} target="_blank" rel="noopener" title="Zobacz dyplom">
+            {children}
+        </a>
+    );
+}
 
 export default function About() {
     return (
@@ -20,12 +32,12 @@ export default function About() {
 
                 <div className={styles.text}>
                     <p className={styles.big} data-reveal style={{ "--d": 100 } as CSSProperties}>
-                        Jestem magistrem dietetyki klinicznej i psychodietetyczką. Na co dzień pomagam kobietom wdrażać zmiany
-                        żywieniowe, dzięki którym czują się lepiej w swojej skórze.
+                        Jestem <Credential diploma={DIPLOMAS.clinical}>magistrem dietetyki klinicznej</Credential> oraz{" "}
+                        <Credential diploma={DIPLOMAS.psychodietetics}>psychodietetyczką</Credential>. Na co dzień pomagam
+                        kobietom wdrażać zmiany żywieniowe, aby lepiej czuły się w swojej skórze, uwzględniając ich zdrowie.
                     </p>
                     <p className={styles.small} data-reveal style={{ "--d": 220 } as CSSProperties}>
                         Wierzę w <span className="marker">małe kroki</span>, które prowadzą do trwałej zmiany i zauważalnych efektów.
-                        Bez zakazanych produktów, bez oceniania — z uważnością na to, jak naprawdę wygląda Twój dzień.
                     </p>
                     <p className={styles.sign} data-reveal style={{ "--d": 340 } as CSSProperties}>
                         <span>Kinga</span>

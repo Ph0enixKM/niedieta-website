@@ -58,7 +58,7 @@ export default function Navbar({ home = true }: Props) {
                 <Link
                     href="/"
                     className={styles.brand}
-                    aria-label="NieDieta — strona główna"
+                    aria-label="NieDieta - strona główna"
                     onClick={(e) => {
                         setOpen(false);
                         if (!home) return;

@@ -28,7 +28,7 @@ export default function Footer({ home = true, cta = true }: Props) {
                                 Zrób pierwszy <span className={styles.hand}>mały krok</span>.
                             </h2>
                             <p className={styles.ctaText} data-reveal>
-                                Resztę przejdziemy razem — w Twoim tempie.
+                                Resztę przejdziemy razem - w Twoim tempie.
                             </p>
                             <div className={styles.ctaButtons} data-reveal>
                                 <a href={href("#oferta")} className="btn btn-deep">
@@ -45,10 +45,10 @@ export default function Footer({ home = true, cta = true }: Props) {
 
                     <div className={cta ? styles.grid : `${styles.grid} ${styles.bare}`}>
                         <div className={styles.brand}>
-                            <Link href="/" aria-label="NieDieta — strona główna">
+                            <Link href="/" aria-label="NieDieta - strona główna">
                                 <Logo size="lg" />
                             </Link>
-                            <p>Dietetyka kliniczna i psychodietetyka bez restrykcji. Jedz normalnie, czuj się dobrze.</p>
+                            <p>Dietetyka kliniczna i psychodietetyka dopasowana do Ciebie. Jedz jak lubisz i czuj się dobrze.</p>
                         </div>
 
                         <nav aria-label="Na skróty">
@@ -92,7 +92,7 @@ export default function Footer({ home = true, cta = true }: Props) {
                             <a className={styles.mail} href={`mailto:${CONTACT_EMAIL}`}>
                                 {CONTACT_EMAIL}
                             </a>
-                            <p className={styles.small}>Konsultacje online — gdziekolwiek jesteś.</p>
+                            <p className={styles.small}>Konsultacje online - gdziekolwiek jesteś.</p>
                             <ArLink />
                         </div>
                     </div>

@@ -27,11 +27,11 @@
     max-width: 14ch;
 }
 
-/* ---------- the board: bricks of notes, four on top, three below ---------- */
+/* ---------- the board: three notes a row, the last row centred ---------- */
 
 .board {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: clamp(30px, 3.4vw, 48px) clamp(16px, 2vw, 28px);
     margin-top: clamp(44px, 5vw, 68px);
@@ -43,16 +43,8 @@
     perspective: 1100px;
 }
 
-.slot:nth-child(5) {
-    grid-column: 2 / span 2;
-}
-
-.slot:nth-child(6) {
-    grid-column: 4 / span 2;
-}
-
 .slot:nth-child(7) {
-    grid-column: 6 / span 2;
+    grid-column: 2 / span 2;
 }
 
 /* ---------- a note: glued along the top edge, the bottom is free to lift ---------- */
@@ -146,6 +138,8 @@
 
 .flipper {
     display: grid;
+    /* the faces never stretch the note: a long answer scrolls inside it instead */
+    grid-template-rows: minmax(0, 1fr);
     flex: 1;
     min-height: 0;
     aspect-ratio: 100 / 87;
@@ -193,7 +187,7 @@
 }
 
 /* fake bend: the glued top stays flat, the free part curves away from the light, a soft sheen rides the bend
-   and the bottom edge bows — gradients only, driven by the same --l / --swing the scroll springs write */
+   and the bottom edge bows - gradients only, driven by the same --l / --swing the scroll springs write */
 .face::after {
     content: "";
     position: absolute;
@@ -260,7 +254,7 @@
         var(--tone);
     border-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 50%) 0 0 / calc(5px + var(--bend) * 20px) calc(5px + var(--bend) * 20px) 0 0;
     /* the rolled fold: a straight, full-width edge at the hinge whose corners round out into a slight swell
-       around the back button, then straight again — the face is drawn wider and clipped to that silhouette */
+       around the back button, then straight again - the face is drawn wider and clipped to that silhouette */
     --bulge: clamp(7px, 0.8vw, 11px);
     width: calc(100% + 2 * var(--bulge));
     margin-inline: calc(-1 * var(--bulge));
@@ -329,7 +323,7 @@
     transform: scaleY(-1);
 }
 
-/* the buttons aren't stuck onto the notes: they're the paper itself, pushed up from behind — lit along the top rim,
+/* the buttons aren't stuck onto the notes: they're the paper itself, pushed up from behind - lit along the top rim,
    shaded under the bottom one. Pressing flattens the relief into a dent. */
 .emboss {
     color: inherit;
@@ -405,9 +399,25 @@
 }
 
 .answer {
+    display: grid;
+    align-content: start;
+    gap: 0.6em;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    /* the text fades out at the bottom edge, so it's clear there's more to scroll */
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
+    padding-bottom: 1.6em;
     font-size: 0.84rem;
     line-height: 1.52;
     text-wrap: pretty;
+}
+
+.answer::-webkit-scrollbar {
+    display: none;
 }
 
 .backButton {
@@ -459,21 +469,6 @@
 
 .askButton:hover svg {
     transform: translateX(3px);
-}
-
-/* three per row on tablets, the question note centred below */
-@media (max-width: 1100px) {
-    .board {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-
-    .slot:nth-child(n) {
-        grid-column: span 2;
-    }
-
-    .slot:nth-child(7) {
-        grid-column: 3 / span 2;
-    }
 }
 
 /* one column on phones, notes zig-zag left and right */

@@ -36,7 +36,7 @@ export function getEvent(now: Date): EventInfo {
 }
 
 /**
- * The page is statically generated, so the date is read after mount —
+ * The page is statically generated, so the date is read after mount -
  * otherwise the build date would decide which prices get server-rendered.
  */
 export function useEvent(): EventInfo {
