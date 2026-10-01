@@ -1,0 +1,272 @@
+.process {
+    position: relative;
+}
+
+.sticky {
+    padding: var(--section-space) 0;
+}
+
+.header {
+    max-width: 720px;
+}
+
+.sub {
+    margin-top: 16px;
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    color: var(--ink-soft);
+}
+
+.board {
+    position: relative;
+    margin-top: clamp(28px, 4vw, 48px);
+}
+
+.track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.line {
+    fill: none;
+    stroke: var(--berry);
+    stroke-opacity: 0.32;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-dasharray: 1.5 11;
+}
+
+.trail {
+    fill: none;
+    stroke: var(--sky-deep);
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 0 100000;
+    opacity: 0.9;
+}
+
+.dot {
+    fill: var(--cream);
+    stroke: var(--berry);
+    stroke-width: 2;
+    transition: fill 0.3s ease;
+}
+
+.dot[data-reached] {
+    fill: var(--berry);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(22px, 3vw, 48px);
+    padding-top: 150px;
+    padding-right: 40px;
+}
+
+.step {
+    position: relative;
+}
+
+.board[data-live] .step:not([data-reached]) {
+    opacity: 0.45;
+}
+
+.num {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--berry);
+}
+
+.num::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--sky);
+    transform: scale(0);
+    transition: transform 0.6s var(--ease-spring);
+}
+
+.step[data-reached] .num::before,
+:global(.berry-fallback) .num::before,
+html:not(:global(.js)) .num::before {
+    transform: scale(1);
+}
+
+.ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--berry);
+    overflow: visible;
+}
+
+.digit {
+    position: relative;
+    transform: translateY(-1px);
+}
+
+.step h3 {
+    margin-bottom: 10px;
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 1.55vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+}
+
+.step p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+}
+
+.goal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 110px;
+    margin: -60px 0 0 36px;
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    text-align: center;
+    color: var(--ink);
+    pointer-events: none;
+}
+
+.heart {
+    width: 44px;
+    height: 40px;
+    margin-bottom: 4px;
+    color: var(--berry);
+    overflow: visible;
+}
+
+.heart path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.9s var(--ease-in-out);
+}
+
+.goal span {
+    transition:
+        opacity 0.5s ease 0.4s,
+        transform 0.5s var(--ease-spring) 0.4s;
+}
+
+:global(.berry-live) .goal:not([data-reached]) .heart path {
+    stroke-dashoffset: 1;
+}
+
+:global(.berry-live) .goal:not([data-reached]) span {
+    opacity: 0;
+    transform: translateY(6px);
+    transition-delay: 0s;
+}
+
+/* narrow layouts: carries the 3D berry's canvas down the track; sticky holds it at the reading line,
+   so the berry glides with the page's own scrolling (see Berry/engine.ts → Roller) */
+.lane {
+    position: absolute;
+    left: 0;
+    width: 0;
+    pointer-events: none;
+}
+
+.rider {
+    position: sticky;
+    top: 55vh;
+    top: 55svh;
+    height: 0;
+}
+
+.goal[data-reached] .heart {
+    animation: beat 1.2s var(--ease-out) 0.5s;
+}
+
+@keyframes beat {
+    30% {
+        transform: scale(1.18);
+    }
+    55% {
+        transform: scale(0.96);
+    }
+}
+
+/* pinned desktop layout: the section scrolls "through" the berry's journey */
+@media (min-width: 900px) and (min-height: 660px) {
+    .process {
+        height: 290vh;
+    }
+
+    .sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: var(--nav-h) 0 24px;
+    }
+
+    .inner {
+        width: 100%;
+    }
+}
+
+/* vertical track on narrow screens */
+@media (max-width: 899px) {
+    .steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        padding: 8px 0 110px 64px;
+    }
+
+    .step {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+    }
+
+    .num {
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .step h3 {
+        margin-top: 10px;
+    }
+
+    .goalV {
+        flex-direction: row;
+        width: auto;
+        margin: 22px 0 0 -8px;
+        gap: 8px;
+        white-space: nowrap;
+    }
+
+    .goalV .heart {
+        width: 34px;
+        height: 32px;
+        margin: 0;
+    }
+}

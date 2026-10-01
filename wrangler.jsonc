@@ -1,0 +1,32 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "niedieta-website",
+    "main": ".open-next/worker.js",
+    "compatibility_date": "2026-09-01",
+    "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+    "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS"
+    },
+    "services": [
+        {
+            // lets the worker call itself (used by OpenNext for caching and revalidation)
+            "binding": "WORKER_SELF_REFERENCE",
+            "service": "niedieta-website"
+        }
+    ],
+    // next/image optimisation through Cloudflare Images
+    "images": {
+        "binding": "IMAGES"
+    },
+    "observability": {
+        "enabled": true
+    },
+    // Worker Previews (`wrangler preview`): service bindings aren't supported there, and the self-reference
+    // isn't needed since nothing revalidates
+    "previews": {
+        "images": {
+            "binding": "IMAGES"
+        }
+    }
+}

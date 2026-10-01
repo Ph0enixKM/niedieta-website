@@ -1,0 +1,190 @@
+.familiar {
+    position: relative;
+    color: var(--cream);
+}
+
+/* horizontal oak rails capping the vertical boards, lit from above */
+.beam {
+    position: relative;
+    z-index: 2;
+    height: clamp(26px, 2.6vw, 36px);
+    background:
+        /* lit top arris, shaded underside */
+        linear-gradient(rgba(255, 224, 192, 0.2), rgba(255, 224, 192, 0) 2px),
+        linear-gradient(transparent calc(100% - 3px), rgba(0, 0, 0, 0.5) calc(100% - 3px)),
+        linear-gradient(rgba(255, 224, 192, 0.05), rgba(0, 0, 0, 0.14)),
+        var(--oak-h) 0 0 / var(--oak-h-size),
+        var(--espresso);
+    box-shadow: 0 12px 16px -10px rgba(6, 3, 1, 0.8);
+}
+
+/* the bottom rail sits over the boards' ends, so it throws no shadow onto them */
+.base {
+    background-position: 0 0, 0 0, 0 0, -380px -170px;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.band {
+    --board-w: clamp(72px, 6.5vw, 92px);
+    position: relative;
+    background: var(--espresso);
+    padding: clamp(56px, 7vw, 96px) 0 clamp(72px, 8.5vw, 124px);
+    overflow: hidden;
+}
+
+/* vertical oak boards: a dark gap at every seam, each edge eased off - lit on the left, shaded on the right */
+.boards {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.boards > span {
+    flex: none;
+    width: var(--board-w);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.62) 0 1px,
+            rgba(255, 224, 192, 0.13) 1px 2.5px,
+            rgba(255, 224, 192, 0) 8px calc(100% - 11px),
+            rgba(0, 0, 0, 0.34) calc(100% - 1.5px),
+            rgba(0, 0, 0, 0.62) calc(100% - 1px)
+        ),
+        linear-gradient(rgba(10, 4, 1, var(--stain)), rgba(10, 4, 1, var(--stain))),
+        var(--oak-v) var(--grain-x) var(--grain-y) / var(--oak-v-size);
+}
+
+/* light falls from above: the fence dims towards its foot */
+.band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(80% 60% at 50% 0%, rgba(255, 214, 170, 0.07), rgba(255, 214, 170, 0) 70%),
+        linear-gradient(rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.26));
+    pointer-events: none;
+}
+
+.band > :global(.container) {
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    position: relative;
+    text-align: center;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+
+.cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 2.6vw, 36px);
+    margin-top: clamp(40px, 5vw, 64px);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 34px 28px 32px;
+    border-radius: 26px;
+    color: var(--ink);
+    background: var(--paper);
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.3),
+        0 30px 50px -30px rgba(6, 3, 1, 0.85);
+    rotate: var(--tilt);
+    height: 100%;
+    transition:
+        rotate 0.6s var(--ease-spring),
+        translate 0.6s var(--ease-spring),
+        box-shadow 0.4s ease;
+}
+
+.card:hover {
+    rotate: 0deg;
+    translate: 0 -6px;
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.24),
+        0 40px 60px -34px rgba(6, 3, 1, 0.9);
+}
+
+.card p {
+    font-family: var(--font-wide);
+    font-size: clamp(1.02rem, 1.3vw, 1.14rem);
+    line-height: 1.55;
+    text-wrap: pretty;
+}
+
+.tape {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    width: 86px;
+    height: 26px;
+    margin-left: -43px;
+    background: color-mix(in srgb, var(--cream) 84%, transparent);
+    border-left: 2px dotted rgba(28, 15, 8, 0.14);
+    border-right: 2px dotted rgba(28, 15, 8, 0.14);
+    transform: rotate(-4deg);
+    box-shadow: 0 2px 6px -3px rgba(6, 3, 1, 0.45);
+}
+
+li:nth-child(2) .tape {
+    transform: rotate(5deg);
+}
+
+.icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+}
+
+.icon > svg:last-child {
+    width: 40px;
+    height: 40px;
+}
+
+.ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--sky-deep);
+    overflow: visible;
+}
+
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 520px;
+        margin-inline: auto;
+        gap: 30px;
+    }
+
+    .card {
+        flex-direction: row;
+        align-items: center;
+        padding: 26px 22px;
+    }
+
+    .icon {
+        flex-shrink: 0;
+        width: 64px;
+        height: 64px;
+    }
+
+    .icon > svg:last-child {
+        width: 34px;
+        height: 34px;
+    }
+}

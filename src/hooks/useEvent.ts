@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 export type EventType = 'BlackWeek' | 'KingasBday' | 'None';
 
 export interface EventInfo {
@@ -7,8 +9,9 @@ export interface EventInfo {
     discount: number;
 }
 
-export function useEvent(): EventInfo {
-    const now = new Date();
+const NO_EVENT: EventInfo = { type: 'None', discount: 0 };
+
+export function getEvent(now: Date): EventInfo {
     const blackWeekBegin = new Date(now.getFullYear(), 10, 15); // November 15
     const blackWeekEnd = new Date(now.getFullYear(), 11, 24); // December 24
 
@@ -29,8 +32,19 @@ export function useEvent(): EventInfo {
         };
     }
 
-    return {
-        type: 'None',
-        discount: 0
-    };
+    return NO_EVENT;
+}
+
+/**
+ * The page is statically generated, so the date is read after mount -
+ * otherwise the build date would decide which prices get server-rendered.
+ */
+export function useEvent(): EventInfo {
+    const [event, setEvent] = useState<EventInfo>(NO_EVENT);
+
+    useEffect(() => {
+        setEvent(getEvent(new Date()));
+    }, []);
+
+    return event;
 }

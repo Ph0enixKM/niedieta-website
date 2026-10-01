@@ -29,8 +29,15 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deploy on Cloudflare Workers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site runs on Cloudflare Workers through the [OpenNext Cloudflare adapter](https://opennext.js.org/cloudflare).
+All pages are prerendered at build time and served from Workers static assets (`open-next.config.ts`);
+`next/image` is optimised by Cloudflare Images through the `IMAGES` binding (`wrangler.jsonc`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run preview   # build and run locally in the Workers runtime (workerd)
+npm run deploy    # build and deploy (run `npx wrangler login` once first)
+```
+
+After changing bindings in `wrangler.jsonc`, regenerate their types with `npm run cf-typegen`.

@@ -1,0 +1,147 @@
+.about {
+    position: relative;
+    padding: clamp(40px, 6vw, 80px) 0 var(--section-space);
+}
+
+.inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(40px, 7vw, 120px);
+}
+
+.greeting {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+.avatar {
+    position: relative;
+    width: clamp(112px, 12vw, 150px);
+    aspect-ratio: 1;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 18px 34px -22px rgba(28, 32, 54, 0.7);
+}
+
+.avatarRing {
+    position: absolute;
+    inset: -14%;
+    width: 128%;
+    height: 128%;
+    color: var(--ink);
+    overflow: visible;
+    transform: rotate(-12deg);
+}
+
+.hello {
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+    line-height: 1.25;
+    color: var(--ink);
+    transform: rotate(-3deg);
+    transform-origin: left center;
+}
+
+/* points from the greeting across to the text on the right */
+.arrow {
+    position: absolute;
+    right: -6%;
+    top: 40%;
+    width: clamp(70px, 8vw, 110px);
+    height: auto;
+    color: var(--sky-deep);
+    overflow: visible;
+    transform: rotate(-64deg);
+}
+
+.text {
+    max-width: 620px;
+}
+
+.big {
+    font-family: var(--font-wide);
+    font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: pretty;
+}
+
+.small {
+    margin-top: 22px;
+    font-size: 1.06rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    text-wrap: pretty;
+}
+
+/* written over the blue highlight, so it stays berry */
+.small :global(.marker) {
+    color: var(--berry);
+    font-weight: 500;
+}
+
+
+.sign {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 28px;
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: 1.7rem;
+    color: var(--ink);
+}
+
+.heart {
+    width: 34px;
+    height: 32px;
+    color: var(--sky-deep);
+    overflow: visible;
+    transform: rotate(8deg);
+}
+
+@media (max-width: 900px) {
+    .inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+    }
+
+    .greeting {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* her qualifications: underlined like a note in the margin, and a link to the diploma once one is set */
+.credential {
+    text-decoration: underline;
+    text-decoration-color: var(--sky-deep);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.2em;
+}
+
+.diploma {
+    color: inherit;
+    transition: text-decoration-color 0.3s ease, text-decoration-thickness 0.3s ease;
+}
+
+.diploma:hover {
+    text-decoration-thickness: 0.16em;
+}

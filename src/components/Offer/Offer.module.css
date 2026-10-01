@@ -1,92 +1,408 @@
-.outer {
-    max-width: 1200px;
-    margin: auto;
+.offer {
+    position: relative;
+    padding: var(--section-space) 0;
+}
 
-    .subscriptionWrapper {
-        padding: 2rem 4rem;
-        margin-top: 2rem;
-    }
+.header {
+    max-width: 780px;
+}
 
-    .title {
-        font-family: "DM Serif Display", serif;
-        font-size: 48px;
-        padding-left: 20px;
-        padding-top: 50px;
-        color: var(--text-color);
-        user-select: none;
-        cursor: default;
-    }
+.now {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: var(--hand-in-title);
+    line-height: 0.75;
+    letter-spacing: -0.055em;
+    vertical-align: -0.1em;
+    white-space: nowrap;
+    /* written over the blue highlight, so it stays berry */
+    color: var(--berry);
+}
 
-    .container {
-        --spacing: 2rem;
-        display: flex;
-        gap: var(--spacing);
-        background: var(--bg);
-        padding: var(--spacing);
-        margin: 4rem;
-        border-radius: 0.5rem;
-        position: relative;
-        overflow: hidden;
-        height: 25rem;
-        max-width: 70rem;
+.now::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -0.12em;
+    right: -0.12em;
+    top: 38%;
+    height: 0.5em;
+    border-radius: 0.2em;
+    background: color-mix(in srgb, var(--sky) 90%, transparent);
+    transform: rotate(-1.5deg);
+}
 
-        .show-more {
-            width: 100%;
-            height: 10rem;
-            background: var(--bg-dark);
-            mask-image: linear-gradient(transparent, var(--bg) calc(100% - 2rem));
-            backdrop-filter: blur(2px);
-            position: absolute;
-            bottom: 0;
+.sub {
+    margin-top: 16px;
+    color: var(--ink-soft);
+}
 
-            &::after {
-                content: "Pokaż Więcej";
-                display: inline-block;
-                position: absolute;
-                text-decoration: underline;
-                padding: 1rem;
-                border-radius: 0.5rem;
-                bottom: 0.5rem;
-                left: calc(50% - var(--spacing));
-                transform: translate(-50%, 0);
-            }
-        }
-    }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 30px);
+    margin-top: clamp(84px, 9vw, 120px);
+    align-items: stretch;
+}
 
-    .container.full {
-        height: unset;
+.cards > div {
+    display: flex;
+}
 
-        .show-more {
-            display: none;
-        }
-    }
+.card {
+    --surface: var(--paper);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 34px clamp(22px, 2.4vw, 34px) 30px;
+    border-radius: 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    transition:
+        translate 0.5s var(--ease-spring),
+        box-shadow 0.4s ease;
+}
 
+.card:hover {
+    translate: 0 -4px;
+}
+
+.featured {
+    /* a light key reads best on the dark card, lettered in the card's own berry */
+    --surface: var(--cream);
+    --ink: var(--berry);
+    margin-block: -20px;
+    padding-block: 54px 50px;
+    color: var(--cream);
+    background:
+        radial-gradient(120% 60% at 85% 0%, rgba(191, 207, 217, 0.22), transparent 60%),
+        radial-gradient(90% 50% at 0% 100%, rgba(191, 207, 217, 0.12), transparent 60%),
+        var(--berry);
+    border-color: transparent;
+    box-shadow: 0 50px 80px -46px rgba(28, 32, 54, 0.9);
+}
+
+.name {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(1.55rem, 2vw, 1.95rem);
+    line-height: 1.12;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+}
+
+.tagline {
+    margin-top: 12px;
+    font-size: 0.97rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    text-wrap: pretty;
+}
+
+.toggle {
+    --i: 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 22px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--cream-deep);
+}
+
+.toggle::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    border-radius: 999px;
+    background: var(--berry);
+    transform: translateX(calc(var(--i) * 100%));
+    transition: transform 0.5s var(--ease-spring);
+}
+
+.toggleOption {
+    position: relative;
+    z-index: 1;
+    min-height: 40px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    transition: color 0.3s ease;
+}
+
+.toggleOption[aria-checked="true"] {
+    color: var(--cream);
+}
+
+.price {
+    margin-top: 26px;
+}
+
+.variantName {
+    margin-top: 8px;
+    font-size: 0.84rem;
+    color: var(--ink-soft);
+}
+
+.features {
+    display: grid;
+    align-content: start;
+    gap: 11px;
+    flex: 1;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1.5px dashed rgba(28, 15, 8, 0.18);
+}
+
+.featured .features {
+    border-color: rgba(246, 240, 227, 0.22);
+}
+
+.features li {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    animation: feature-in 0.5s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 50ms);
+}
+
+.features svg {
+    width: 22px;
+    height: 22px;
+    padding: 3px;
+    border-radius: 50%;
+    color: var(--berry);
+    background: var(--sky-soft);
+    stroke-width: 2.4;
+}
+
+.featured .features svg {
+    background: var(--sky);
+}
+
+.fine {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+}
+
+.trial {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 12px 12px 12px 16px;
+    border-radius: 18px;
+    color: var(--berry);
+    background: var(--sky-soft);
+    font-size: 0.86rem;
+}
+
+.trial span {
+    flex: 1 1 100%;
+    font-weight: 500;
+}
+
+.trial a {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--paper);
+    font-weight: 600;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.trial a:hover {
+    background: var(--berry);
+    color: var(--cream);
+}
+
+.cta {
+    margin-top: 26px;
+}
+
+.card .topper {
+    position: absolute;
+    top: 0;
+    right: 13%;
+    width: 92px;
+    height: 92px;
+    transform: translateY(-100%);
+    pointer-events: none;
 }
 
 
-@media screen and (max-width: 800px) {
-    .outer {
-        .subscriptionWrapper {
-            padding: 1rem 2rem;
-            margin-top: 1rem;
-        }
+/* ---------- e-books: laid out on an espresso-stained oak board ---------- */
 
-        .container {
-            margin: 2rem;
-            padding: 0;
-            height: auto;
-            flex-direction: column;
-            background-color: transparent;
+.shelf {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 2fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
+    margin-top: clamp(64px, 7vw, 96px);
+    padding: clamp(24px, 3.2vw, 40px);
+    border-radius: 32px;
+    color: var(--cream);
+    background:
+        /* satin finish, lit from the top-left */
+        radial-gradient(90% 130% at 8% 0%, rgba(255, 224, 192, 0.11), rgba(255, 224, 192, 0) 60%),
+        linear-gradient(rgba(255, 224, 192, 0.03), rgba(0, 0, 0, 0.16)),
+        var(--oak-h) -240px -130px / var(--oak-h-size),
+        var(--espresso);
+    box-shadow:
+        /* eased edge: lit along the top, shaded along the bottom */
+        inset 0 1.5px 0 rgba(255, 224, 192, 0.2),
+        inset 0 3px 5px -2px rgba(255, 224, 192, 0.1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.4),
+        inset 0 -5px 8px -5px rgba(0, 0, 0, 0.45),
+        /* the board's thickness */
+        0 1px 0 #2c180d,
+        0 2.5px 0 #160b05,
+        0 4px 0 #0d0603,
+        /* contact and ambient shadow */
+        0 6px 5px -2px rgba(28, 15, 8, 0.3),
+        0 30px 44px -24px rgba(28, 15, 8, 0.4);
+}
 
-            .show-more {
-                display: none;
-            }
-        }
+.shelfTitle {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+}
 
-        .title {
-            font-size: 2.5rem;
-            text-align: center;
-            padding-left: 0;
-        }
+.shelfIntro p {
+    margin-top: 10px;
+    font-size: 0.96rem;
+    color: color-mix(in srgb, var(--cream) 74%, transparent);
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.book {
+    --surface: var(--paper);
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    padding: 14px 18px 14px 14px;
+    border-radius: 22px;
+    color: var(--ink);
+    background: var(--paper);
+    box-shadow:
+        0 2px 3px rgba(6, 3, 1, 0.3),
+        0 20px 30px -18px rgba(6, 3, 1, 0.75);
+}
+
+.cover {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 16px 30px -18px rgba(28, 32, 54, 0.6);
+    transform: rotate(-3deg);
+    transition: transform 0.5s var(--ease-spring);
+}
+
+.book:hover .cover {
+    transform: rotate(0deg) translateY(-4px) scale(1.04);
+}
+
+.cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.bookBody h4 {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+}
+
+.bookBody p {
+    margin-top: 4px;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+
+.bookFoot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* on the narrowest phones the label wraps rather than spilling off the card */
+.bookFoot :global(.btn) {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+}
+
+@keyframes feature-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+}
+
+@media (max-width: 1080px) {
+    .shelf {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .cards {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 560px;
+        margin-inline: auto;
+        gap: 60px;
+    }
+
+    .featured {
+        margin-block: 0;
+        padding-block: 40px 34px;
+    }
+
+    .books {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* phones: a slimmer frame and cover leave the buttons room for their labels */
+@media (max-width: 480px) {
+    .shelf {
+        padding: 22px 16px 16px;
+    }
+
+    .book {
+        grid-template-columns: 84px minmax(0, 1fr);
+        gap: 14px;
+        padding: 12px 14px 12px 12px;
     }
 }

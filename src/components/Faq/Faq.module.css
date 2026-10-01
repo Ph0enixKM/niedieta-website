@@ -1,0 +1,509 @@
+@property --peek {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+/* how bent the paper looks: the scroll springs write --l, hovering eases --hl in */
+@property --hl {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+.faq {
+    position: relative;
+    padding: calc(var(--section-space) * 0.5) 0 var(--section-space);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 40px;
+}
+
+.header :global(.h2) {
+    max-width: 14ch;
+}
+
+/* ---------- the board: three notes a row, the last row centred ---------- */
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: clamp(30px, 3.4vw, 48px) clamp(16px, 2vw, 28px);
+    margin-top: clamp(44px, 5vw, 68px);
+}
+
+.slot {
+    display: flex;
+    grid-column: span 2;
+    perspective: 1100px;
+}
+
+.slot:nth-child(7) {
+    grid-column: 2 / span 2;
+}
+
+/* ---------- a note: glued along the top edge, the bottom is free to lift ---------- */
+
+.note {
+    --tilt: 0deg;
+    --x: 0px;
+    --y: 0px;
+    --lift: 0deg;
+    --swing: 0deg;
+    --l: 0;
+    /* the resting curl every note has even when nothing moves (set per note in Faq.tsx) */
+    --rest-lift: 0deg;
+    --rest-bend: 0;
+    --rest-sway: 0deg;
+    --skew: 0;
+    --bend: max(calc(var(--l) + var(--rest-bend)), var(--hl));
+    --sway: calc(var(--swing) + var(--rest-sway));
+    --tone: var(--sky);
+    --ink: var(--berry);
+    /* the paper's shading: shadows take on --shade, highlights are white scaled by --sheen */
+    --shade: var(--berry);
+    --sheen: 1;
+    /* how the paper catches the light when it is pressed into relief (see .emboss) */
+    --emboss-hi: rgba(255, 255, 255, 0.8);
+    --emboss-lo: color-mix(in srgb, var(--shade) 22%, transparent);
+    --emboss-sheen: rgba(255, 255, 255, 0.22);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    color: var(--ink);
+    /* everything bends at the lower edge of the glued strip */
+    transform-origin: 50% 13%;
+    transform: translate(var(--x), var(--y)) rotate(var(--tilt)) rotate(var(--swing)) rotateX(calc(var(--rest-lift) + var(--lift) + var(--peek)));
+    filter: drop-shadow(0 calc(3px + var(--bend) * 16px) calc(4px + var(--bend) * 14px) rgba(28, 32, 54, calc(0.2 + var(--bend) * 0.1)));
+    transition:
+        --peek 0.45s var(--ease-spring),
+        --hl 0.45s var(--ease-spring);
+}
+
+.slot:hover .note:not(:has([data-flipped])) {
+    --peek: 16deg;
+    --hl: 0.7;
+}
+
+.sky {
+    --tone: var(--sky);
+}
+
+.soft {
+    --tone: var(--sky-soft);
+}
+
+/* the warm papers are written and shaded in espresso; the blue ones keep berry */
+.paper {
+    --tone: #fffaf0;
+    --ink: var(--espresso);
+    --shade: var(--espresso);
+}
+
+.sand {
+    --tone: var(--cream-deep);
+    --ink: var(--espresso);
+    --shade: var(--espresso);
+}
+
+/* dark espresso paper, written in cream */
+.espresso {
+    --tone: var(--espresso);
+    --ink: var(--cream);
+    --shade: #000;
+    --sheen: 0.3;
+    --emboss-hi: rgba(255, 236, 214, 0.2);
+    --emboss-lo: rgba(0, 0, 0, 0.6);
+    --emboss-sheen: rgba(255, 236, 214, 0.06);
+}
+
+/* the glued strip never moves: only the free part below it lifts, bends and flips */
+.glue {
+    flex: none;
+    aspect-ratio: 100 / 13;
+    border-radius: 3px 3px 0 0;
+    background:
+        linear-gradient(color-mix(in srgb, var(--shade) 5%, transparent), color-mix(in srgb, var(--shade) 5%, transparent)),
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.38 * var(--sheen))), transparent),
+        var(--grain),
+        var(--tone);
+}
+
+.flipper {
+    display: grid;
+    /* the faces never stretch the note: a long answer scrolls inside it instead */
+    grid-template-rows: minmax(0, 1fr);
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: 100 / 87;
+    transform-style: preserve-3d;
+    /* the note stays glued: it flips up over its top edge like a calendar page */
+    transform-origin: 50% 0;
+    transform: perspective(1200px) rotateX(0deg);
+    transition: transform 0.85s cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+
+.flipper[data-flipped] {
+    transform: perspective(1200px) rotateX(180deg);
+}
+
+/* a flipped note hangs over whatever sits above it (Faq.tsx keeps it raised until it has landed back) */
+.slot {
+    position: relative;
+}
+
+.slot[data-raised] {
+    z-index: 5;
+}
+
+.face {
+    grid-area: 1 / 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    min-width: 0;
+    padding: 12px 22px 18px;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    background:
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.3 * var(--sheen))), transparent 36%),
+        linear-gradient(to top, color-mix(in srgb, var(--shade) 8%, transparent), transparent 26%),
+        var(--grain),
+        var(--tone);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* fake bend: the glued top stays flat, the free part curves away from the light, a soft sheen rides the bend
+   and the bottom edge bows - gradients only, driven by the same --l / --swing the scroll springs write */
+.face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: min(1, calc(var(--bend) * 2.2));
+    /* right at the hinge the paper is still flat, so the shading eases in below it */
+    -webkit-mask-image: linear-gradient(transparent, #000 20%);
+    mask-image: linear-gradient(transparent, #000 20%);
+    background:
+        /* elliptical bands, so the sheen and the shadow follow the bowed free edge instead of cutting straight across */
+        radial-gradient(
+            ellipse 92% 100% at calc(50% + var(--sway) * 6) 0%,
+            transparent 0 16%,
+            rgba(255, 255, 255, calc(0.34 * var(--sheen))) 38%,
+            rgba(255, 255, 255, 0) 56%,
+            color-mix(in srgb, var(--shade) 16%, transparent) 80%,
+            color-mix(in srgb, var(--shade) 30%, transparent) 100%
+        ),
+        linear-gradient(
+            calc(90deg + var(--sway) * 8),
+            color-mix(in srgb, var(--shade) 13%, transparent),
+            transparent 30% 70%,
+            color-mix(in srgb, var(--shade) 13%, transparent)
+        );
+}
+
+.face {
+    /* --skew lets one corner curl a little more than the other */
+    border-bottom-left-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * (20px - var(--skew) * 9px));
+    border-bottom-right-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * (20px + var(--skew) * 9px));
+}
+
+.front {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.front:focus-visible,
+.backButton:focus-visible,
+.askButton:focus-visible {
+    outline: 2.5px solid var(--ink);
+    outline-offset: 4px;
+}
+
+.back {
+    transform: rotateX(180deg);
+    /* seen from behind, the glued edge is now at the bottom and the free edge bows at the top */
+    background:
+        /* the fold never creases flat: the paper rolls over the hinge, lit on the crown of the roll, shaded where it tucks under */
+        linear-gradient(
+            to top,
+            color-mix(in srgb, var(--shade) 26%, transparent),
+            color-mix(in srgb, var(--shade) 8%, transparent) 4%,
+            rgba(255, 255, 255, calc(0.34 * var(--sheen))) 9%,
+            rgba(255, 255, 255, 0) 17%,
+            color-mix(in srgb, var(--shade) 6%, transparent) 22%,
+            transparent 30%
+        ),
+        linear-gradient(8deg, rgba(255, 255, 255, calc(0.3 * var(--sheen))), transparent 36%),
+        linear-gradient(color-mix(in srgb, var(--shade) 8%, transparent), transparent 26%),
+        var(--grain),
+        var(--tone);
+    border-radius: calc(5px + var(--bend) * 50%) calc(5px + var(--bend) * 50%) 0 0 / calc(5px + var(--bend) * 20px) calc(5px + var(--bend) * 20px) 0 0;
+    /* the rolled fold: a straight, full-width edge at the hinge whose corners round out into a slight swell
+       around the back button, then straight again - the face is drawn wider and clipped to that silhouette */
+    --bulge: clamp(7px, 0.8vw, 11px);
+    width: calc(100% + 2 * var(--bulge));
+    margin-inline: calc(-1 * var(--bulge));
+    padding-inline: calc(22px + var(--bulge));
+    clip-path: polygon(
+        var(--bulge) 0%,
+        var(--bulge) 30%,
+        calc(var(--bulge) * 0.976) 35.6%,
+        calc(var(--bulge) * 0.905) 41.2%,
+        calc(var(--bulge) * 0.794) 46.8%,
+        calc(var(--bulge) * 0.655) 52.4%,
+        calc(var(--bulge) * 0.5) 58%,
+        calc(var(--bulge) * 0.345) 63.6%,
+        calc(var(--bulge) * 0.206) 69.2%,
+        calc(var(--bulge) * 0.095) 74.8%,
+        calc(var(--bulge) * 0.024) 80.4%,
+        0px 86%,
+        calc(var(--bulge) * 0.005) 87.37%,
+        calc(var(--bulge) * 0.019) 88.73%,
+        calc(var(--bulge) * 0.043) 90.06%,
+        calc(var(--bulge) * 0.076) 91.36%,
+        calc(var(--bulge) * 0.118) 92.6%,
+        calc(var(--bulge) * 0.169) 93.78%,
+        calc(var(--bulge) * 0.227) 94.88%,
+        calc(var(--bulge) * 0.293) 95.9%,
+        calc(var(--bulge) * 0.366) 96.82%,
+        calc(var(--bulge) * 0.444) 97.64%,
+        calc(var(--bulge) * 0.529) 98.35%,
+        calc(var(--bulge) * 0.617) 98.93%,
+        calc(var(--bulge) * 0.71) 99.4%,
+        calc(var(--bulge) * 0.805) 99.73%,
+        calc(var(--bulge) * 0.902) 99.93%,
+        var(--bulge) 100%,
+        calc(100% - var(--bulge)) 100%,
+        calc(100% - var(--bulge) * 0.902) 99.93%,
+        calc(100% - var(--bulge) * 0.805) 99.73%,
+        calc(100% - var(--bulge) * 0.71) 99.4%,
+        calc(100% - var(--bulge) * 0.617) 98.93%,
+        calc(100% - var(--bulge) * 0.529) 98.35%,
+        calc(100% - var(--bulge) * 0.444) 97.64%,
+        calc(100% - var(--bulge) * 0.366) 96.82%,
+        calc(100% - var(--bulge) * 0.293) 95.9%,
+        calc(100% - var(--bulge) * 0.227) 94.88%,
+        calc(100% - var(--bulge) * 0.169) 93.78%,
+        calc(100% - var(--bulge) * 0.118) 92.6%,
+        calc(100% - var(--bulge) * 0.076) 91.36%,
+        calc(100% - var(--bulge) * 0.043) 90.06%,
+        calc(100% - var(--bulge) * 0.019) 88.73%,
+        calc(100% - var(--bulge) * 0.005) 87.37%,
+        100% 86%,
+        calc(100% - var(--bulge) * 0.024) 80.4%,
+        calc(100% - var(--bulge) * 0.095) 74.8%,
+        calc(100% - var(--bulge) * 0.206) 69.2%,
+        calc(100% - var(--bulge) * 0.345) 63.6%,
+        calc(100% - var(--bulge) * 0.5) 58%,
+        calc(100% - var(--bulge) * 0.655) 52.4%,
+        calc(100% - var(--bulge) * 0.794) 46.8%,
+        calc(100% - var(--bulge) * 0.905) 41.2%,
+        calc(100% - var(--bulge) * 0.976) 35.6%,
+        calc(100% - var(--bulge)) 30%,
+        calc(100% - var(--bulge)) 0%
+    );
+}
+
+.back::after {
+    transform: scaleY(-1);
+}
+
+/* the buttons aren't stuck onto the notes: they're the paper itself, pushed up from behind - lit along the top rim,
+   shaded under the bottom one. Pressing flattens the relief into a dent. */
+.emboss {
+    color: inherit;
+    background: linear-gradient(var(--emboss-sheen), transparent 75%);
+    box-shadow:
+        inset 0 1px 0.5px var(--emboss-hi),
+        inset 0 -1px 1px var(--emboss-lo),
+        0 1px 1px var(--emboss-lo),
+        0 3px 6px -3px var(--emboss-lo);
+    transition: box-shadow 0.3s ease;
+}
+
+.emboss:hover,
+.front:hover .emboss {
+    box-shadow:
+        inset 0 1.5px 0.5px var(--emboss-hi),
+        inset 0 -1.5px 1.5px var(--emboss-lo),
+        0 1.5px 1.5px var(--emboss-lo),
+        0 6px 10px -4px var(--emboss-lo);
+}
+
+.emboss:active,
+.front:active .emboss {
+    box-shadow:
+        inset 0 1.5px 2px var(--emboss-lo),
+        inset 0 -1px 0.5px var(--emboss-hi),
+        0 0 0 transparent,
+        0 0 0 transparent;
+}
+
+.question {
+    font-family: var(--font-hand);
+    font-size: clamp(1.45rem, 1.95vw, 1.8rem);
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+.flipIcon {
+    display: grid;
+    place-items: center;
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition:
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* it has done its job once the note is flipped; it fades back in after the note has landed again */
+.flipper[data-flipped] .flipIcon {
+    opacity: 0;
+}
+
+.flipper:not([data-flipped]) .flipIcon {
+    transition-delay: 0s, 0.6s;
+}
+
+/* only the arrows turn: spinning the whole relief would swing its lighting round with it */
+.flipIcon svg {
+    transition: transform 0.55s var(--ease-spring);
+}
+
+.front:hover .flipIcon svg {
+    transform: rotate(180deg);
+}
+
+.flipIcon svg,
+.backButton svg {
+    width: 17px;
+    height: 17px;
+}
+
+.answer {
+    display: grid;
+    align-content: start;
+    gap: 0.6em;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    /* the text fades out at the bottom edge, so it's clear there's more to scroll */
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 2.4em), transparent);
+    padding-bottom: 1.6em;
+    font-size: 0.84rem;
+    line-height: 1.52;
+    text-wrap: pretty;
+}
+
+.answer::-webkit-scrollbar {
+    display: none;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: center;
+    padding: 6px 12px 6px 9px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.askFace {
+    flex: 1;
+    aspect-ratio: 100 / 87;
+    justify-content: center;
+    gap: 22px;
+    background:
+        linear-gradient(172deg, rgba(255, 255, 255, calc(0.4 * var(--sheen))), transparent 42%),
+        var(--grain),
+        var(--tone);
+}
+
+.askTitle {
+    font-family: var(--font-hand);
+    font-size: clamp(1.7rem, 2.3vw, 2.1rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.askButton {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: 0.65em;
+    min-height: 48px;
+    padding: 0 1.45em;
+    border-radius: 999px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.askButton svg {
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.askButton:hover svg {
+    transform: translateX(3px);
+}
+
+/* one column on phones, notes zig-zag left and right */
+@media (max-width: 700px) {
+    .board {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: auto;
+        gap: 34px;
+    }
+
+    .slot:nth-child(n) {
+        grid-column: auto;
+        width: min(100%, 330px);
+    }
+
+    .slot:nth-child(odd) {
+        justify-self: start;
+    }
+
+    .slot:nth-child(even) {
+        justify-self: end;
+    }
+
+    .flipper,
+    .askFace {
+        aspect-ratio: 100 / 67;
+    }
+
+    .note {
+        transform-origin: 50% 16%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flipper {
+        transition: none;
+    }
+}

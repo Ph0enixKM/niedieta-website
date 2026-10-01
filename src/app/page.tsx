@@ -1,19 +1,33 @@
-import Jumbotron from "@/components/Jumbotron/Jumbotron";
-import BlackWeekBanner from "@/components/BlackWeekBanner/BlackWeekBanner";
-import ValentinesCard from "@/components/ValentinesCard/ValentinesCard";
-import Offer from "@/components/Offer/Offer";
+import About from "@/components/About/About";
+import Approach from "@/components/Approach/Approach";
+import BerryStage from "@/components/Berry/BerryStage";
+import Familiar from "@/components/Familiar/Familiar";
+import Faq from "@/components/Faq/Faq";
+import Footer from "@/components/Footer/Footer";
+import Hero from "@/components/Hero/Hero";
 import Navbar from "@/components/Navbar/Navbar";
-import Store from "@/components/Store/Store";
+import Offer from "@/components/Offer/Offer";
+import Process from "@/components/Process/Process";
+import PromoBanner from "@/components/PromoBanner/PromoBanner";
+import Stories from "@/components/Stories/Stories";
 
 export default function Home() {
     return (
-		<div className="container">
-			<Navbar />
-			<Jumbotron />
-			<BlackWeekBanner />
-			{/* <ValentinesCard /> */}
-			<Offer />
-			<Store />
-		</div>
+        <>
+            <Navbar />
+            <main>
+                <Hero />
+                <About />
+                <Familiar />
+                <Approach />
+                <Process />
+                <Stories />
+                <Offer />
+                <Faq />
+            </main>
+            <Footer />
+            <PromoBanner />
+            <BerryStage />
+        </>
     );
 }

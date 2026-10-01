@@ -1,0 +1,244 @@
+/* a blue surface, so it keeps berry ink */
+.footer {
+    --ink: var(--berry);
+    position: relative;
+    color: var(--ink);
+}
+
+.edge {
+    display: block;
+    width: 100%;
+    height: clamp(26px, 3.4vw, 48px);
+    background: var(--sky) var(--grain);
+}
+
+.body {
+    margin-top: -1px;
+    background: var(--sky) var(--grain);
+    overflow: hidden;
+}
+
+/* ---------- closing call to action ---------- */
+
+.cta {
+    padding: clamp(44px, 7vw, 100px) 0 clamp(56px, 7vw, 96px);
+    text-align: center;
+}
+
+.ctaTitle {
+    font-family: var(--font-title);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+}
+
+.hand {
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: var(--hand-in-title);
+    line-height: 0.75;
+    letter-spacing: -0.055em;
+    vertical-align: -0.1em;
+    white-space: nowrap;
+}
+
+.ctaText {
+    margin-top: 16px;
+    font-size: 1.1rem;
+    color: var(--berry-soft);
+}
+
+.ctaButtons {
+    --surface: var(--sky);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 14px;
+    margin-top: 32px;
+}
+
+/* ---------- columns ---------- */
+
+/* without the call to action the columns open the footer, so they need no rule above them */
+.grid.bare {
+    border-top: 0;
+    padding-top: clamp(28px, 4vw, 48px);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.3fr);
+    gap: 36px;
+    padding: 44px 0 40px;
+    border-top: 1.5px dashed rgba(41, 46, 76, 0.25);
+}
+
+.brand p {
+    max-width: 30ch;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--berry-soft);
+}
+
+.colTitle {
+    margin-bottom: 16px;
+    font-family: var(--font-wide);
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    opacity: 0.72;
+}
+
+.links {
+    display: grid;
+    gap: 8px;
+}
+
+.links a {
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.links a:hover {
+    text-decoration-color: var(--berry);
+}
+
+.socials {
+    display: grid;
+    gap: 12px;
+}
+
+.socials a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.socials small {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.72;
+}
+
+.socialIcon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--cream);
+    transition:
+        transform 0.45s var(--ease-spring),
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+.socialIcon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.socials a:hover .socialIcon {
+    transform: rotate(-10deg) scale(1.08);
+    background: var(--berry);
+    color: var(--cream);
+}
+
+.mail {
+    font-weight: 600;
+    word-break: break-word;
+    text-decoration: underline;
+    text-decoration-color: rgba(41, 46, 76, 0.35);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+.mail:hover {
+    text-decoration-color: var(--berry);
+}
+
+.small {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    opacity: 0.75;
+}
+
+.ar,
+.arAndroid {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 6px 16px 6px 6px;
+    border-radius: 999px;
+    background: var(--cream);
+    font-size: 0.86rem;
+    font-weight: 600;
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.ar:hover,
+.arAndroid:hover {
+    transform: translateY(-2px);
+}
+
+.ar img {
+    width: 32px;
+    height: 32px;
+}
+
+.ar::after {
+    content: attr(data-label);
+}
+
+.arAndroid {
+    padding-left: 12px;
+}
+
+.arAndroid svg {
+    width: 22px;
+    height: 22px;
+}
+
+.legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 20px;
+    padding: 18px 0 max(28px, env(safe-area-inset-bottom));
+    border-top: 1.5px dashed rgba(41, 46, 76, 0.25);
+    font-size: 0.84rem;
+    opacity: 0.78;
+}
+
+.legal a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+    }
+
+    .legal {
+        flex-direction: column;
+    }
+}

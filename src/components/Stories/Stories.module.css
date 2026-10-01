@@ -1,0 +1,146 @@
+.stories {
+    position: relative;
+    padding: var(--section-space) 0 calc(var(--section-space) * 0.6);
+}
+
+.title {
+    max-width: 16ch;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2.6vw, 36px);
+    margin-top: clamp(40px, 5vw, 64px);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px 28px 28px;
+    border-radius: 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    rotate: var(--tilt);
+    transition:
+        rotate 0.6s var(--ease-spring),
+        translate 0.6s var(--ease-spring),
+        box-shadow 0.4s ease;
+    box-shadow: 0 30px 50px -40px rgba(28, 32, 54, 0.5);
+}
+
+.card:hover {
+    rotate: 0deg;
+    translate: 0 -6px;
+}
+
+.quoteMark {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 54px;
+    margin-bottom: 18px;
+    font-family: var(--font-wide);
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 1;
+    color: var(--berry);
+}
+
+.quoteMark span {
+    position: relative;
+    transform: translateY(8px);
+}
+
+.quoteBlob {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--sky);
+}
+
+.quote {
+    font-family: var(--font-wide);
+    font-size: 1.04rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+    white-space: pre-line;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.quote[data-open] {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: none;
+}
+
+.more {
+    align-self: flex-start;
+    margin: -12px 0 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+.more:hover {
+    color: var(--ink-soft);
+}
+
+.card figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1.5px dashed rgba(28, 15, 8, 0.2);
+}
+
+.name {
+    font-family: var(--font-hand);
+    font-weight: 400;
+    font-size: 1.35rem;
+}
+
+.context {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+}
+
+.placeholder {
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #fff3c4;
+    border: 1px dashed #b89a2f;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6b5610;
+}
+
+@media (max-width: 900px) {
+    .list {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 560px;
+    }
+}
