@@ -49,7 +49,7 @@ const handFallback = localFont({
 });
 
 const description =
-    "Dietetyczka kliniczna i psychodietetyczka Kinga Sobańska. Pomogę Ci lepiej poczuć się w swojej skórze - małymi krokami, z uwzględnieniem Twojego zdrowia. Konsultacje online, 8-tygodniowa współpraca, plany posiłków w aplikacji i e-booki.";
+    "Dietetyczka kliniczna i psychodietetyczka Kinga Sobańska. Pomogę Ci lepiej poczuć się w swojej skórze - małymi krokami, z uwzględnieniem Twojego zdrowia. Konsultacje online, 3-miesięczna współpraca, plany posiłków w aplikacji i e-booki.";
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://niedieta.pl"),

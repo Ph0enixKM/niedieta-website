@@ -32,7 +32,7 @@ export default function Offer() {
                                 {PROGRAM.name}
                             </h3>
                             <p className={styles.tagline}>{PROGRAM.tagline}</p>
-                            <Price amount={PROGRAM.price} period="za 8 tygodni" className={styles.price} />
+                            <Price amount={PROGRAM.price} period="za 3 miesiące" className={styles.price} />
                             <ul className={styles.features}>
                                 {PROGRAM.features.map((feature) => (
                                     <li key={feature}>
@@ -77,13 +77,13 @@ export default function Offer() {
                 </div>
 
                 <div className={styles.shelf} data-reveal>
-                    <div className={styles.shelfIntro}>
+                    <div className={styles.shelfIntro} data-reveal style={{ "--d": 120 } as CSSProperties}>
                         <h3 className={styles.shelfTitle}>E-booki</h3>
                         <p>Przepisy, które ułatwiają codzienność - do pobrania od razu.</p>
                     </div>
                     <ul className={styles.books}>
-                        {EBOOKS.map((book) => (
-                            <li key={book.title} className={styles.book}>
+                        {EBOOKS.map((book, i) => (
+                            <li key={book.title} className={styles.book} data-reveal style={{ "--d": 80 + i * 140 } as CSSProperties}>
                                 <a href={book.href} className={styles.cover} aria-label={`${book.title} - zobacz e-book`}>
                                     <Image src={book.cover} alt="" width={905} height={1280} sizes="120px" />
                                 </a>

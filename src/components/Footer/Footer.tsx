@@ -101,9 +101,14 @@ export default function Footer({ home = true, cta = true }: Props) {
                         <span>
                             © {year} NieDieta · Kinga Sobańska
                         </span>
-                        <a href="/policy.pdf" target="_blank" rel="noopener">
-                            Polityka prywatności
-                        </a>
+                        <span className={styles.legalLinks}>
+                            <a href="https://www.naffy.io/niedieta/terms" target="_blank" rel="noopener noreferrer">
+                                Regulamin
+                            </a>
+                            <a href="https://www.naffy.io/niedieta/privacy" target="_blank" rel="noopener noreferrer">
+                                Polityka prywatności
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>

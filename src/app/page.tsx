@@ -1,5 +1,6 @@
 import About from "@/components/About/About";
 import Approach from "@/components/Approach/Approach";
+import Avodiet from "@/components/Avodiet/Avodiet";
 import BerryStage from "@/components/Berry/BerryStage";
 import Familiar from "@/components/Familiar/Familiar";
 import Faq from "@/components/Faq/Faq";
@@ -23,6 +24,7 @@ export default function Home() {
                 <Process />
                 <Stories />
                 <Offer />
+                <Avodiet />
                 <Faq />
             </main>
             <Footer />

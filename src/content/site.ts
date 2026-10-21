@@ -116,49 +116,47 @@ export interface OfferVariant {
     note?: string;
 }
 
+const CONSULTATION_FEATURES = [
+    "Pogłębiony wywiad o zdrowiu i stylu życia",
+    "Analiza problemów i omówienie celów",
+    "Indywidualny plan zmiany",
+    "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
+];
+
 export const CONSULTATION: OfferVariant[] = [
     {
         id: "konsultacja",
         label: "Sama konsultacja",
         name: "Konsultacja dietetyczna i psychodietetyczna",
-        price: 100,
+        price: 150,
         href: NAFFY.consultation,
         cta: "Umawiam konsultację",
-        features: [
-            "Pogłębiony wywiad o zdrowiu i stylu życia",
-            "Analiza problemów i omówienie celów",
-            "Indywidualny plan zmiany",
-            "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
-        ],
+        features: CONSULTATION_FEATURES,
         note: "Konsultacja nie obejmuje jadłospisu.",
     },
     {
         id: "konsultacja-jadlospis",
-        label: "+ jadłospis",
+        label: "Z planem żywieniowym",
         name: "Konsultacja + indywidualny 7-dniowy plan żywieniowy",
-        price: 300,
+        price: 350,
         href: NAFFY.consultationPlan,
         cta: "Wybieram pakiet",
-        features: [
-            "Konsultacja online: Twoje potrzeby i cele",
-            "7-dniowy jadłospis dopasowany do Twoich preferencji",
-            "Plan w PDF i w aplikacji w ciągu 3 dni",
-            "Praktyczne wskazówki: zakupy i przygotowanie posiłków",
-        ],
+        features: [...CONSULTATION_FEATURES, "Plan żywieniowy dopasowany do Twoich preferencji"],
     },
 ];
 
 export const PROGRAM = {
-    name: "8-tygodniowa metamorfoza",
+    name: "3-miesięczna metamorfoza",
     tagline: "Uporządkuj jedzenie, popraw wyniki i zadbaj o masę ciała - małymi krokami, ze stałym wsparciem.",
-    price: 899,
+    price: 799,
     href: NAFFY.program,
     features: [
         "Konsultacja startowa online",
+        "Indywidualny 7-dniowy jadłospis na start",
         "Analiza wyników badań, stylu życia i nawyków",
         "Indywidualny plan działania i spersonalizowane zalecenia",
         "Praktyczne porady: posiłki i radzenie sobie z zachciankami",
-        "2 konsultacje kontrolne",
+        "3 konsultacje kontrolne",
         "Aplikacja z przepisami, monitoringiem i czatem",
         "Stały kontakt między spotkaniami",
         "Podsumowanie i plan na dalszą drogę",
@@ -178,6 +176,26 @@ export const APP = {
         "Cotygodniowe raporty postępów",
     ],
 } as const;
+
+// The app clients and I keep in touch through (not to be confused with APP, the self-serve meal plan offer)
+export const AVODIET = {
+    photo: { src: "/avodiet-app.webp", width: 1000, height: 1778 },
+    // shown as messages from Kinga in a chat window
+    messages: [
+        {
+            title: "Czat ze mną",
+            text: "Piszesz, kiedy pojawi się pytanie, wątpliwość albo gorszy dzień - nie musisz czekać do kolejnego spotkania.",
+        },
+        {
+            title: "Twój plan żywieniowy",
+            text: "Jeśli wybierzesz konsultację z planem żywieniowym lub 3‑miesięczną współpracę, plan czeka na Ciebie właśnie tutaj.",
+        },
+        {
+            title: "Baza posiłków",
+            text: "Razem z planem dostajesz dostęp do zbilansowanych i smacznych przepisów - na dni, gdy masz ochotę na coś nowego.",
+        },
+    ],
+};
 
 export const EBOOKS = [
     {
@@ -218,7 +236,7 @@ export const FAQ = [
         q: "Jak wyglądają spotkania?",
         a: [
             "Spotykamy się online, dlatego zawsze sugeruję, aby to było miejsce, w którym czujesz się komfortowo. Rozmawiamy o Twoich celach, stylu życia, drodze, którą przebyłaś, i o miejscu, w którym się teraz znajdujesz - wszystko w spokojnej atmosferze i bez oceniania.",
-            "W przypadku 8-tygodniowej współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
+            "W przypadku 3-miesięcznej współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
             "W przypadku jednorazowych konsultacji nie zostawiam Cię samej - jesteśmy w kontakcie przez miesiąc od wizyty, więc w przypadku pojawienia się jakichkolwiek wątpliwości jestem pod telefonem.",
         ],
     },
@@ -237,7 +255,7 @@ export const FAQ = [
     {
         q: "Nie wiem, którą opcję wybrać - co zrobić?",
         a: [
-            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz 8-tygodniową współpracę.",
+            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz dłuższą współpracę.",
             "A jeśli wolisz działać samodzielnie, ale szukasz inspiracji na zbilansowane zdrowe posiłki i chcesz otrzymywać sezonowe plany żywieniowe co 2 tygodnie, sprawdź NieDietę w Apce - 3 dni próbnego jadłospisu możesz przetestować za darmo.",
             "Jeżeli nadal masz wątpliwości - napisz do mnie, pomogę Ci dobrać opcję, która będzie dla Ciebie odpowiednia.",
         ],

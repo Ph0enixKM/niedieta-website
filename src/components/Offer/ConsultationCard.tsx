@@ -7,8 +7,8 @@ import { CONSULTATION } from "@/content/site";
 import styles from "./Offer.module.css";
 
 export default function ConsultationCard() {
-    const [index, setIndex] = useState(0);
-    const variant = CONSULTATION[index];
+    const [withPlan, setWithPlan] = useState(false);
+    const variant = CONSULTATION[withPlan ? 1 : 0];
 
     return (
         <article className={styles.card} aria-labelledby="oferta-konsultacja">
@@ -17,25 +17,19 @@ export default function ConsultationCard() {
             </h3>
             <p className={styles.tagline}>Gdy potrzebujesz kierunku i planu zmiany dopasowanego do Ciebie.</p>
 
-            <div className={styles.toggle} role="radiogroup" aria-label="Wariant konsultacji" style={{ "--i": index } as CSSProperties}>
-                {CONSULTATION.map((option, i) => (
-                    <button
-                        key={option.id}
-                        type="button"
-                        role="radio"
-                        aria-checked={i === index}
-                        className={styles.toggleOption}
-                        onClick={() => setIndex(i)}
-                    >
-                        {option.label}
-                    </button>
-                ))}
-            </div>
+            <label className={styles.addon}>
+                <input type="checkbox" checked={withPlan} onChange={(event) => setWithPlan(event.target.checked)} />
+                <span className={styles.addonBox} aria-hidden="true">
+                    <CheckIcon />
+                </span>
+                <span className={styles.addonLabel}>{CONSULTATION[1].label}</span>
+                <span className={styles.addonDelta}>+{CONSULTATION[1].price - CONSULTATION[0].price} zł</span>
+            </label>
 
             <Price amount={variant.price} className={styles.price} />
             <p className={styles.variantName}>{variant.name}</p>
 
-            <ul className={styles.features} key={variant.id}>
+            <ul className={styles.features}>
                 {variant.features.map((feature, i) => (
                     <li key={feature} style={{ "--i": i } as CSSProperties}>
                         <CheckIcon />

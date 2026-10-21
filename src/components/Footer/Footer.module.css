@@ -222,6 +222,12 @@
     opacity: 0.78;
 }
 
+.legalLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
 .legal a:hover {
     text-decoration: underline;
 }
