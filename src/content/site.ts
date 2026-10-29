@@ -95,7 +95,6 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const NAFFY = {
     store: "https://www.naffy.io/niedieta",
-    consultationPlan: "https://www.naffy.io/niedieta/konsultacja-indywidualny-7-dniowy-plan-zywieniowy-olw",
     cooperation1: "https://www.naffy.io/niedieta/1-miesiac-kem",
     cooperation3: "https://www.naffy.io/niedieta/3-miesiace-mvx",
     cooperation6: "https://www.naffy.io/niedieta/6-miesiecy-1vi",
@@ -104,22 +103,6 @@ export const NAFFY = {
     appTrialVege: "https://www.naffy.io/niedieta/3-dni-posilkow-z-apki-na-probe-wersja-wege-yQs",
     ebookBreakfasts: "https://www.naffy.io/niedieta/sniadania-14o",
     ebookBagels: "https://www.naffy.io/niedieta/bajgle-dSd",
-} as const;
-
-export const CONSULTATION = {
-    name: "Konsultacja",
-    tagline: "Gdy potrzebujesz kierunku i planu zmiany dopasowanego do Ciebie.",
-    variantName: "Konsultacja + indywidualny 7-dniowy plan żywieniowy",
-    price: 350,
-    href: NAFFY.consultationPlan,
-    cta: "Umawiam konsultację",
-    features: [
-        "Pogłębiony wywiad o zdrowiu i stylu życia",
-        "Analiza problemów i omówienie celów",
-        "Indywidualny plan zmiany",
-        "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
-        "7-dniowy plan żywieniowy dopasowany do Twoich preferencji",
-    ],
 } as const;
 
 export interface CooperationVariant {
@@ -227,7 +210,7 @@ export const AVODIET = {
         },
         {
             title: "Twój plan żywieniowy",
-            text: "Jeśli wybierzesz konsultację z planem żywieniowym lub współpracę dietetyczną, plan czeka na Ciebie właśnie tutaj.",
+            text: "Jeśli wybierzesz współpracę dietetyczną, plan czeka na Ciebie właśnie tutaj.",
         },
         {
             title: "Baza posiłków",
@@ -260,8 +243,7 @@ export const FAQ = [
     {
         q: "Czy dostanę gotowy jadłospis?",
         a: [
-            "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz po konsultacji - w PDF i w aplikacji, w ciągu 3 dni od spotkania. Wówczas na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
-            "We współpracy dietetycznej (1, 3 lub 6 miesięcy) indywidualny jadłospis przygotowuję wtedy, gdy wspólnie uznamy, że jest Ci potrzebny - przy dłuższej współpracy aktualizuję go co 31\u00a0dni.",
+            "Jeśli wspólnie uznamy, że jest Ci potrzebny - tak. Indywidualny 7-dniowy jadłospis otrzymasz w PDF i w aplikacji, w ciągu 3 dni roboczych od pierwszej konsultacji, a przy współpracy na 3 lub 6 miesięcy aktualizuję go co 31\u00a0dni. Na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
             "Gotowe plany posiłków, odświeżane co dwa tygodnie, znajdziesz też w NieDiecie w Apce.",
         ],
     },
@@ -275,8 +257,7 @@ export const FAQ = [
         q: "Jak wyglądają spotkania?",
         a: [
             "Spotykamy się online, dlatego zawsze sugeruję, aby to było miejsce, w którym czujesz się komfortowo. Rozmawiamy o Twoich celach, stylu życia, drodze, którą przebyłaś, i o miejscu, w którym się teraz znajdujesz - wszystko w spokojnej atmosferze i bez oceniania.",
-            "W przypadku współpracy na 1, 3 lub 6 miesięcy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
-            "W przypadku jednorazowych konsultacji nie zostawiam Cię samej - jesteśmy w kontakcie przez miesiąc od wizyty, więc w przypadku pojawienia się jakichkolwiek wątpliwości jestem pod telefonem.",
+            "Przez cały czas współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
         ],
     },
     {
@@ -294,7 +275,7 @@ export const FAQ = [
     {
         q: "Nie wiem, którą opcję wybrać - co zrobić?",
         a: [
-            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz współpracę na 3 lub 6 miesięcy.",
+            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji i dostać plan na start, wybierz 1 miesiąc współpracy. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz współpracę na 3 lub 6 miesięcy.",
             "A jeśli wolisz działać samodzielnie, ale szukasz inspiracji na zbilansowane zdrowe posiłki i chcesz otrzymywać sezonowe plany żywieniowe co 2 tygodnie, sprawdź NieDietę w Apce - 3 dni próbnego jadłospisu możesz przetestować za darmo.",
             "Jeżeli nadal masz wątpliwości - napisz do mnie, pomogę Ci dobrać opcję, która będzie dla Ciebie odpowiednia.",
         ],

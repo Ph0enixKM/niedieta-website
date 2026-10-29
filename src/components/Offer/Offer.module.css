@@ -57,10 +57,10 @@
     display: none;
 }
 
-/* the consultation and the app, below the cooperation lengths */
-.pair {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 880px;
+/* the app, below the cooperation lengths - as wide as one of them */
+.solo {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: calc((100% - 2 * clamp(18px, 2.2vw, 30px)) / 3);
     margin-inline: auto;
     margin-top: clamp(48px, 5vw, 72px);
 }
@@ -192,12 +192,6 @@
     margin-top: 26px;
 }
 
-.variantName {
-    margin-top: 8px;
-    font-size: 0.84rem;
-    color: var(--ink-soft);
-}
-
 .features {
     display: grid;
     align-content: start;
@@ -234,12 +228,6 @@
 
 .featured .features svg {
     background: var(--sky);
-}
-
-.fine {
-    margin-top: 16px;
-    font-size: 0.8rem;
-    color: var(--ink-soft);
 }
 
 .trial {
@@ -436,7 +424,8 @@
         display: grid;
     }
 
-    .pair {
+    .solo {
+        max-width: 560px;
         margin-top: 60px;
     }
 

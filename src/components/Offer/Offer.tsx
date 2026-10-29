@@ -3,7 +3,6 @@ import Image from "next/image";
 import { ArrowUpRight, CheckIcon } from "@/components/Icons/Icons";
 import Price from "@/components/Price/Price";
 import { APP, COOPERATION, EBOOKS, NAFFY } from "@/content/site";
-import ConsultationCard from "./ConsultationCard";
 import CooperationCard, { CooperationLengthCard } from "./CooperationCard";
 import styles from "./Offer.module.css";
 
@@ -39,12 +38,8 @@ export default function Offer() {
                     </div>
                 </div>
 
-                <div className={`${styles.cards} ${styles.pair}`}>
+                <div className={`${styles.cards} ${styles.solo}`}>
                     <div data-reveal style={{ "--d": 100 } as CSSProperties}>
-                        <ConsultationCard />
-                    </div>
-
-                    <div data-reveal style={{ "--d": 220 } as CSSProperties}>
                         <article className={styles.card} aria-labelledby="oferta-apka">
                             <h3 id="oferta-apka" className={styles.name}>
                                 {APP.name}
