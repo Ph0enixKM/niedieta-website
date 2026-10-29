@@ -95,9 +95,9 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const NAFFY = {
     store: "https://www.naffy.io/niedieta",
-    consultation: "https://www.naffy.io/niedieta/konsultacja-online-KeA",
-    consultationPlan: "https://www.naffy.io/niedieta/konsultacja-indywidualny-7-dniowy-plan-zywieniowy-olw",
-    program: "https://www.naffy.io/niedieta/8-tygodniowa-wspolpraca-ssc",
+    cooperation1: "https://www.naffy.io/niedieta/1-miesiac-kem",
+    cooperation3: "https://www.naffy.io/niedieta/3-miesiace-mvx",
+    cooperation6: "https://www.naffy.io/niedieta/6-miesiecy-1vi",
     app: "https://www.naffy.io/niedieta/niedieta-w-apce-l0n",
     appTrialClassic: "https://www.naffy.io/niedieta/3-dni-posilkow-z-apki-na-probe-wersja-klasyczna-Blt",
     appTrialVege: "https://www.naffy.io/niedieta/3-dni-posilkow-z-apki-na-probe-wersja-wege-yQs",
@@ -105,63 +105,91 @@ export const NAFFY = {
     ebookBagels: "https://www.naffy.io/niedieta/bajgle-dSd",
 } as const;
 
-export interface OfferVariant {
+export interface CooperationVariant {
     id: string;
+    /** Short label of the length switch, e.g. "3 mies." */
     label: string;
+    /** Card title when the lengths are shown side by side, e.g. "3 miesiące współpracy" */
     name: string;
+    tagline: string;
+    months: number;
+    /** Price period, e.g. "za 3 miesiące" */
+    period: string;
     price: number;
     href: string;
-    cta: string;
+    bestseller?: boolean;
     features: string[];
-    note?: string;
 }
 
-const CONSULTATION_FEATURES = [
-    "Pogłębiony wywiad o zdrowiu i stylu życia",
-    "Analiza problemów i omówienie celów",
-    "Indywidualny plan zmiany",
-    "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
+const COOPERATION_START = "50-minutowa konsultacja online: cele, wyniki i nawyki";
+const MEAL_PLAN = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - w ciągu 3 dni roboczych";
+const MEAL_PLAN_UPDATED = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - aktualizowany co 31\u00a0dni";
+
+const COOPERATION_SHARED = [
+    "Dopasowany plan suplementacji",
+    "Aplikacja z bazą przepisów, licznikiem kalorii i makro oraz wymianą posiłków i produktów",
+    "Możliwość dodawania własnych przepisów i posiłków",
+    "Czat ze mną w aplikacji - odpowiadam w ciągu 24\u00a0godzin",
 ];
 
-export const CONSULTATION: OfferVariant[] = [
-    {
-        id: "konsultacja",
-        label: "Sama konsultacja",
-        name: "Konsultacja dietetyczna i psychodietetyczna",
-        price: 150,
-        href: NAFFY.consultation,
-        cta: "Umawiam konsultację",
-        features: CONSULTATION_FEATURES,
-        note: "Konsultacja nie obejmuje jadłospisu.",
-    },
-    {
-        id: "konsultacja-jadlospis",
-        label: "Z planem żywieniowym",
-        name: "Konsultacja + indywidualny 7-dniowy plan żywieniowy",
-        price: 350,
-        href: NAFFY.consultationPlan,
-        cta: "Wybieram pakiet",
-        features: [...CONSULTATION_FEATURES, "Plan żywieniowy dopasowany do Twoich preferencji"],
-    },
-];
+export const COOPERATION = {
+    name: "Współpraca dietetyczna",
+    tagline: "Konkretny plan dopasowany do Twojej codzienności i wsparcie w budowaniu zmian, które zostają na dłużej.",
+    /** Variant selected by default in the length switch (shown on phones; wider screens list all lengths side by side). */
+    defaultVariant: 0,
+    variants: [
+        {
+            id: "wspolpraca-1",
+            label: "1 mies.",
+            name: "1 miesiąc współpracy",
+            tagline: "Gdy chcesz dobrze zacząć i dostać konkretny plan na start.",
+            months: 1,
+            period: "za 1 miesiąc",
+            price: 299,
+            href: NAFFY.cooperation1,
+            features: [COOPERATION_START, MEAL_PLAN, ...COOPERATION_SHARED],
+        },
+        {
+            id: "wspolpraca-3",
+            label: "3 mies.",
+            name: "3 miesiące współpracy",
+            tagline: "Czas, by zmiany weszły w nawyk - z regularnymi konsultacjami kontrolnymi.",
+            months: 3,
+            period: "za 3 miesiące",
+            price: 849,
+            href: NAFFY.cooperation3,
+            bestseller: true,
+            features: [
+                COOPERATION_START,
+                "2 konsultacje kontrolne: postępy, sukcesy i trudności",
+                MEAL_PLAN_UPDATED,
+                ...COOPERATION_SHARED,
+            ],
+        },
+        {
+            id: "wspolpraca-6",
+            label: "6 mies.",
+            name: "6 miesięcy współpracy",
+            tagline: "Dla trwałej zmiany nawyków - krok po kroku, bez zgadywania, kiedy i co zmieniać.",
+            months: 6,
+            period: "za 6 miesięcy",
+            price: 1649,
+            href: NAFFY.cooperation6,
+            features: [
+                COOPERATION_START,
+                "5 konsultacji kontrolnych: postępy, sukcesy i trudności",
+                MEAL_PLAN_UPDATED,
+                ...COOPERATION_SHARED,
+            ],
+        },
+    ] as CooperationVariant[],
+};
 
-export const PROGRAM = {
-    name: "3-miesięczna metamorfoza",
-    tagline: "Uporządkuj jedzenie, popraw wyniki i zadbaj o masę ciała - małymi krokami, ze stałym wsparciem.",
-    price: 799,
-    href: NAFFY.program,
-    features: [
-        "Konsultacja startowa online",
-        "Indywidualny 7-dniowy jadłospis na start",
-        "Analiza wyników badań, stylu życia i nawyków",
-        "Indywidualny plan działania i spersonalizowane zalecenia",
-        "Praktyczne porady: posiłki i radzenie sobie z zachciankami",
-        "3 konsultacje kontrolne",
-        "Aplikacja z przepisami, monitoringiem i czatem",
-        "Stały kontakt między spotkaniami",
-        "Podsumowanie i plan na dalszą drogę",
-    ],
-} as const;
+/** How much cheaper a longer cooperation is than paying for the 1-month one month by month, in whole percent. */
+export function cooperationSaving(variant: CooperationVariant): number {
+    const monthly = COOPERATION.variants[0];
+    return Math.round((1 - variant.price / (monthly.price * variant.months)) * 100);
+}
 
 export const APP = {
     name: "NieDieta w Apce",
@@ -188,7 +216,7 @@ export const AVODIET = {
         },
         {
             title: "Twój plan żywieniowy",
-            text: "Jeśli wybierzesz konsultację z planem żywieniowym lub 3‑miesięczną współpracę, plan czeka na Ciebie właśnie tutaj.",
+            text: "Jeśli wybierzesz współpracę dietetyczną, plan czeka na Ciebie właśnie tutaj.",
         },
         {
             title: "Baza posiłków",
@@ -221,9 +249,8 @@ export const FAQ = [
     {
         q: "Czy dostanę gotowy jadłospis?",
         a: [
-            "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz w pakiecie „Konsultacja + jadłospis” - w PDF i w aplikacji, w ciągu 3 dni od spotkania. Wówczas na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
+            "Jeśli wspólnie uznamy, że jest Ci potrzebny - tak. Indywidualny 7-dniowy jadłospis otrzymasz w PDF i w aplikacji, w ciągu 3 dni roboczych od pierwszej konsultacji, a przy współpracy na 3 lub 6 miesięcy aktualizuję go co 31\u00a0dni. Na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
             "Gotowe plany posiłków, odświeżane co dwa tygodnie, znajdziesz też w NieDiecie w Apce.",
-            "Sama konsultacja nie obejmuje jadłospisu: skupiamy się na planie zmiany dopasowanym do Ciebie, bazując na Twoich dotychczasowych przyzwyczajeniach.",
         ],
     },
     {
@@ -236,8 +263,7 @@ export const FAQ = [
         q: "Jak wyglądają spotkania?",
         a: [
             "Spotykamy się online, dlatego zawsze sugeruję, aby to było miejsce, w którym czujesz się komfortowo. Rozmawiamy o Twoich celach, stylu życia, drodze, którą przebyłaś, i o miejscu, w którym się teraz znajdujesz - wszystko w spokojnej atmosferze i bez oceniania.",
-            "W przypadku 3-miesięcznej współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
-            "W przypadku jednorazowych konsultacji nie zostawiam Cię samej - jesteśmy w kontakcie przez miesiąc od wizyty, więc w przypadku pojawienia się jakichkolwiek wątpliwości jestem pod telefonem.",
+            "Przez cały czas współpracy jesteśmy w stałym kontakcie przez aplikację AvoDiet. Znajdziesz w niej czat, ale także dostęp do bazy posiłków, więc na pewno nie zabraknie Ci inspiracji podczas naszej współpracy.",
         ],
     },
     {
@@ -255,7 +281,7 @@ export const FAQ = [
     {
         q: "Nie wiem, którą opcję wybrać - co zrobić?",
         a: [
-            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji, zacznij od konsultacji. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz dłuższą współpracę.",
+            "Jeśli chcesz na spokojnie przyjrzeć się swojej sytuacji i dostać plan na start, wybierz 1 miesiąc współpracy. Jeżeli zależy Ci na konkretnym, długofalowym wsparciu i stałym kontakcie, wybierz współpracę na 3 lub 6 miesięcy.",
             "A jeśli wolisz działać samodzielnie, ale szukasz inspiracji na zbilansowane zdrowe posiłki i chcesz otrzymywać sezonowe plany żywieniowe co 2 tygodnie, sprawdź NieDietę w Apce - 3 dni próbnego jadłospisu możesz przetestować za darmo.",
             "Jeżeli nadal masz wątpliwości - napisz do mnie, pomogę Ci dobrać opcję, która będzie dla Ciebie odpowiednia.",
         ],

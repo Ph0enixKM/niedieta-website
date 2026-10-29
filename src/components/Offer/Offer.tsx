@@ -1,10 +1,9 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import BerrySlot from "@/components/Berry/BerrySlot";
 import { ArrowUpRight, CheckIcon } from "@/components/Icons/Icons";
 import Price from "@/components/Price/Price";
-import { APP, EBOOKS, NAFFY, PROGRAM } from "@/content/site";
-import ConsultationCard from "./ConsultationCard";
+import { APP, COOPERATION, EBOOKS, NAFFY } from "@/content/site";
+import CooperationCard, { CooperationLengthCard } from "./CooperationCard";
 import styles from "./Offer.module.css";
 
 export default function Offer() {
@@ -20,35 +19,27 @@ export default function Offer() {
                     </p>
                 </header>
 
-                <div className={styles.cards}>
+                {/* wide screens: the three lengths side by side; phones: one card with a length switch */}
+                <div className={`${styles.cards} ${styles.trio}`}>
+                    {COOPERATION.variants.map((variant, i) => (
+                        <div
+                            key={variant.id}
+                            data-reveal
+                            style={{ "--d": 100 + i * 120 } as CSSProperties}
+                            className={variant.bestseller ? styles.featuredWrap : undefined}
+                        >
+                            <CooperationLengthCard variant={variant} />
+                        </div>
+                    ))}
+                </div>
+                <div className={`${styles.cards} ${styles.switch}`}>
                     <div data-reveal style={{ "--d": 100 } as CSSProperties}>
-                        <ConsultationCard />
+                        <CooperationCard />
                     </div>
+                </div>
 
-                    <div data-reveal style={{ "--d": 220 } as CSSProperties} className={styles.featuredWrap}>
-                        <article className={`${styles.card} ${styles.featured}`} data-berry-host="" aria-labelledby="oferta-wspolpraca">
-                            <BerrySlot kind="offer" className={styles.topper} />
-                            <h3 id="oferta-wspolpraca" className={styles.name}>
-                                {PROGRAM.name}
-                            </h3>
-                            <p className={styles.tagline}>{PROGRAM.tagline}</p>
-                            <Price amount={PROGRAM.price} period="za 3 miesiące" className={styles.price} />
-                            <ul className={styles.features}>
-                                {PROGRAM.features.map((feature) => (
-                                    <li key={feature}>
-                                        <CheckIcon />
-                                        {feature}
-                                    </li>
-                                ))}
-                            </ul>
-                            <a href={PROGRAM.href} className={`btn btn-bright btn-block ${styles.cta}`}>
-                                Zaczynam współpracę
-                                <ArrowUpRight />
-                            </a>
-                        </article>
-                    </div>
-
-                    <div data-reveal style={{ "--d": 340 } as CSSProperties}>
+                <div className={`${styles.cards} ${styles.solo}`}>
+                    <div data-reveal style={{ "--d": 100 } as CSSProperties}>
                         <article className={styles.card} aria-labelledby="oferta-apka">
                             <h3 id="oferta-apka" className={styles.name}>
                                 {APP.name}

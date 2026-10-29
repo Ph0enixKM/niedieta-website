@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEvent } from "@/hooks/useEvent";
 import styles from "./Price.module.css";
 
@@ -12,6 +13,8 @@ const format = (value: number) =>
 interface Props {
     amount: number;
     period?: string;
+    /** Hung on the currency, above "zł" - e.g. a savings tag. Position it absolutely (the currency is its containing block). */
+    tag?: ReactNode;
     /** Services round the promo price to whole złoty, products keep the grosze. */
     rounding?: "whole" | "cents";
     discountable?: boolean;
@@ -19,7 +22,7 @@ interface Props {
     className?: string;
 }
 
-export default function Price({ amount, period, rounding = "whole", discountable = true, size = "md", className }: Props) {
+export default function Price({ amount, period, tag, rounding = "whole", discountable = true, size = "md", className }: Props) {
     const event = useEvent();
     const classes = [styles.price, styles[size], className].filter(Boolean).join(" ");
 
@@ -45,7 +48,10 @@ export default function Price({ amount, period, rounding = "whole", discountable
                 {discounted !== null && <s className={styles.old}>{format(amount)} zł</s>}
                 <span className={styles.amount}>
                     {format(discounted ?? amount)}
-                    <span className={styles.currency}>&nbsp;zł</span>
+                    <span className={styles.currency}>
+                        &nbsp;zł
+                        {tag}
+                    </span>
                 </span>
                 {period && <span className={styles.period}>{period}</span>}
             </div>
