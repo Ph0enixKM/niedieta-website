@@ -771,6 +771,8 @@ export async function createBerryEngine(canvas: HTMLCanvasElement, onLost: () =>
         alpha: true,
         antialias: true,
         powerPreference: "high-performance",
+        // a software renderer would draw every frame on the CPU; BerryStage shows the still berries instead
+        failIfMajorPerformanceCaveat: true,
     });
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;

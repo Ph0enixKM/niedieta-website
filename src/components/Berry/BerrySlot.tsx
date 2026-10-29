@@ -1,8 +1,14 @@
 import type { CSSProperties } from "react";
 import styles from "./Berry.module.css";
 
+/** Displayed width of each slot's still berry (see Hero.module.css and Offer.module.css), for picking the image size. */
+const SIZES = {
+    hero: "clamp(88px, 10.9vw, 147px)",
+    offer: "92px",
+} as const;
+
 interface Props {
-    kind: "hero" | "offer";
+    kind: keyof typeof SIZES;
     className?: string;
     style?: CSSProperties;
 }
@@ -15,7 +21,8 @@ export default function BerrySlot({ kind, className, style }: Props) {
             <img
                 className={styles.fallback}
                 src="/brand/berry-192.webp"
-                srcSet="/brand/berry-192.webp 1x, /brand/berry-384.webp 2x"
+                srcSet="/brand/berry-96.webp 96w, /brand/berry-192.webp 192w, /brand/berry-384.webp 384w"
+                sizes={SIZES[kind]}
                 alt=""
                 width={192}
                 height={192}
