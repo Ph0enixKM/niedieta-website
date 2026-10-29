@@ -13,7 +13,7 @@ const format = (value: number) =>
 interface Props {
     amount: number;
     period?: string;
-    /** Shown at the end of the price row, e.g. a savings tag. */
+    /** Hung on the currency, above "zł" - e.g. a savings tag. Position it absolutely (the currency is its containing block). */
     tag?: ReactNode;
     /** Services round the promo price to whole złoty, products keep the grosze. */
     rounding?: "whole" | "cents";
@@ -48,10 +48,12 @@ export default function Price({ amount, period, tag, rounding = "whole", discoun
                 {discounted !== null && <s className={styles.old}>{format(amount)} zł</s>}
                 <span className={styles.amount}>
                     {format(discounted ?? amount)}
-                    <span className={styles.currency}>&nbsp;zł</span>
+                    <span className={styles.currency}>
+                        &nbsp;zł
+                        {tag}
+                    </span>
                 </span>
                 {period && <span className={styles.period}>{period}</span>}
-                {tag}
             </div>
             {discounted !== null && (
                 <p className={styles.lowest}>Najniższa cena z 30 dni przed obniżką: {format(amount)} zł</p>
