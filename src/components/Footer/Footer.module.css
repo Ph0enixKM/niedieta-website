@@ -174,43 +174,6 @@
     opacity: 0.75;
 }
 
-.ar,
-.arAndroid {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 18px;
-    padding: 6px 16px 6px 6px;
-    border-radius: 999px;
-    background: var(--cream);
-    font-size: 0.86rem;
-    font-weight: 600;
-    transition: transform 0.45s var(--ease-spring);
-}
-
-.ar:hover,
-.arAndroid:hover {
-    transform: translateY(-2px);
-}
-
-.ar img {
-    width: 32px;
-    height: 32px;
-}
-
-.ar::after {
-    content: attr(data-label);
-}
-
-.arAndroid {
-    padding-left: 12px;
-}
-
-.arAndroid svg {
-    width: 22px;
-    height: 22px;
-}
-
 .legal {
     display: flex;
     flex-wrap: wrap;

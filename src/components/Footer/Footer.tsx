@@ -3,7 +3,6 @@ import Logo from "@/components/Logo/Logo";
 import { ArrowRight, MailIcon, SOCIAL_ICONS } from "@/components/Icons/Icons";
 import { RoughEdgeMask } from "@/components/Sketch/Sketch";
 import { CONTACT_EMAIL, NAV_LINKS, SOCIALS } from "@/content/site";
-import ArLink from "./ArLink";
 import styles from "./Footer.module.css";
 
 interface Props {
@@ -93,7 +92,6 @@ export default function Footer({ home = true, cta = true }: Props) {
                                 {CONTACT_EMAIL}
                             </a>
                             <p className={styles.small}>Konsultacje online - gdziekolwiek jesteś.</p>
-                            <ArLink />
                         </div>
                     </div>
 
