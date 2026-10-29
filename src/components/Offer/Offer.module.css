@@ -176,6 +176,64 @@
     color: var(--berry-soft);
 }
 
+/* length switch of the featured cooperation card: 1 / 3 / 6 months */
+.lengths {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 22px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(246, 240, 227, 0.12);
+}
+
+.length {
+    position: relative;
+    padding: 10px 6px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--cream);
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+.length:hover {
+    background: rgba(246, 240, 227, 0.1);
+}
+
+.length[aria-checked="true"] {
+    color: var(--berry);
+    background: var(--cream);
+}
+
+.length:focus-visible {
+    outline: 2px solid var(--sky);
+    outline-offset: 2px;
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--berry);
+    background: var(--sky);
+    transform: translate(-50%, -60%);
+    pointer-events: none;
+}
+
 .price {
     margin-top: 26px;
 }
