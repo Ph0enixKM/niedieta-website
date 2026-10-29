@@ -185,6 +185,12 @@ export const COOPERATION = {
     ] as CooperationVariant[],
 };
 
+/** How much cheaper a longer cooperation is than paying for the 1-month one month by month, in whole percent. */
+export function cooperationSaving(variant: CooperationVariant): number {
+    const monthly = COOPERATION.variants[0];
+    return Math.round((1 - variant.price / (monthly.price * variant.months)) * 100);
+}
+
 export const APP = {
     name: "NieDieta w Apce",
     tagline: "Gdy chcesz działać na własną rękę, ale z gotowym planem pod ręką.",

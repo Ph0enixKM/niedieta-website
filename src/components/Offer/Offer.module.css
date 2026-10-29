@@ -188,6 +188,18 @@
     pointer-events: none;
 }
 
+/* savings of a longer cooperation against paying for 1 month at a time */
+.saving {
+    align-self: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--berry);
+    background: var(--sky);
+}
+
 .price {
     margin-top: 26px;
 }

@@ -4,7 +4,7 @@ import { useState, type CSSProperties } from "react";
 import BerrySlot from "@/components/Berry/BerrySlot";
 import { ArrowUpRight, CheckIcon } from "@/components/Icons/Icons";
 import Price from "@/components/Price/Price";
-import { COOPERATION, type CooperationVariant } from "@/content/site";
+import { COOPERATION, cooperationSaving, type CooperationVariant } from "@/content/site";
 import styles from "./Offer.module.css";
 
 function Features({ variant }: { variant: CooperationVariant }) {
@@ -17,6 +17,16 @@ function Features({ variant }: { variant: CooperationVariant }) {
                 </li>
             ))}
         </ul>
+    );
+}
+
+function SavingTag({ variant }: { variant: CooperationVariant }) {
+    const saving = cooperationSaving(variant);
+    if (saving <= 0) return null;
+    return (
+        <span className={styles.saving} title={`${saving}% taniej niż ${variant.months} × 1 miesiąc`}>
+            -{saving}%
+        </span>
     );
 }
 
@@ -46,7 +56,7 @@ export function CooperationLengthCard({ variant }: { variant: CooperationVariant
                 {variant.name}
             </h3>
             <p className={styles.tagline}>{variant.tagline}</p>
-            <Price amount={variant.price} period={variant.period} className={styles.price} />
+            <Price amount={variant.price} period={variant.period} tag={<SavingTag variant={variant} />} className={styles.price} />
             <Features variant={variant} />
             <Cta variant={variant} bright={featured} />
         </article>
@@ -82,7 +92,7 @@ export default function CooperationCard() {
                 ))}
             </div>
 
-            <Price amount={variant.price} period={variant.period} className={styles.price} />
+            <Price amount={variant.price} period={variant.period} tag={<SavingTag variant={variant} />} className={styles.price} />
             <Features variant={variant} />
             <Cta variant={variant} bright />
         </article>
