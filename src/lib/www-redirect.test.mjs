@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { redirectWwwToApex } from "./www-redirect.mjs";
 
-async function locationOf(url, method = "GET") {
+function locationOf(url, method = "GET") {
     const response = redirectWwwToApex(new Request(url, { method }));
     assert.ok(response, `expected a redirect for ${url}`);
     assert.equal(response.status, 308);
-    assert.equal(response.headers.get("location"), await expectedLocation(url));
+    assert.equal(response.headers.get("location"), expectedLocation(url));
     return response.headers.get("location");
 }
 
@@ -15,16 +15,16 @@ function expectedLocation(url) {
     return `https://niedieta.pl${parsed.pathname}${parsed.search}`;
 }
 
-test("redirects www requests to the apex and keeps path and query", async () => {
-    await locationOf("https://www.niedieta.pl/");
-    await locationOf("https://www.niedieta.pl/calculator");
-    await locationOf("https://www.niedieta.pl/calculator/");
-    await locationOf("https://www.niedieta.pl/calculator?a=1&b=2");
-    await locationOf("https://www.niedieta.pl/calculator?q=hello%20world");
-    await locationOf("https://www.niedieta.pl/og.jpg");
-    await locationOf("https://www.niedieta.pl/_next/static/chunks/app.js?dpl=1");
-    await locationOf("http://www.niedieta.pl/robots.txt");
-    await locationOf("https://WWW.NIEDIETA.PL/sitemap.xml");
+test("redirects www requests to the apex and keeps path and query", () => {
+    locationOf("https://www.niedieta.pl/");
+    locationOf("https://www.niedieta.pl/calculator");
+    locationOf("https://www.niedieta.pl/calculator/");
+    locationOf("https://www.niedieta.pl/calculator?a=1&b=2");
+    locationOf("https://www.niedieta.pl/calculator?q=hello%20world");
+    locationOf("https://www.niedieta.pl/og.jpg");
+    locationOf("https://www.niedieta.pl/_next/static/chunks/app.js?dpl=1");
+    locationOf("http://www.niedieta.pl/robots.txt");
+    locationOf("https://WWW.NIEDIETA.PL/sitemap.xml");
 });
 
 test("a scheme-relative path stays on the apex", () => {
