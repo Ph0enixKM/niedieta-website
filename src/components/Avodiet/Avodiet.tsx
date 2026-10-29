@@ -35,7 +35,7 @@ export default function Avodiet() {
                         <header className={styles.chatHead}>
                             <span className={styles.avatar}>
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/brand/kinga-avatar.webp" alt="" width={80} height={80} loading="lazy" decoding="async" />
+                                <img src="/brand/kinga-avatar-200.webp" alt="" width={80} height={80} loading="lazy" decoding="async" />
                             </span>
                             <strong className={styles.who}>Kinga</strong>
                         </header>

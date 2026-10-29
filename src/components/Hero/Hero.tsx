@@ -47,7 +47,7 @@ export default function Hero() {
                             alt="Kinga Sobańska przy stole w jasnej kuchni, z tabletem i kubkiem kawy"
                             priority
                             placeholder="blur"
-                            sizes="(min-width: 1240px) 580px, (min-width: 900px) 46vw, 90vw"
+                            sizes="(min-width: 1240px) 580px, (min-width: 900px) 46vw, min(80vw, 560px)"
                         />
                     </figure>
                     <BerrySlot kind="hero" className={styles.berry} />

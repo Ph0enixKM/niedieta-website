@@ -21,7 +21,13 @@ export default function About() {
                 <div className={styles.greeting} data-reveal="left">
                     <div className={styles.avatar}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/brand/kinga-avatar.webp" alt="Kinga Sobańska" width={400} height={400} loading="lazy" decoding="async" />
+                        <img
+                            src="/brand/kinga-avatar.webp"
+                            srcSet="/brand/kinga-avatar-200.webp 200w, /brand/kinga-avatar.webp 400w"
+                            sizes="clamp(112px, 12vw, 150px)"
+                            alt="Kinga Sobańska"
+                            width={400}
+                            height={400} loading="lazy" decoding="async" />
                         <SketchRing className={styles.avatarRing} seed={12} strokeWidth={2.2} delay={300} />
                     </div>
                     <h2 id="o-mnie-title" className={styles.hello}>
