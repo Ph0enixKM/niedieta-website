@@ -92,26 +92,6 @@
 }
 
 
-.sign {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 28px;
-    font-family: var(--font-hand);
-    font-weight: 400;
-    font-size: 1.7rem;
-    color: var(--ink);
-}
-
-.heart {
-    width: 34px;
-    height: 32px;
-    color: var(--sky-deep);
-    overflow: visible;
-    transform: rotate(8deg);
-}
-
 @media (max-width: 900px) {
     .inner {
         grid-template-columns: minmax(0, 1fr);

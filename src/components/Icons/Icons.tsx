@@ -74,15 +74,6 @@ export function CloseIcon(props: IconProps) {
     );
 }
 
-export function ArIcon(props: IconProps) {
-    return (
-        <svg viewBox="0 0 24 24" {...base} {...props}>
-            <path d="M12 3.5 19.5 7.8v8.4L12 20.5 4.5 16.2V7.8L12 3.5Z" />
-            <path d="M4.8 8 12 12.2 19.2 8M12 12.2v8" />
-        </svg>
-    );
-}
-
 export function InstagramIcon(props: IconProps) {
     return (
         <svg viewBox="0 0 24 24" {...base} {...props}>

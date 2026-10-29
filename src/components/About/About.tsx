@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import type { ReactNode } from "react";
-import { HandArrow, HandHeart, SketchRing } from "@/components/Sketch/Sketch";
+import { HandArrow, SketchRing } from "@/components/Sketch/Sketch";
 import { DIPLOMAS } from "@/content/site";
 import styles from "./About.module.css";
 
@@ -44,10 +44,6 @@ export default function About() {
                     </p>
                     <p className={styles.small} data-reveal style={{ "--d": 220 } as CSSProperties}>
                         Wierzę w <span className="marker">małe kroki</span>, które prowadzą do trwałej zmiany i zauważalnych efektów.
-                    </p>
-                    <p className={styles.sign} data-reveal style={{ "--d": 340 } as CSSProperties}>
-                        <span>Kinga</span>
-                        <HandHeart className={styles.heart} delay={900} />
                     </p>
                 </div>
             </div>
