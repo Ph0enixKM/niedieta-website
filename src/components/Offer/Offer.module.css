@@ -195,19 +195,19 @@
     --tag-hole: var(--paper);
     /* hung above the "zł" of the price (see Price's tag) */
     position: absolute;
-    bottom: 72%;
-    left: 0.35em;
+    bottom: 92%;
+    left: 0.6em;
     white-space: nowrap;
-    padding: 5px 11px 5px 21px;
+    padding: 4px 9px 4px 18px;
     font-family: var(--font-sans);
     border-radius: 0 7px 7px 0;
-    font-size: 0.84rem;
+    font-size: 0.74rem;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.01em;
     color: var(--tag-ink);
     background: var(--tag);
-    clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
     transform: rotate(-12deg);
     transform-origin: 0 50%;
     pointer-events: none;
@@ -219,9 +219,9 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 9px;
-    width: 6px;
-    height: 6px;
+    left: 8px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--tag-hole);
     transform: translateY(-50%);
