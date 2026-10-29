@@ -95,7 +95,6 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const NAFFY = {
     store: "https://www.naffy.io/niedieta",
-    consultation: "https://www.naffy.io/niedieta/konsultacja-online-KeA",
     consultationPlan: "https://www.naffy.io/niedieta/konsultacja-indywidualny-7-dniowy-plan-zywieniowy-olw",
     cooperation1: "https://www.naffy.io/niedieta/1-miesiac-kem",
     cooperation3: "https://www.naffy.io/niedieta/3-miesiace-mvx",
@@ -107,50 +106,29 @@ export const NAFFY = {
     ebookBagels: "https://www.naffy.io/niedieta/bajgle-dSd",
 } as const;
 
-export interface OfferVariant {
-    id: string;
-    label: string;
-    name: string;
-    price: number;
-    href: string;
-    cta: string;
-    features: string[];
-    note?: string;
-}
-
-const CONSULTATION_FEATURES = [
-    "Pogłębiony wywiad o zdrowiu i stylu życia",
-    "Analiza problemów i omówienie celów",
-    "Indywidualny plan zmiany",
-    "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
-];
-
-export const CONSULTATION: OfferVariant[] = [
-    {
-        id: "konsultacja",
-        label: "Sama konsultacja",
-        name: "Konsultacja dietetyczna i psychodietetyczna",
-        price: 150,
-        href: NAFFY.consultation,
-        cta: "Umawiam konsultację",
-        features: CONSULTATION_FEATURES,
-        note: "Konsultacja nie obejmuje jadłospisu.",
-    },
-    {
-        id: "konsultacja-jadlospis",
-        label: "Z planem żywieniowym",
-        name: "Konsultacja + indywidualny 7-dniowy plan żywieniowy",
-        price: 350,
-        href: NAFFY.consultationPlan,
-        cta: "Wybieram pakiet",
-        features: [...CONSULTATION_FEATURES, "Plan żywieniowy dopasowany do Twoich preferencji"],
-    },
-];
+export const CONSULTATION = {
+    name: "Konsultacja",
+    tagline: "Gdy potrzebujesz kierunku i planu zmiany dopasowanego do Ciebie.",
+    variantName: "Konsultacja + indywidualny 7-dniowy plan żywieniowy",
+    price: 350,
+    href: NAFFY.consultationPlan,
+    cta: "Umawiam konsultację",
+    features: [
+        "Pogłębiony wywiad o zdrowiu i stylu życia",
+        "Analiza problemów i omówienie celów",
+        "Indywidualny plan zmiany",
+        "Wsparcie psychodietetyczne: nie tylko dieta, ale też nastawienie",
+        "7-dniowy plan żywieniowy dopasowany do Twoich preferencji",
+    ],
+} as const;
 
 export interface CooperationVariant {
     id: string;
     /** Short label of the length switch, e.g. "3 mies." */
     label: string;
+    /** Card title when the lengths are shown side by side, e.g. "3 miesiące współpracy" */
+    name: string;
+    tagline: string;
     months: number;
     /** Price period, e.g. "za 3 miesiące" */
     period: string;
@@ -165,7 +143,7 @@ const MEAL_PLAN = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - w 
 const MEAL_PLAN_UPDATED = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - aktualizowany co 31\u00a0dni";
 
 const COOPERATION_SHARED = [
-    "Plan suplementacji dopasowany do Twojego zdrowia",
+    "Dopasowany plan suplementacji",
     "Aplikacja z bazą przepisów, licznikiem kalorii i makro oraz wymianą posiłków i produktów",
     "Możliwość dodawania własnych przepisów i posiłków",
     "Czat ze mną w aplikacji - odpowiadam w ciągu 24\u00a0godzin",
@@ -174,12 +152,14 @@ const COOPERATION_SHARED = [
 export const COOPERATION = {
     name: "Współpraca dietetyczna",
     tagline: "Konkretny plan dopasowany do Twojej codzienności i wsparcie w budowaniu zmian, które zostają na dłużej.",
-    /** Index of the variant selected by default - the bestseller. */
-    defaultVariant: 1,
+    /** Variant selected by default in the length switch (shown on phones; wider screens list all lengths side by side). */
+    defaultVariant: 0,
     variants: [
         {
             id: "wspolpraca-1",
             label: "1 mies.",
+            name: "1 miesiąc współpracy",
+            tagline: "Gdy chcesz dobrze zacząć i dostać konkretny plan na start.",
             months: 1,
             period: "za 1 miesiąc",
             price: 299,
@@ -189,6 +169,8 @@ export const COOPERATION = {
         {
             id: "wspolpraca-3",
             label: "3 mies.",
+            name: "3 miesiące współpracy",
+            tagline: "Czas, by zmiany weszły w nawyk - z regularnymi konsultacjami kontrolnymi.",
             months: 3,
             period: "za 3 miesiące",
             price: 849,
@@ -204,6 +186,8 @@ export const COOPERATION = {
         {
             id: "wspolpraca-6",
             label: "6 mies.",
+            name: "6 miesięcy współpracy",
+            tagline: "Dla trwałej zmiany nawyków - krok po kroku, bez zgadywania, kiedy i co zmieniać.",
             months: 6,
             period: "za 6 miesięcy",
             price: 1649,
@@ -215,7 +199,7 @@ export const COOPERATION = {
                 ...COOPERATION_SHARED,
             ],
         },
-    ] satisfies CooperationVariant[],
+    ] as CooperationVariant[],
 };
 
 export const APP = {
@@ -276,10 +260,9 @@ export const FAQ = [
     {
         q: "Czy dostanę gotowy jadłospis?",
         a: [
-            "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz w pakiecie „Konsultacja + jadłospis” - w PDF i w aplikacji, w ciągu 3 dni od spotkania. Wówczas na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
+            "To zależy od wybranej formy wsparcia. Indywidualny 7-dniowy jadłospis otrzymasz po konsultacji - w PDF i w aplikacji, w ciągu 3 dni od spotkania. Wówczas na konsultacji dokładnie omówimy, jak możemy wykorzystać to narzędzie w Twojej sytuacji oraz jak sprawić, aby nie przywiązywać się do niego na stałe.",
             "We współpracy dietetycznej (1, 3 lub 6 miesięcy) indywidualny jadłospis przygotowuję wtedy, gdy wspólnie uznamy, że jest Ci potrzebny - przy dłuższej współpracy aktualizuję go co 31\u00a0dni.",
             "Gotowe plany posiłków, odświeżane co dwa tygodnie, znajdziesz też w NieDiecie w Apce.",
-            "Sama konsultacja nie obejmuje jadłospisu: skupiamy się na planie zmiany dopasowanym do Ciebie, bazując na Twoich dotychczasowych przyzwyczajeniach.",
         ],
     },
     {

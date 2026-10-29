@@ -2,9 +2,9 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import { ArrowUpRight, CheckIcon } from "@/components/Icons/Icons";
 import Price from "@/components/Price/Price";
-import { APP, EBOOKS, NAFFY } from "@/content/site";
+import { APP, COOPERATION, EBOOKS, NAFFY } from "@/content/site";
 import ConsultationCard from "./ConsultationCard";
-import CooperationCard from "./CooperationCard";
+import CooperationCard, { CooperationLengthCard } from "./CooperationCard";
 import styles from "./Offer.module.css";
 
 export default function Offer() {
@@ -20,16 +20,31 @@ export default function Offer() {
                     </p>
                 </header>
 
-                <div className={styles.cards}>
+                {/* wide screens: the three lengths side by side; phones: one card with a length switch */}
+                <div className={`${styles.cards} ${styles.trio}`}>
+                    {COOPERATION.variants.map((variant, i) => (
+                        <div
+                            key={variant.id}
+                            data-reveal
+                            style={{ "--d": 100 + i * 120 } as CSSProperties}
+                            className={variant.bestseller ? styles.featuredWrap : undefined}
+                        >
+                            <CooperationLengthCard variant={variant} />
+                        </div>
+                    ))}
+                </div>
+                <div className={`${styles.cards} ${styles.switch}`}>
+                    <div data-reveal style={{ "--d": 100 } as CSSProperties}>
+                        <CooperationCard />
+                    </div>
+                </div>
+
+                <div className={`${styles.cards} ${styles.pair}`}>
                     <div data-reveal style={{ "--d": 100 } as CSSProperties}>
                         <ConsultationCard />
                     </div>
 
-                    <div data-reveal style={{ "--d": 220 } as CSSProperties} className={styles.featuredWrap}>
-                        <CooperationCard />
-                    </div>
-
-                    <div data-reveal style={{ "--d": 340 } as CSSProperties}>
+                    <div data-reveal style={{ "--d": 220 } as CSSProperties}>
                         <article className={styles.card} aria-labelledby="oferta-apka">
                             <h3 id="oferta-apka" className={styles.name}>
                                 {APP.name}
