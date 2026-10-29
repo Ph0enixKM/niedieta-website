@@ -1,12 +1,15 @@
 {
     "$schema": "node_modules/wrangler/config-schema.json",
     "name": "niedieta",
-    "main": ".open-next/worker.js",
+    "main": "worker.mjs",
     "compatibility_date": "2026-09-01",
     "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
     "assets": {
         "directory": ".open-next/assets",
-        "binding": "ASSETS"
+        "binding": "ASSETS",
+        // Static assets are otherwise served before the Worker, which would skip the www → apex
+        // redirect in worker.mjs. The Worker still reads those files from this binding.
+        "run_worker_first": true
     },
     "services": [
         {
