@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     title: "Kalkulator BMI, PPM i CPM",
     description:
         "Policz swoje BMI, podstawową przemianę materii (PPM) i całkowitą przemianę materii (CPM). Kalkulator NieDiety - dietetyczki klinicznej Kingi Sobańskiej.",
+    alternates: {
+        canonical: "/calculator",
+    },
 };
 
 export default function CalculatorPage() {
