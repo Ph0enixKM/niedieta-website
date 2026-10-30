@@ -125,6 +125,9 @@ const COOPERATION_START = "50-minutowa konsultacja online: cele, wyniki i nawyki
 const MEAL_PLAN = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - w ciągu 3 dni roboczych";
 const MEAL_PLAN_UPDATED = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - aktualizowany co 31\u00a0dni";
 
+/** Longer cooperations can be paid through Klarna at checkout in Naffy. */
+const KLARNA = "Płatność w 3 ratach lub odroczona o 30\u00a0dni z\u00a0Klarna";
+
 const COOPERATION_SHARED = [
     "Dopasowany plan suplementacji",
     "Aplikacja z bazą przepisów, licznikiem kalorii i makro oraz wymianą posiłków i produktów",
@@ -164,6 +167,7 @@ export const COOPERATION = {
                 "2 konsultacje kontrolne: postępy, sukcesy i trudności",
                 MEAL_PLAN_UPDATED,
                 ...COOPERATION_SHARED,
+                KLARNA,
             ],
         },
         {
@@ -173,13 +177,14 @@ export const COOPERATION = {
             tagline: "Dla trwałej zmiany nawyków - krok po kroku, bez zgadywania, kiedy i co zmieniać.",
             months: 6,
             period: "za 6 miesięcy",
-            price: 1649,
+            price: 1525,
             href: NAFFY.cooperation6,
             features: [
                 COOPERATION_START,
                 "5 konsultacji kontrolnych: postępy, sukcesy i trudności",
                 MEAL_PLAN_UPDATED,
                 ...COOPERATION_SHARED,
+                KLARNA,
             ],
         },
     ] as CooperationVariant[],
