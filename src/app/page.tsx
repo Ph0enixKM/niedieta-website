@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Offer from "@/components/Offer/Offer";
 import Process from "@/components/Process/Process";
 import PromoBanner from "@/components/PromoBanner/PromoBanner";
+import Reels from "@/components/Reels/Reels";
 import Stories from "@/components/Stories/Stories";
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function Home() {
                 <Stories />
                 <Offer />
                 <Avodiet />
+                <Reels />
                 <Faq />
             </main>
             <Footer />

@@ -44,12 +44,6 @@
     white-space: nowrap;
 }
 
-.ctaText {
-    margin-top: 16px;
-    font-size: 1.1rem;
-    color: var(--berry-soft);
-}
-
 .ctaButtons {
     --surface: var(--sky);
     display: flex;

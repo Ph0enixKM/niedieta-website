@@ -26,9 +26,6 @@ export default function Footer({ home = true, cta = true }: Props) {
                             <h2 className={styles.ctaTitle} data-reveal>
                                 Zrób pierwszy <span className={styles.hand}>mały krok</span>.
                             </h2>
-                            <p className={styles.ctaText} data-reveal>
-                                Resztę przejdziemy razem - w Twoim tempie.
-                            </p>
                             <div className={styles.ctaButtons} data-reveal>
                                 <a href={href("#oferta")} className="btn btn-deep">
                                     Umów konsultację

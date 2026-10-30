@@ -28,7 +28,7 @@
     --board-w: clamp(72px, 6.5vw, 92px);
     position: relative;
     background: var(--espresso);
-    padding: clamp(56px, 7vw, 96px) 0 clamp(72px, 8.5vw, 124px);
+    padding: clamp(36px, 4vw, 52px) 0;
     overflow: hidden;
 }
 
@@ -84,7 +84,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(18px, 2.6vw, 36px);
-    margin-top: clamp(40px, 5vw, 64px);
+    margin-top: clamp(28px, 3.5vw, 44px);
 }
 
 .card {

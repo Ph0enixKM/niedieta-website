@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import heroImage from "@/../public/hero.webp";
-import BerrySlot from "@/components/Berry/BerrySlot";
 import { ArrowRight } from "@/components/Icons/Icons";
 import { SketchLoop, SketchUnderline } from "@/components/Sketch/Sketch";
 import styles from "./Hero.module.css";
@@ -50,7 +49,6 @@ export default function Hero() {
                             sizes="(min-width: 1240px) 580px, (min-width: 900px) 46vw, min(80vw, 560px)"
                         />
                     </figure>
-                    <BerrySlot kind="hero" className={styles.berry} />
                 </div>
             </div>
         </section>
