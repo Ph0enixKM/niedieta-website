@@ -5,13 +5,15 @@
 
 .inner {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     align-items: center;
     gap: clamp(40px, 7vw, 120px);
 }
 
 .greeting {
     position: relative;
+    grid-column: 2;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -62,18 +64,21 @@
     transform-origin: left center;
 }
 
-/* leaves the photo to the right, then curves down to point at the text below */
+/* leaves the photo to the left, then curves down to point at the text below */
 .arrow {
     position: absolute;
-    right: -44%;
+    left: -44%;
     top: 8%;
     width: clamp(70px, 8vw, 110px);
     height: auto;
     color: var(--sky-deep);
     overflow: visible;
+    transform: scaleX(-1);
 }
 
 .text {
+    grid-column: 1;
+    grid-row: 1;
     max-width: 620px;
 }
 
@@ -105,6 +110,12 @@
     .inner {
         grid-template-columns: minmax(0, 1fr);
         gap: 36px;
+    }
+
+    .greeting,
+    .text {
+        grid-column: auto;
+        grid-row: auto;
     }
 
     .greeting {

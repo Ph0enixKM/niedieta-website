@@ -20,7 +20,7 @@ export default function About() {
     return (
         <section className={styles.about} id="o-mnie" aria-labelledby="o-mnie-title">
             <div className={`container ${styles.inner}`}>
-                <div className={styles.greeting} data-reveal="left">
+                <div className={styles.greeting} data-reveal="right">
                     <Image
                         className={styles.photo}
                         src={kingaPhoto}
