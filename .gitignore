@@ -40,3 +40,7 @@ next-env.d.ts
 /.wrangler/
 .dev.vars*
 !.dev.vars.example
+
+# full-size sources of the webps next to them, never served
+/public/hero.png
+/public/kinga.jpg
