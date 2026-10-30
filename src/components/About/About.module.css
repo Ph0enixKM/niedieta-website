@@ -18,8 +18,18 @@
     gap: 22px;
 }
 
+.photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+}
+
+/* phones only: the full photo would take up most of the screen */
 .avatar {
+    display: none;
     position: relative;
+    flex-shrink: 0;
     width: clamp(112px, 12vw, 150px);
     aspect-ratio: 1;
 }
@@ -52,16 +62,15 @@
     transform-origin: left center;
 }
 
-/* points from the greeting across to the text on the right */
+/* leaves the photo to the right, then curves down to point at the text below */
 .arrow {
     position: absolute;
-    right: -6%;
-    top: 40%;
+    right: -44%;
+    top: 8%;
     width: clamp(70px, 8vw, 110px);
     height: auto;
     color: var(--sky-deep);
     overflow: visible;
-    transform: rotate(-64deg);
 }
 
 .text {
@@ -102,6 +111,14 @@
         flex-direction: row;
         align-items: center;
         gap: 20px;
+    }
+
+    .photo {
+        display: none;
+    }
+
+    .avatar {
+        display: block;
     }
 
     .arrow {

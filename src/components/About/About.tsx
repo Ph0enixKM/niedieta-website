@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 import type { ReactNode } from "react";
+import Image from "next/image";
+import kingaPhoto from "@/../public/kinga-about.webp";
 import { HandArrow, SketchRing } from "@/components/Sketch/Sketch";
 import { DIPLOMAS } from "@/content/site";
 import styles from "./About.module.css";
@@ -19,11 +21,18 @@ export default function About() {
         <section className={styles.about} id="o-mnie" aria-labelledby="o-mnie-title">
             <div className={`container ${styles.inner}`}>
                 <div className={styles.greeting} data-reveal="left">
+                    <Image
+                        className={styles.photo}
+                        src={kingaPhoto}
+                        alt="Kinga Sobańska przy kuchennym blacie, z miską owsianki w dłoniach"
+                        placeholder="blur"
+                        sizes="(min-width: 1240px) 472px, (min-width: 901px) 38vw, min(92vw, 520px)"
+                    />
                     <div className={styles.avatar}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/brand/kinga-avatar.webp"
-                            srcSet="/brand/kinga-avatar-200.webp 200w, /brand/kinga-avatar.webp 400w"
+                            src="/brand/kinga-about-avatar.webp"
+                            srcSet="/brand/kinga-about-avatar-200.webp 200w, /brand/kinga-about-avatar.webp 400w"
                             sizes="clamp(112px, 12vw, 150px)"
                             alt="Kinga Sobańska"
                             width={400}
