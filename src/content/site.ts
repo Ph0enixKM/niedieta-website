@@ -15,7 +15,16 @@ export const NAV_LINKS = [
     { href: "#o-mnie", label: "O mnie" },
     { href: "#wspolpraca", label: "Współpraca" },
     { href: "#oferta", label: "Oferta" },
+    { href: "#rolki", label: "Rolki" },
     { href: "#faq", label: "FAQ" },
+] as const;
+
+// Reels from https://www.instagram.com/nie.dieta/ - the id is the part of the link after /reel/; the title is read
+// out by screen readers only
+export const REELS = [
+    { id: "DcJYwdxscun", title: "Krem z pieczonych czerwonych warzyw" },
+    { id: "Ddn_QL0o7MU", title: "Food marketing okiem dietetyczki" },
+    { id: "Dd4HeHAoeC0", title: "Co jem w ciągu dnia jako dietetyczka" },
 ] as const;
 
 /**
@@ -126,7 +135,7 @@ const MEAL_PLAN = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - w 
 const MEAL_PLAN_UPDATED = "Indywidualny 7-dniowy jadłospis, jeśli go potrzebujesz - aktualizowany co 31\u00a0dni";
 
 /** Longer cooperations can be paid through Klarna at checkout in Naffy. */
-const KLARNA = "Płatność w 3 ratach lub odroczona o 30\u00a0dni z\u00a0Klarna";
+const KLARNA = "Płatność w 3 ratach lub odroczona o 30\u00a0dni (Klarna)";
 
 const COOPERATION_SHARED = [
     "Dopasowany plan suplementacji",

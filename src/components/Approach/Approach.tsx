@@ -2,19 +2,12 @@ import type { CSSProperties } from "react";
 import Clipboard from "@/components/Clipboard/Clipboard";
 import { HandCheck, HandStrike } from "@/components/Sketch/Sketch";
 import { GAINS } from "@/content/site";
-import ScrollWords from "./ScrollWords";
 import styles from "./Approach.module.css";
 
 export default function Approach() {
     return (
         <section className={styles.approach} aria-labelledby="podejscie-title">
             <div className="container">
-                <ScrollWords
-                    className={styles.statement}
-                    // zero-width spaces let the slashed list wrap on narrow screens
-                    text={"Dlaczego do tej pory nie wychodziło? Problemem może być dobór zaleceń niedopasowanych do Twojej sytuacji życiowej/\u200Bzawodowej/\u200Bzdrowotnej."}
-                />
-
                 <div className={styles.stack}>
                     <div className={styles.head}>
                         <h2 id="podejscie-title" className={`h2 ${styles.nodiet}`} data-reveal>

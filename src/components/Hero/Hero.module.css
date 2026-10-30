@@ -63,8 +63,10 @@
     animation-delay: calc(0.55s + var(--w) * 0.85s);
 }
 
+/* behind the letters: the word's clip-path makes it a stacking context, so this stays above the page */
 .underline {
     position: absolute;
+    z-index: -1;
     left: 1%;
     bottom: -0.12em;
     width: 97%;
@@ -141,16 +143,6 @@
     object-fit: cover;
 }
 
-.media .berry {
-    position: absolute;
-    /* above the copy: the 3D berry drops in over the headline */
-    z-index: 4;
-    left: -6%;
-    bottom: -11%;
-    width: clamp(88px, 10.9vw, 147px);
-    aspect-ratio: 1;
-}
-
 
 /* ---------- keyframes ---------- */
 
@@ -193,12 +185,6 @@
     .media {
         width: min(88%, 560px);
         margin-inline: auto;
-    }
-
-    .media .berry {
-        width: clamp(69px, 18.75vw, 112px);
-        left: -9%;
-        bottom: -14%;
     }
 }
 

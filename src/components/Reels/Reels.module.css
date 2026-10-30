@@ -1,0 +1,83 @@
+.reels {
+    padding: var(--section-space) 0;
+    border-top: 1px solid var(--line);
+}
+
+/* narrower than the page, so a whole player fits on a laptop screen; Instagram's needs about 326px of width */
+.reels .inner {
+    max-width: calc(1060px + var(--gutter) * 2);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px 40px;
+}
+
+.header :global(.h2) {
+    max-width: 20ch;
+}
+
+.sub {
+    margin-top: 14px;
+    max-width: 52ch;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+}
+
+.follow {
+    flex-shrink: 0;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 28px);
+    margin-top: clamp(32px, 4vw, 56px);
+}
+
+.frame {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--cream-deep);
+}
+
+/* Instagram's player is a whole post: a 54px header, the media at 4:5, then the likes. Scaled up and shifted, only a
+   9:16 window of the media shows through the frame, without the post around it or the bars beside a vertical video.
+   Those numbers are Instagram's and can change without notice. */
+.frame iframe {
+    position: absolute;
+    top: -54px;
+    left: -21.1%;
+    width: 142.2%;
+    height: calc(100% + 454px);
+    border: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.frame[data-loaded] iframe {
+    opacity: 1;
+}
+
+/* phones: three tall players would fill several screens, so they sit in a row to swipe through */
+@media (max-width: 760px) {
+    .list {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: min(78vw, 320px);
+        margin-inline: calc(var(--gutter) * -1);
+        padding-inline: var(--gutter);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--gutter);
+    }
+
+    .item {
+        scroll-snap-align: start;
+    }
+}
